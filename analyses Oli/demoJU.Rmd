@@ -30,12 +30,14 @@ Achtung:
 
 # Change of social structure and between group inequality
 
-
-## Periode: 2006 to 2011
-
+Werte kleiner 1 werden 1 gesetzt, der Theil möchte das so.
 ```{r}
 datenju$TOTEINK[datenju$TOTEINK<1]<-1
 ```
+
+## Periode: 2006 to 2011
+
+
 
 
 ### 2006
@@ -171,7 +173,7 @@ decompGEI(x.2011,datenju$agegroup[datenju$steuerjahr==2011])
 
 
 * Beitrag der Between-Group Ungleichheit zur Overall Ungleichheit ist auch bezüglich Altersgruppen sehr hoch (2006:26.2%) und hat geringfügig zugenommen (2011: 27.0%)
-* Verheiratete ohne Kinder verfügen über ein deutlich höheres Einkommen wie die übliche Gruppen
+
 
 
 
