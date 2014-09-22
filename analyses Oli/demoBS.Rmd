@@ -1,0 +1,253 @@
+Inequality by Demographic Factors - Basel
+========================================================
+
+
+
+Load Library
+```{r}
+library(foreign,quietly=TRUE,warn.conflicts=FALSE)
+library(plyr,quietly=TRUE,warn.conflicts=FALSE)
+library(dplyr,quietly=TRUE,warn.conflicts=FALSE)
+library(ggplot2,quietly=TRUE,warn.conflicts=FALSE)
+library(ineq,quietly=TRUE,warn.conflicts=FALSE)
+library(IC2,quietly=TRUE,warn.conflicts=FALSE)
+```
+
+Load Data 
+```{r}
+load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs1.Rda")
+load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs2.Rda")
+```
+
+
+Achtung: 
+* Einkommen sind nicht preisbereinigt. Vergleich der Mittelwerte über die Zeit sind damit nicht zu interpretieren
+* Es wird die Ungleichheit zwischen Steuereinheiten und nicht zwischen Haushalten untersucht
+* Es wurde keine Äquivalenzgewichtung vorgenommen
+
+
+<br><br>
+<br><br>
+
+# Change of social structure and between group inequality
+
+## Periode 1: 1991 to 2003
+
+### 1991
+
+**Agegroup and mean taxable income**
+```{r}
+prop.table(table(datenbs1$agegroup[datenbs1$steuerjahr==1991]))
+by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==1991],datenbs1$agegroup[datenbs1$steuerjahr==1991],mean)
+```
+
+**Housholdstructur and mean income**
+```{r}
+prop.table(table(datenbs1$household[datenbs1$steuerjahr==1991]))
+by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==1991],datenbs1$household[datenbs1$steuerjahr==1991],mean)
+```
+
+
+### 2003 
+
+**Agegroup and mean income**
+```{r}
+prop.table(table(datenbs1$agegroup[datenbs1$steuerjahr==2003]))
+by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==2003],datenbs1$agegroup[datenbs1$steuerjahr==2003],mean)
+```
+
+**Housholdstructur and mean income**
+```{r}
+prop.table(table(datenbs1$household[datenbs1$steuerjahr==2003]))
+by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==2003],datenbs1$household[datenbs1$steuerjahr==2003],mean)
+```
+
+<br><br>
+<br><br>
+
+## Periode 2: 2006 to 2011
+
+### 2006
+
+**Agegroup and mean Total income**
+```{r}
+prop.table(table(datenbs2$agegroup[datenbs2$steuerjahr==2006]))
+by(datenbs2$TOTEINK[datenbs2$steuerjahr==2006],datenbs2$agegroup[datenbs2$steuerjahr==2006],mean)
+```
+
+**Housholdstructur and mean income**
+```{r}
+prop.table(table(datenbs2$household[datenbs2$steuerjahr==2006]))
+by(datenbs2$TOTEINK[datenbs2$steuerjahr==2006],datenbs2$household[datenbs2$steuerjahr==2006],mean)
+```
+
+
+### 2011
+
+**Agegroup and mean income**
+```{r}
+prop.table(table(datenbs2$agegroup[datenbs2$steuerjahr==2011]))
+by(datenbs2$TOTEINK[datenbs2$steuerjahr==2011],datenbs2$agegroup[datenbs2$steuerjahr==2011],mean)
+```
+
+**Housholdstructur and mean income**
+```{r}
+prop.table(table(datenbs2$household[datenbs2$steuerjahr==2011]))
+by(datenbs2$TOTEINK[datenbs2$steuerjahr==2011],datenbs2$household[datenbs2$steuerjahr==2011],mean)
+```
+
+<br><br>
+<br><br>
+
+
+## Periode 3: 1991 to 2011
+
+### 1991
+
+**Agegroup and mean Reineinkommen**
+```{r}
+prop.table(table(datenbs1$agegroup[datenbs1$steuerjahr==1991]))
+by(datenbs1$reineinkommen[datenbs1$steuerjahr==1991],datenbs1$agegroup[datenbs1$steuerjahr==1991],mean)
+```
+
+**Agegroup (more categories) and mean Reineinkommen**
+```{r}
+prop.table(table(datenbs1$alterskategorie[datenbs1$steuerjahr==1991]))
+by(datenbs1$reineinkommen[datenbs1$steuerjahr==1991],datenbs1$alterskategorie[datenbs1$steuerjahr==1991],mean)
+```
+
+**Housholdstructur and mean income**
+```{r}
+prop.table(table(datenbs1$household[datenbs1$steuerjahr==1991]))
+by(datenbs1$reineinkommen[datenbs1$steuerjahr==1991],datenbs1$household[datenbs1$steuerjahr==1991],mean)
+```
+
+### 2011
+
+**Agegroup and mean income**
+```{r}
+prop.table(table(datenbs2$agegroup[datenbs2$steuerjahr==2011]))
+by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$agegroup[datenbs2$steuerjahr==2011],mean)
+```
+
+**Agegroup (more categories) and mean income**
+```{r}
+prop.table(table(datenbs2$alterskategorie[datenbs2$steuerjahr==2011]))
+by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$alterskategorie[datenbs2$steuerjahr==2011],mean)
+```
+
+
+**Housholdstructur and mean income**
+```{r}
+prop.table(table(datenbs2$household[datenbs2$steuerjahr==2011]))
+by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$household[datenbs2$steuerjahr==2011],mean)
+```
+
+<br><br>
+<br><br>
+
+# Change of overall inequality
+
+## Periode 3: 1991 to 2011
+
+### 1991
+
+```{r}
+Gini(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
+Theil(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
+```
+
+
+### 2011
+
+```{r}
+Gini(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
+Theil(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
+
+```
+
+
+### Lorenz curve
+
+```{r}
+Lc.1991<-Lc(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
+Lc.2011<-Lc(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
+
+plot(Lc.1991,lty="dotted")
+lines(Lc.2011$p, Lc.2011$L,lty="dashed", lwd=1.2, col=4)
+```
+
+## Change of inequality measured with calcGEI (THEIL)
+
+```{r}
+# calcGEI kann nix mit 0 anfangen, macht aber das selbe
+x.1991<-datenbs1$reineinkommen[datenbs1$steuerjahr==1991]
+x.1991[x.1991==0]<-1
+calcGEI(x.1991)
+Theil(x.1991)
+
+x.2011<-datenbs1$reineinkommen[datenbs2$steuerjahr==2011]
+x.2011[x.2011==0]<-1
+calcGEI(x.2011)
+Theil(x.2011)
+
+
+```
+
+
+<br><br>
+<br><br>
+
+# Decomposing overall inequality
+
+## Households
+
+### 1991
+ 
+```{r}
+decompGEI(x.1991,datenbs1$household[datenbs1$steuerjahr==1991])
+```
+
+
+### 2011
+
+```{r}
+decompGEI(x.2011,datenbs2$household[datenbs2$steuerjahr==2011])
+```
+
+
+#### Interpretation
+
+* Ungleichheit ist von 1991 bis 2011 gestiegen (0.43 auf 0.51)
+* Dies ist mit einer Zunahme der within-inequality und einer Abnahme der between-inequality verbunden
+* Die within Group inequality war 1991 bei den Verheirateten mit Kinder am grössten, diese Gruppe hat auch am meisten zur overall inequality beigetragen (16%?), 2011 ist die Ungleichheit stark durch die Gruppen single Man (13%) und Women (24%) getrieben, während die Beitrag der Ungleichheit bei den Verheirateten mit Kindern (8%) an Bedeutung verloren hat. Generell ist der Anteil der Verheirateten zurückgegangen, während der Anteil an Singels stark zugenommen hat.
+* Der Wandel der Lebensentwürfe scheint sich in den Daten niederzuschlagen und auch einen Teil der Zunahme der Overall inequality zu "erklären"
+* Alleinerziehende tragen nicht viel zur Overall inequality bei, obwohl der Anteil an Alleinerziehenden Mütter geringfügig zugenommen hat und diese Gruppe im Mittel über deutlich am wenigsten Einkommen verfügt. Es sind aber einfach sehr wenige.
+
+
+## Agegroups
+
+### 1991
+ 
+```{r}
+decompGEI(x.1991,datenbs1$agegroup[datenbs1$steuerjahr==1991])
+```
+
+
+### 2011
+
+```{r}
+decompGEI(x.2011,datenbs2$agegroup[datenbs2$steuerjahr==2011])
+```
+
+
+#### Interpretation
+
+
+* Bedetung der Between Group inequality hat abgenommmen
+* Die Anteile der Altersgruppen ist relativ konstant geblieben
+* Die Ungleichheit bei den Rentern hat sich markant reduziert
+* Dafür ist die Ungleichheit innerhalb der Erwerbsbevölkerung stark gestiegen.
+* Ebenso die Bedeutung der Ungleichheit dieser Gruppe für die Overall Ungleichheit
+
+
