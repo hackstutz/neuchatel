@@ -1,0 +1,112 @@
+---
+title: "Vermögensmobilität Obwalden"
+author: "Rudi Farys"
+date: "Monday, September 15, 2014"
+output: html_document
+---
+
+#### Libraries laden die wir brauchen
+
+```{r libs_and_options}
+load("G:/stick/obwalden/obwalden_entschaerft.RData")
+library(ggplot2)
+library(scales)
+library(dplyr)
+library(stringr)
+library(knitr)
+opts_chunk$set(fig.width=12, fig.height=7.5) 
+```
+
+#### Daten aufbereiten:
+
+* Datumsformat
+* gebürtige Obwaldener identifizieren
+* letztes Steuerjahr pro Person erzeugen (Variable ENDE)
+* Variable für Personen deren Steuerpflicht ohne Wegzug in eine andere schweizer Gemeinde endet (verstorben oder Wegzug ins Ausland)
+* Wohnsitz Variable: Zeigt an, ob die Person in einer der 7 obwaldener Gemeinden wohnt (man könnte noch Restschweiz und Ausland unterscheiden in Zukunft)
+
+```{r datenaufbereitung}
+daten$ZUZUG <- as.Date(daten$ZUZUGDATUM)
+daten$ZUZUGJAHR <- as.numeric(substr(daten$ZUZUGDATUM,1,4))
+daten$HIESIG <- factor(daten$ZUZUGJAHR==daten$JAHRGANG,label=c("neu","gebürtiger Obwaldener"))
+daten <- daten %.% group_by(PERSID) %.% mutate(ENDE=max(STEUERJAHR))
+daten$TOT_ODER_AUSLAND <- factor(is.na(daten$WEGZUGNACHBFS)&is.na(daten$WEGZUGKT)&daten$ENDE<2013,label=c("Wegzug innerhalb CH","tot oder Ausland"))
+daten$WEGZUG <- ifelse(!is.na(daten$WEGZUGNACHBFS)|!is.na(daten$WEGZUGKT), daten$ENDE, NA)
+# Personen mit Wohnsitz in OW
+daten$WOHNSITZ_OW <- factor(!is.na(substring(str_extract(daten[,"WOHNORT"], "Alpnach|Engelberg|Giswil|Kerns|Lungern|Sachseln|Sarnen"),1)),label=c("auswärtig","Wohnsitz OW"))
+```
+
+Nun betrachten wir retrospektiv die Auswirkungen von Bevölkerungsströmen auf die Vermögensstruktur 2013 in Obwalden:
+
+## Zuzug nach Obwalden über die Jahre
+
+```{r ow2013}
+ow2013 <- filter(daten, STEUERJAHR==2013 & !is.na(HIESIG))
+ggplot(ow2013, aes(x=ZUZUG)) + geom_histogram(binwidth=365, colour="white") +
+       scale_x_date(labels = date_format("%Y"),
+                    breaks = seq(min(ow2013$ZUZUG,na.rm=TRUE), as.Date("2013-12-31"), 1461),
+                    limits = c(as.Date("1899-01-01"), as.Date("2013-12-31"))) +
+       ylab("Frequency") + xlab("Year") +
+       facet_wrap(~HIESIG) +
+       theme_bw() + theme(axis.text.x = element_text(angle=90))+ggtitle("Zuzug/Geburt (Anzahl Personen) pro Jahr ab 1899")
+
+# 1996 kamen viele!
+
+ggplot(ow2013, aes(x=ZUZUG)) + geom_histogram(binwidth=365, colour="white") +
+       scale_x_date(labels = date_format("%Y-%b"),
+                    breaks = seq(as.Date("1975-01-01"), as.Date("2013-12-31"), 365),
+                    limits = c(as.Date("1975-01-01"), as.Date("2014-01-01"))) +
+       ylab("Frequency") + xlab("Year and Month") +
+       facet_wrap(~HIESIG) +
+       theme_bw() + theme(axis.text.x = element_text(angle=90))+ggtitle("Zuzug/Geburt (Anzahl Personen) pro Jahr ab 1975")
+
+### man sieht immer Anfang des Jahres ein Ausreisser. wirklich gute Optik gibts nur wenn man übers ganze Jahr aggregiert
+```
+
+Besonders grosse Zuwächse in der Zuzugsrate gab es 1996 und 2011
+
+## Zuzug von Vermögen
+
+d.h.Personen gewichtet mit ihrem satzbestimmenden Vermögen. Aufgespaltet einmal nach gebürtig/nicht_gebürtig und einmal zusätzlich nach Wohnsitz OW (ja/nein)
+
+```{r vermoegen}
+ggplot(ow2013, aes(x=ZUZUG, weight=VSATZBESTKOPF)) + geom_histogram(binwidth=365, colour="white") +
+       scale_x_date(labels = date_format("%Y"),
+                    breaks = seq(min(ow2013$ZUZUG,na.rm=TRUE), as.Date("2013-12-31"), 1461),
+                    limits = c(as.Date("1899-01-01"), as.Date("2013-12-31"))) +
+       ylab("Frequency") + xlab("Year") +
+       facet_wrap(~HIESIG) +
+       theme_bw() + theme(axis.text.x = element_text(angle=90))+ggtitle("Zuzug in CHF pro Jahr ab 1899")
+
+ggplot(ow2013, aes(x=ZUZUG, weight=VSATZBESTKOPF)) + geom_histogram(binwidth=365, colour="white") +
+       scale_x_date(labels = date_format("%Y"),
+                    breaks = seq(min(ow2013$ZUZUG,na.rm=TRUE), as.Date("2013-12-31"), 1461),
+                    limits = c(as.Date("1899-01-01"), as.Date("2013-12-31"))) +
+       ylab("Frequency") + xlab("Year") +
+       theme_bw() + theme(axis.text.x = element_text(angle=90)) +facet_wrap(~HIESIG+WOHNSITZ_OW)+ggtitle("Zuzug in CHF pro Jahr")
+```
+
+## Gegenseite: Wegzug von Personen und Vermögen
+
+```{r wegzug}
+owWEG <- daten %.% filter(STEUERJAHR==ENDE & STEUERJAHR < 2013 & !is.na(HIESIG))
+ggplot(owWEG, aes(x=WEGZUG, weight=1)) + geom_histogram(colour="white") + 
+      ylab("Frequency") + xlab("Year") +
+      scale_x_continuous(breaks=2001:2012) + 
+       theme_bw() + theme(axis.text.x = element_text(angle=90)) +facet_wrap(~HIESIG+WOHNSITZ_OW)
+
+ggplot(owWEG, aes(x=WEGZUG, weight=VSATZBESTKOPF)) + geom_histogram(colour="white",fill="red") + 
+ 	   ylab("Frequency") + xlab("Year") +
+ 	   scale_x_continuous(breaks=2001:2012) + 
+       theme_bw() + theme(axis.text.x = element_text(angle=90)) +facet_wrap(~HIESIG+WOHNSITZ_OW)+ggtitle("Wegzug in CHF pro Jahr ab 2001")
+
+
+ggplot(ow2013, aes(x=ZUZUG, weight=VSATZBESTKOPF)) + geom_histogram(binwidth=365, colour="white") +
+       scale_x_date(labels = date_format("%Y"),
+                    breaks = seq(min(ow2013$ZUZUG,na.rm=TRUE), max(ow2013$ZUZUG,na.rm=TRUE), 365),
+                    limits = c(as.Date("2001-01-01"), as.Date("2014-01-01"))) +
+       ylab("Frequency") + xlab("Year") +
+       theme_bw() + theme(axis.text.x = element_text(angle=90)) +facet_wrap(~HIESIG+WOHNSITZ_OW)+ggtitle("Zuzug in CHF pro Jahr ab 2001")
+```
+
+Man kann sehen, dass deutlich mehr Vermögen kommt als geht. Faktor 3-4 für die auswärtigen. Die Personen die nach OW ziehen bleiben überwiegend dort.
