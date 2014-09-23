@@ -1,0 +1,19 @@
+---
+title: "Bern Spielereien"
+author: "Rudi Farys"
+date: "Tuesday, September 23, 2014"
+output: html_document
+---
+
+## Libraries
+```{r libs}
+library(foreign)
+library(ggplot2)
+library(dplyr)
+```
+
+## Daten
+```{r}
+be <- read.csv("g:/stick/bern/BFH - SNF-Projekt - Testdaten V1.0.csv",sep=";")
+```
+

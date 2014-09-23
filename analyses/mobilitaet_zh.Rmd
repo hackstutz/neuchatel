@@ -1,0 +1,47 @@
+---
+title: "ZH Mobilität"
+author: "Rudi Farys"
+date: "Tuesday, September 23, 2014"
+output: html_document
+---
+
+## Libraries
+```{r libs}
+library(foreign)
+library(ggplot2)
+library(dplyr)
+library(scales)
+```
+
+## Daten
+
+```{r daten}
+zh <- read.dta("G:/stick/zürich/taxdata_ZH.dta")
+zh0407 <- read.dta("G:/stick/zürich/taxdata_ZH_2004-2007_mit_KV.dta")
+zh0407$ZUZUG <- as.Date(zh0407$D_ZUZUG,"%d.%m.%Y")
+zh0407$WEGZUG <- as.Date(zh0407$D_WEGZUG,"%d.%m.%Y")
+# ZUZUG und WEGZUG nur für 2004 verfügbar. Allerdings gibt es Werte wie 2006 für den Wegzug!
+```
+
+## Spielereien
+
+```{r analyses}
+ggplot(zh0407, aes(x=ZUZUG)) + geom_histogram(binwidth=365, colour="white") +
+       scale_x_date(labels = date_format("%Y"),
+                    breaks = seq(min(zh0407$ZUZUG,na.rm=TRUE), max(zh0407$ZUZUG,na.rm=TRUE), 365),
+                    limits = c(as.Date("1900-01-01"), as.Date("2007-12-31"))) +
+       ylab("Frequency") + xlab("Year") +
+       theme_bw() + theme(axis.text.x = element_text(angle=90))+ggtitle("Zuzug (Personen) pro Jahr ab 1900")
+ggplot(zh0407, aes(x=ZUZUG, weight=STEUERBARES_VERMOEGEN)) + geom_histogram(binwidth=365, colour="white") +
+       scale_x_date(labels = date_format("%Y"),
+                    breaks = seq(min(zh0407$ZUZUG,na.rm=TRUE), max(zh0407$ZUZUG,na.rm=TRUE), 365),
+                    limits = c(as.Date("1900-01-01"), as.Date("2007-12-31"))) +
+       ylab("Frequency") + xlab("Year") +
+       theme_bw() + theme(axis.text.x = element_text(angle=90))+ggtitle("Zuzug (in CHF) pro Jahr ab 1900")
+
+# WEGZUG zu analysieren macht wenig Sinn da der Zeitraum extrem kurz ist (betrifft nur Personen die 2004+ verzogen sind)
+
+# Man könnte die Zuzugsplots mit OW übereinanderlegen und mit 1/Fallzahl gewichten (Zuzugsrate) um vergleichbar zu machen
+```
+
+

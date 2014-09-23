@@ -110,3 +110,30 @@ ggplot(ow2013, aes(x=ZUZUG, weight=VSATZBESTKOPF)) + geom_histogram(binwidth=365
 ```
 
 Man kann sehen, dass deutlich mehr Vermögen kommt als geht. Faktor 3-4 für die auswärtigen. Die Personen die nach OW ziehen bleiben überwiegend dort.
+
+
+## Nationalität
+
+```{r nationality}
+# read in bfs country codes/labels
+setwd("C:/Users/Hackstutz/Dropbox/Git/neuchatel/")
+bfscodes <- read.csv("analyses/bfs_nationalities.csv")
+bfscodes$country_cat[bfscodes$country_cat==""] <- "non OECD"
+# Serbien ist teilweise als 8259 abgelegt was nicht der bfs konvention entspricht
+bfscodes <- rbind(bfscodes,data.frame("bfs"=8259,"country"="Serbien","country_cat"="non OECD"))
+daten$country_cat <- bfscodes$country_cat[match(daten$NATIONALITAET,bfscodes$bfs)]
+
+ow2001_13 <- filter(daten, (STEUERJAHR==2013 | STEUERJAHR == 2001) & !is.na(HIESIG) &!is.na(NATIONALITAET))
+
+ggplot(ow2001_13, aes(x=log(ESATZBESTKOPF))) + geom_histogram(aes(y=..density..),binwidth=0.1) +
+       ylab("Frequency") + xlab("taxable income") +
+       theme_bw() + facet_wrap(~country_cat+STEUERJAHR,ncol=2)+ggtitle("Taxable income by nationality")
+
+aggregate(ow2001_13$ESATZBESTKOPF~ow2001_13$STEUERJAHR+ow2001_13$country_cat,FUN=mean)
+library(ineq)
+aggregate(ow2001_13$ESATZBESTKOPF~ow2001_13$STEUERJAHR+ow2001_13$country_cat,FUN=Gini)
+# der grosse zuwachs and gini kam von 2007 auf 2008 wie man hieran sieht:
+# aggregate(daten$ESATZBESTKOPF~daten$STEUERJAHR+daten$country_cat,FUN=Gini)
+
+```
+
