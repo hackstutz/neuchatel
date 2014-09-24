@@ -14,6 +14,7 @@ library(dplyr)
 library(ggplot2)
 library(foreign)
 library(reldist)
+library(IC2)
 
 ### Obwalden ####################################
 #################################################
@@ -74,7 +75,7 @@ ggplot(owZIV,aes(x=log(ESATZBESTKOPF),fill=SEX))+
   facet_wrap(~country_cat,ncol=1)+
   scale_fill_manual(values=c("men"="blue","women"="red" )) +
   scale_color_manual(values=c("men"="blue","women"="red" )) +
-  ggtitle("log taxable income by sex and marital status")+
+  ggtitle("log taxable income by sex and nationality")+
   xlab("log taxable income")+
   theme_bw()
 
