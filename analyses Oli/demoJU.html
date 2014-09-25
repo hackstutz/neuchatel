@@ -214,7 +214,7 @@ library(IC2,quietly=TRUE,warn.conflicts=FALSE)
 <pre><code class="r">datenju$TOTEINK[datenju$TOTEINK&lt;1]&lt;-1
 </code></pre>
 
-<h2>Periode: 2006 to 2011</h2>
+<h2>Periode: 2006 to 2012</h2>
 
 <h3>2006</h3>
 
@@ -275,11 +275,11 @@ library(IC2,quietly=TRUE,warn.conflicts=FALSE)
 ## [1] 57835
 </code></pre>
 
-<h3>2011</h3>
+<h3>2012</h3>
 
 <p><strong>Agegroup and mean income</strong></p>
 
-<pre><code class="r">prop.table(table(datenju$agegroup[datenju$steuerjahr==2011]))
+<pre><code class="r">prop.table(table(datenju$agegroup[datenju$steuerjahr==2012]))
 </code></pre>
 
 <pre><code>## 
@@ -287,22 +287,22 @@ library(IC2,quietly=TRUE,warn.conflicts=FALSE)
 ## 0.2034 0.5780 0.2186
 </code></pre>
 
-<pre><code class="r">by(datenju$TOTEINK[datenju$steuerjahr==2011],datenju$agegroup[datenju$steuerjahr==2011],mean)
+<pre><code class="r">by(datenju$TOTEINK[datenju$steuerjahr==2012],datenju$agegroup[datenju$steuerjahr==2012],mean)
 </code></pre>
 
-<pre><code>## datenju$agegroup[datenju$steuerjahr == 2011]: 18-25
+<pre><code>## datenju$agegroup[datenju$steuerjahr == 2012]: 18-25
 ## [1] 17524
 ## -------------------------------------------------------- 
-## datenju$agegroup[datenju$steuerjahr == 2011]: 26-65
+## datenju$agegroup[datenju$steuerjahr == 2012]: 26-65
 ## [1] 78658
 ## -------------------------------------------------------- 
-## datenju$agegroup[datenju$steuerjahr == 2011]: 66+
+## datenju$agegroup[datenju$steuerjahr == 2012]: 66+
 ## [1] 51257
 </code></pre>
 
 <p><strong>Housholdstructur and mean income</strong></p>
 
-<pre><code class="r">prop.table(table(datenju$household[datenju$steuerjahr==2011]))
+<pre><code class="r">prop.table(table(datenju$household[datenju$steuerjahr==2012]))
 </code></pre>
 
 <pre><code>## 
@@ -312,25 +312,25 @@ library(IC2,quietly=TRUE,warn.conflicts=FALSE)
 ##               0.317723               0.003809               0.017182
 </code></pre>
 
-<pre><code class="r">by(datenju$TOTEINK[datenju$steuerjahr==2011],datenju$household[datenju$steuerjahr==2011],mean)
+<pre><code class="r">by(datenju$TOTEINK[datenju$steuerjahr==2012],datenju$household[datenju$steuerjahr==2012],mean)
 </code></pre>
 
-<pre><code>## datenju$household[datenju$steuerjahr == 2011]: Married with Kid(s)
+<pre><code>## datenju$household[datenju$steuerjahr == 2012]: Married with Kid(s)
 ## [1] 86072
 ## -------------------------------------------------------- 
-## datenju$household[datenju$steuerjahr == 2011]: Married without Kid(s)
+## datenju$household[datenju$steuerjahr == 2012]: Married without Kid(s)
 ## [1] 119417
 ## -------------------------------------------------------- 
-## datenju$household[datenju$steuerjahr == 2011]: Single man
+## datenju$household[datenju$steuerjahr == 2012]: Single man
 ## [1] 38944
 ## -------------------------------------------------------- 
-## datenju$household[datenju$steuerjahr == 2011]: Single women
+## datenju$household[datenju$steuerjahr == 2012]: Single women
 ## [1] 33964
 ## -------------------------------------------------------- 
-## datenju$household[datenju$steuerjahr == 2011]: Single dad
+## datenju$household[datenju$steuerjahr == 2012]: Single dad
 ## [1] 90725
 ## -------------------------------------------------------- 
-## datenju$household[datenju$steuerjahr == 2011]: Single mom
+## datenju$household[datenju$steuerjahr == 2012]: Single mom
 ## [1] 60636
 </code></pre>
 
@@ -339,7 +339,7 @@ library(IC2,quietly=TRUE,warn.conflicts=FALSE)
 
 <h1>Change of overall inequality</h1>
 
-<h2>Periode 2006 to 2011</h2>
+<h2>Periode 2006 to 2012</h2>
 
 <h3>2006</h3>
 
@@ -355,15 +355,15 @@ library(IC2,quietly=TRUE,warn.conflicts=FALSE)
 <pre><code>## [1] 0.3199
 </code></pre>
 
-<h3>2011</h3>
+<h3>2012</h3>
 
-<pre><code class="r">Gini(datenju$TOTEINK[datenju$steuerjahr==2011])
+<pre><code class="r">Gini(datenju$TOTEINK[datenju$steuerjahr==2012])
 </code></pre>
 
 <pre><code>## [1] 0.4495
 </code></pre>
 
-<pre><code class="r">Theil(datenju$TOTEINK[datenju$steuerjahr==2011])
+<pre><code class="r">Theil(datenju$TOTEINK[datenju$steuerjahr==2012])
 </code></pre>
 
 <pre><code>## [1] 0.364
@@ -372,10 +372,10 @@ library(IC2,quietly=TRUE,warn.conflicts=FALSE)
 <h3>Lorenz curve</h3>
 
 <pre><code class="r">Lc.2006&lt;-Lc(datenju$TOTEINK[datenju$steuerjahr==2006])
-Lc.2011&lt;-Lc(datenju$TOTEINK[datenju$steuerjahr==2011])
+Lc.2012&lt;-Lc(datenju$TOTEINK[datenju$steuerjahr==2012])
 
 plot(Lc.2006,lty=&quot;dotted&quot;)
-lines(Lc.2011$p, Lc.2011$L,lty=&quot;dashed&quot;, lwd=1.2, col=4)
+lines(Lc.2012$p, Lc.2012$L,lty=&quot;dashed&quot;, lwd=1.2, col=4)
 </code></pre>
 
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAhFBMVEX9/v0AAAAAADkAAGUAAP8AOY8AZrU5AAA5ADk5AGU5OQA5OWU5OY85j9plAABlADllAGVlOQBlOY9lZjllZrVltbVltf2POQCPOTmPZgCPjzmPj2WPtY+P29qP2/21ZgC1ZmW1tWW1/v3ajznatWXa/rXa/v39tWX924/9/rX9/tr9/v1MSME5AAAALHRSTlP/////////////////////////////////////////////////////////AMfWCYwAAAAJcEhZcwAACxIAAAsSAdLdfvwAABKZSURBVHic7Z2LeuO2EUYLry/ZZq3dJK2ctondWq0lGe//fhVBSiIlijcMZgaY/3xfsrQpQcAczQCkSPkvHpjkL9IdADJAvFEg3igQbxSINwrEGwXijQLxRoF4o0C8USDeKBBvFIg3CsQbBeKNAvFGgXijQLxRIN4oEG8UiDcKxBsF4o0C8UaBeKOULH739PAh3Qe1QLxRbIjfOOeevf98ufvN3b2GH9fVj1/+49yXd791rn6Ar34ZfnXY9+73q4eP+jl/dY+HfW/V/5sn544J8W9B7GOQ6h4+3hrP4cfq90H8QbT3ze++vLfEV8/57+Fphx8Pb5q31pskZyyI3z0dhFXWDhIfm19XYg8/Ph+khwdtmizePR2Ev7l1W/xjqBWv4aGnJ0sOjAIL4rehTm8qmwd9TWF31fsgvCGqB+2eHuvnbE8V/1zqX8Ozn6v3w/nJQmMiw7b4Rm4rhevHXos/bP5vdVoOQLxqekp9Jew09Z/Fb07LtVDqD+l9qPDrw78n8f7t7l9VMSjmSKFs8c1C7Ly4CxLrHyunjfj6gSHVj4u71oNq8YfHdJ4sOTAKTIhvHc7V2VurO4nfuJP4sLN61H7l3N/Ppb45ljs/OXdKFg8GgHijQLxRIN4oEG8UiDcKxBsF4o0C8UaBeKNAvFEg3igQbxSINwrEGwXijQLxRoF4o0C8USDeKCPid1/r6833qxIuMARnhsVvT3eUrf3mkaVDgIdB8W93f9QZv//xfkp+UATTSv3u24fffz/eNuRADlCI3z60xR8ZaRpIQiO+m/GntiP6BdLixuxME98/x0O8WtyonWniP1+ee1b1EK+UUObvhx8zQXz1X+9xPMTrpPYS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" alt="plot of chunk unnamed-chunk-10"/> </p>
@@ -419,9 +419,9 @@ calcGEI(x.2006)
 <pre><code>## [1] 0.3199
 </code></pre>
 
-<pre><code class="r">x.2011&lt;-datenju$TOTEINK[datenju$steuerjahr==2011]
-x.2011[x.2011&lt;1]&lt;-1
-calcGEI(x.2011)
+<pre><code class="r">x.2012&lt;-datenju$TOTEINK[datenju$steuerjahr==2012]
+x.2012[x.2012&lt;1]&lt;-1
+calcGEI(x.2012)
 </code></pre>
 
 <pre><code>## $ineq
@@ -449,7 +449,7 @@ calcGEI(x.2011)
 ## [1] &quot;ICI&quot;
 </code></pre>
 
-<pre><code class="r">Theil(x.2011)
+<pre><code class="r">Theil(x.2012)
 </code></pre>
 
 <pre><code>## [1] 0.364
@@ -534,9 +534,9 @@ calcGEI(x.2011)
 ## [1] &quot;ICI&quot;
 </code></pre>
 
-<h3>2011</h3>
+<h3>2012</h3>
 
-<pre><code class="r">decompGEI(x.2011,datenju$household[datenju$steuerjahr==2011])
+<pre><code class="r">decompGEI(x.2012,datenju$household[datenju$steuerjahr==2012])
 </code></pre>
 
 <pre><code>## $ineq
@@ -611,7 +611,7 @@ calcGEI(x.2011)
 <ul>
 <li>Grundsätzlich: Der Anteil lediger ist extrem hoch (fast 60%) das ist aber auch bei den Brülhartdaten so. Trotzdem irgendwie strange&hellip;</li>
 <li>Overall Ungleichheit nimmt geringfügig zu, nicht aber, weil Between-Group inequality grösser geworden wäre</li>
-<li>Beitrag der Between-Group Ungleichheit zur Overall Ungleichheit ist sehr hoch (2006:36.6%, 2011:36.9%) </li>
+<li>Beitrag der Between-Group Ungleichheit zur Overall Ungleichheit ist sehr hoch (2006:36.6%, 2012:36.9%) </li>
 <li>Verheiratete ohne Kinder verfügen über ein deutlich höheres Einkommen wie die übliche Gruppen</li>
 </ul>
 
@@ -681,9 +681,9 @@ calcGEI(x.2011)
 ## [1] &quot;ICI&quot;
 </code></pre>
 
-<h3>2011</h3>
+<h3>2012</h3>
 
-<pre><code class="r">decompGEI(x.2011,datenju$agegroup[datenju$steuerjahr==2011])
+<pre><code class="r">decompGEI(x.2012,datenju$agegroup[datenju$steuerjahr==2012])
 </code></pre>
 
 <pre><code>## $ineq
@@ -748,14 +748,400 @@ calcGEI(x.2011)
 <h4>Interpretation</h4>
 
 <ul>
-<li>Beitrag der Between-Group Ungleichheit zur Overall Ungleichheit ist auch bezüglich Altersgruppen sehr hoch (2006:26.2%) und hat geringfügig zugenommen (2011: 27.0%)</li>
+<li>Beitrag der Between-Group Ungleichheit zur Overall Ungleichheit ist auch bezüglich Altersgruppen sehr hoch (2006:26.2%) und hat geringfügig zugenommen (2012: 27.0%)</li>
 </ul>
 
 <h4>Anschlussfrage</h4>
 
-<ul>
-<li>Weshalb ist die Between Group inequality in Jura so viel höher, wie in Basel?</li>
-</ul>
+<p>Weshalb ist die Between Group inequality in Jura so viel höher, wie in Basel?</p>
+
+<h2>Sieht es anders aus, wenn ebenfalls mit dem Reineinkommen wie in Basel gearbeitet wird?</h2>
+
+<h3>Lorenz curve</h3>
+
+<pre><code class="r">Lc.2006&lt;-Lc(datenju$R590[datenju$steuerjahr==2006])
+Lc.2012&lt;-Lc(datenju$R590[datenju$steuerjahr==2012])
+
+plot(Lc.2006,lty=&quot;dotted&quot;)
+lines(Lc.2012$p, Lc.2012$L,lty=&quot;dashed&quot;, lwd=1.2, col=4)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-16"/> </p>
+
+<h2>Lorenz curve with ggplot</h2>
+
+<pre><code class="r">lorenz.2006 &lt;- data.frame(Lc.2006$p, Lc.2006$L)
+lorenz.2012 &lt;- data.frame(Lc.2012$p, Lc.2012$L)
+lorenz.2006$Lorenzkurve=&quot;2006&quot;
+lorenz.2012$Lorenzkurve=&quot;2012&quot;
+names(lorenz.2006)&lt;- c(&quot;p&quot;,&quot;L&quot;,&quot;Lorenzkurve&quot;)
+names(lorenz.2012)&lt;- c(&quot;p&quot;,&quot;L&quot;,&quot;Lorenzkurve&quot;)
+lorenz &lt;- rbind(lorenz.2006, lorenz.2012)
+
+
+ggplot(lorenz, aes(x=p,y=L,shape=Lorenzkurve)) + 
+  geom_line(data=lorenz,aes(linetype=Lorenzkurve)) +
+geom_segment(y=0, x=0,yend=1,xend=1,colour=&quot;black&quot;)+theme_bw()+
+xlab(&quot;Tax subjects&quot;)+
+ylab(&quot;Share of total&quot;)+
+  annotate(&quot;text&quot;,label=&quot;Gini=84.4&quot;,x=0.1,y=0.8,size=5)+
+annotate(&quot;text&quot;,label=&quot;Gini=35.6&quot;,x=0.1,y=0.7,size=5)+
+scale_x_continuous(breaks=c(0,0.2,0.4,0.6,0.8,1),labels=c(&quot;&quot;,&quot;Q1&quot;,&quot;Q2&quot;,&quot;Q3&quot;,&quot;Q4&quot;,&quot;Q5&quot;))+
+scale_y_continuous(labels=c(&quot;0%&quot;,&quot;25%&quot;,&quot;50%&quot;,&quot;75%&quot;,&quot;100%&quot;))
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAulBMVEUAAAAAADkAADoAAGYAOjoAOmYAOpAAZrY6AAA6ADo6AGY6OgA6OpA6ZmY6ZrY6kJA6kLY6kNtmAABmADpmAGZmOgBmOjpmOpBmZgBmZjpmZmZmtttmtv9/f3+QOgCQOjqQOmaQZpCQkGaQkLaQtpCQ27aQ2/+2ZgC2Zjq2kDq225C2/7a2/9u2///MzMzbkDrbtmbb25Db/7bb/9vb///lxYDl5aPl5eX6+vr/tmb/25D//7b//9v///9KKVJ+AAAACXBIWXMAAAsSAAALEgHS3X78AAAdaElEQVR4nO2dC3vbOHaGUae1nVm3O3LS6c5GJ852uta0O66yHbe2Lvz/f6sE7wCBQ4I4IEDyfE8iCxI+HhCvAN5AUGSsTUrELgArjhj8RsXgNyoGv1Ex+I2KwW9UDH6jYvAbFYPfqBj8RsXgNyoGv1Ex+I3KAzywgoiMLSof8Fr6Dc/+jn8d051U0QHPTiUGHzs4g4/nTqrogGenEoOPHZzBx3MnVXTAs1OJwccOzuDjuZMqOuDZqcTgYwdn8PHcSRUd8OxUYvCxgzP4eO6kig54diox+NjBGXw8d1JFBzw7lRh87OAMPp47qaIDnp1KDD52cAYfz51U0QHPTiUE/OXzS5YdxM1z9Xp5FPvs/PBafw9a/pRqz82dVNEBz04lO/iT+PCSnW5f23+788PvT89NBtAMKdWemzupogOenUpW8Ndfrt9esuNONvzyVYL/flfZcsEbi0BCS8cGn6OX4PfyT/mad/Vfnn4Wt3VfD1r+lJqNmztmcKETAHxpVBoC32nx+UfHH7+9HPbV96DlZ/AT3KJHAPClUWkAfHcbL3f3fmPwtO5UwXf36vM/u3yXj7t6QrfoEwB8aVTi4/iYwUXG4LcIXjQvHQG+NCox+IjBGXxkd6TgovPaCvClUYnBRwsulD+NAF8alRh8rOA1dwYfz83gnQRamsG7uOuKF6ldpBkWaGkG7+Bu6p3BR3TPH7ytdgYf0c3gnQRamsGPdndqncFHdM8dvMudwUd0zxxcKO8ZfDw3g3cSaGkGP84t1ASDj+eeNbjQUgw+nnvO4Bp3Br8R8Fp9i/TG1Q8LtDSDH+Fm8Lq2AV6vbga/DfC92mbwmwDf587gNwre4AZ8aVRi8PMF79c1g98CeENVM/gNgDdxZ/AbBW9yA740KjH4mYKbKprBR3bPENxYzww+sjt8cDN3Bh/ZzeCdBFqawVvd5lpm8LHdoYNbKlkY3YAvjUoMPnxwG3cGH9vN4J0EWprBm2WrYmF2A740KjH40MGFzc3go7tDBhc2t2Dw0d0Bgwuru655Bh/PzeCdBFqawfclrG7B4OO7gwUXdndT8Qw+njtUcIG4GXwCbgbvJNDSDF6TQNxiyeDfVb29+yimO0xwgXnaL3U3kLFFxS0+VPCmZs0t3uoGPBiVGHyo4Ay+0sbAtxVrcneqncHHcwcI3qlXBo9qXeC71crgUW0KvGDwSbjJgyu1agKPuAEPRiUGHyC4Wqnc4lGtCLxWp323YPBpuGcHj7kBD0YlBk8eXK9SU4tHYgMejEoMnjp4r0Z7bsHgE3FTBu9XaB88GhvwYFRi8LTBDfVpaPFYbMCDUYnB0wZn8D1tArypOnW34K4+FTdZcGNtMnhUawBvrkwGj2oz4PVnijL4eG6i4Ja6ZPColg/eVpUMHtXiwVtrUnX3nh7N4OO5GbyTQEtvG7y9Ihk8qoWDR+pRcfe4M/iIbv/gWDVuAfxBCHHznGWXT8/1p83bfP0vj0LclanzxyZH+Z7BVwI8GJUowV8eJdWT2Buzv2fXr3f5/51MXL/eNODL94sGj9Zi193nvgbwh7I1H29f82Z++fQf97L1d1r85TH/SRyLTMd/blt8+X7J4PFKXD34/1P698vjh5fsUPwGTkLqH57bFn9++HsDvnq/YPADdbh68P/7w0v9tgCfN+/Th5fuNl7uA8jtwPXpudnG1++XC16Mdxu4rwX8+V7u3pnBXx7z1i63B8ddu3NXv2fwlQBfGpUCdPU5RxV83dWfbl+Lb88Prw345v1iwfefB213rxN8vXPXA19+/Z7V4I/FD6Hc+W/eLxW8cHCbuK8B/OWxIHuPd/Uyz3qO44WLe63gq/a7t+7cyRM4JfcS9mHXvmfwlQBfGpX4lK2XXbi4jdwZfET3ZLtwcjN4k5YIXri5GbxJ6wdv5s7gI7on2uu6Y/CoVgfeOimp2S0YvFGLA2+fotDsttU0g4/nnge8paoZfDz3FDsyi43RbevpGXxE9wQ7NqeF0W2taAYfz+1uR+9wN7ptDZ7BR3TPAN7a0ycKvrjqspMjZ26eL49iX1w/rwRa3g2Bx290Nrnt9Zwm+FzXv7xen+QVttPu/PD7U3s1FbSM2wE/cNujyW1t8OmC//U5u/x0L+4K8N+rYfGyI4C3jUpMsIjRJggLvNYg+NNdcVk9O+7zrv7L08/1BfXttvjBWyIMbqSaU23xv1Z9+0kOmjj++O3lUN8vAVpOBm9123ftkgV/+bfXEvpRDqz5/BuDHx4Z33eL5e3cnf9Fvh7krn0xVOq09a5+xDjZvhur5UTBIwItvQnwY0bN9dxYT8/gI7qDg1/izp1doKW3AH7U4KmeG61kBh/PPX7U3CQ32tMz+Iju0YOnprnRnp7BR3SHBY+2dwa/APBjr69pwhs8g4/oJh5KoYnBo0oe/Phzb6oGenoGH9EdFvw7b+MxpQ7e4RSMIoEfzDH4xMG7HJApEq5FBzw7lWad4PD6tZzgUE6U01zsOZSWtME77Z4pGti1WwX4oQkO5cRHxXRnp7v2Yzk5ghzosVLwgz39GsAPTXBYzHyRf5sd2p9GMyVK0uDdttJdCeeiA56dSnNOcCi/kS3++vSHpqc/1T1+yuAd22zXmff0qwc/YoLDfCOfgy4mQarGaR9v/1OI/CeSMnhXdF1rjn4b4LEJDgvJ7blU8b0cuJ/8Nt55v1zxbqirt05wWHx7/brv/pWb/OL9KsEXe3arBz88waFs7Pnn5d/y81Py4N3RKd4tgB+a4LBo5Dnp+q/8tHyfcFc/obNuvRsBPzjBoTyBI3nXEx3KY3j5WcI7d1PQdcyb2Mav8pStJ/gJbsCzU4nBo/ZJ6Brzdrp6TEsEL7yCi63s3OHZFwi+rpxpwcW0nw3g2anE4BG7J3jexhdaHvimbhi8ItDSawPfVs2k4FN/NoBnpxKDt9k7NTMRPG/jC20MvGDwlRYGvlsxk8BPdQOenUoM3mxX6mVC8LbBM3j867TAq9UyBXx7IwWDR7U68FPdgGenEoM32bVacQ/e6ekZPP51SuD1SpkAvnPLHINHlRD4Xp04BxcexwSAZ6cSg+/Z+1XiDp638a02BF74HAwCnp1KDF63G2rEGbyPG/DsVGLwmt1UIVN27ia7Ac9OJQav2o314Rjc72AQ8OxUYvCqnQY8b+M7WgR4c3W4BRcMXtESwFtqwxG8l3sJ4N9Vvb37KKa7tguK4EK4LUcvOpCxRcUtvmO3VYZTcMGHc6rSB2+tC5fg/ZlPGDyq+ODtVeEEng/nNKUOHqkJN/B6m2fwqFYC3v+EL+DZqcTgKztWEW7g1384p6UXDR6th/HBRb+nZ/D413HB49XgAN7LXQjw7FRi8IWdCLx+ttbNXQrw7FRi8FIDtTAevJe7FODZqcTgcwmi4MYGz+DxryO6BVVwwy69g7sS4NmpxOBlFdAEt8xTzeBRrQE879WblCp4QRVcMHijEgUvyIKTXNSNAl5OOFnow4s1f0egpRcJXtAFtzT4BYB3FGjpjYM3na0d724FeHYqbRy8oAtOMowjiwX+uK2uvl57guDmkzdj3R0Bnp1KamHlUwXusuOdJbMq0NLLA9+sPAV4L3dHgGenkgb+80v5b4wVtPSmwdsb/CLAX5+e83/nH7YBvl13AvBLPpzLlTM/Cfl8oBECLb008J1V9w6OPVVwEeBdBFp6YeC7a+4P3sutCPDsVOpt45vXQYGW3jB429nacW5VgGenkvHMXf30R1ygpZcFXuHkDR7r7NMHP7qtlwItvSjw6np7BsefG7wE8E4CLb0k8Npq+4Inux0jiwVePgxsZE/P4JuFUY3RLQR4dippx/Hy6e7lYz+HBVp6QeB1Up7gA+7VV4/gtat5DrujNrlX38PkN2RvBeC30eL7lPzA0xYdlFQF/iDEXXaSl88O8vza6cOf8rfyYc37HPzp5lk+0vNxLzP86cNLdr7fZYeB83Ab3MYbWqfXkD1BdgNWIVBSJfiC6+4k9tmxJHzzfL7fF030/PGvn56zGvy+gJ5nKvNhxcZLhQm09FbBBz2cK+nJPvhwl+OWDTlvyiXnops/f/zDTQM+f5cdbn//uqvyocVWwmxgG2+C5DNWk2xUfiVQUkqLz7mWm+EKvHxuew7/cPtadgEF+PPHf897+8HN9ebO3Bkbp98gXaobsEqBkiqY7KptfM61fCB3s0kXt3//+JzvmeXZ/rECn+fdtQ/uxsrdDbP6M3dmSB6DdMlG5dcCPDuVtraNJwcfeK8+mDYG3rK60wfphgb/333hixsrZRvv0tEvErztZz4dvJfbGBuUVB9zEPB/W/c23tq9TQ1enrRbPPjy4G/Fw6vpwQc/nJsH/Mr36u37MxODC8IbsBqBkpoJvJNAS6cOHlnVqeC93JbYoKTmAr/ic/XYT3xa8Pqy3ArAr/nqXADwXm5bbFBSJvDVWbmDKE7NF69HeWbPSZs5V49u0yYFb67Dzw3+lDM+7E+3r+2/4hM8jqahFp/v6BfXhPKXy6O86vfQfKeWMHHw+L7MNPDZLOCFovqncNwfd7KFVq9/9mzxvW389Ume9q9+Vrvzw+9P7XgPtYRpgx/Yh50SvL0WG2EbL29t3WfXby/lq7xMd/Rp8T1dfrrPf0rlz0qC/179ruSPD94WI7GQZUqNAV+A7rb4HPpp3I1vI8Gf5KXdffmzyrv6L08/t/0BaHkTbvFDB60TgndG2s2/c1dco9e28bQtXuq0K39W+dvjj3m3UgcALV+64MWAexL4eHv11egaba/ercEPtvid/CmVPyu5u//bEsGLIfeE4CIieBINtfhysGb5s8oOu+y0vK5eDLrdgyuj7NYAPt+rv/2fT+NGaoOW3hT4jHYilY5ASc135i4/UD+t6sydGHY7Bxci8uGcv3pn7nLwqzpzJ0a43cF7ufHYoKRmGYFTt/g1nasXY9yuwbWbplbQ4td3dS4MeC/3QGxQUnw9fppbjHI7BtfvklwB+LWNwKnXjhh8tjrw1yeHe25BS6cHvlk5UvC9O+VWAL66iWotgy0Dgc+0aos6EKPopQdvmOprzdv4dt0owavH8K7u4digpIYGYmQn2Uy9B2I4CbR0auA7q0YI3nBLdOiBGJnyXx2Icf3l+u2l+gSPo0lbjRVNW95dM0rwWQqHc81AjCyrwJ/8xtytaNryMOBNcyDMD74diFGDPzhy7x/OrWXacmXFCMHri3Zyj4kNSmpoIEYJvvzESb3DuZVMW66uFxl4kQJ4ZSBGAX5w4pO+tJVYy7Tl2mrRgfdyj4oNSopP2Tq59bWiAm+e5YjBo1oFeMOy1wH+tIrDuR4bIvCWac1WAP4yctRVIdDSyYDv46EBb9yzG+0eGxuU1EwDMVZxdc6Ahgh8Nv9xfDDpZ+4cjglAS68dvHX+ysWDX8dDhU14aMBbFr588I4CLZ0GeOMKUYC3T1jL4FHNA968PgTghX3pywd/ebzLzvcje3oG7+B2iA14diopq3LYFaf7F3x1ztKB+YPHZiZfPHh5MCcv0Cz36pyNDgF4ZOmrAC9vpljs1Tlrq/QGjz6KYPHgs8O+mARn5EV90NKrBo8tffng8wP521e5hzdKoKWjg7e3Sl/wtpO149xusQHPTqUVHc4hq+IJfuCJggweVWjw2Jr4gvdyM3hUCYPHO3oGHxc8uiKe4N/xemLwqMKCx9fDC7xg8KpAS8cEP7AaPuDF4KRZDB5VyNrzfB4QDr4+jp/kHg7O4D3cAcHLPbt3/HiOwaMKCN73sTCIHbkoN8I9JjiDn+wWvrEZvJNAS8cCL7xj2+1lH887d4pAS68SfPHC4BWBlo4EXvjHttrLc3YMXhVo6TjgBUFsm70+V8vgFYGWjgJeUMS2gq9eGLwieFf19u6jiW5BEdtiF8LHPTU2kLFFtfAWXxc/RIsXzaEct3hFoKUjgG9KHwR88cLgewItPT/4tvABwHeuwjN4RaCl1wa+jcDgFYGWnh18p+z04LvXZRi8ItDSc4PvFp0cvDLcisErAi09M3il5PTgHewMHtWiwKvjKxm8ItDS84JXC04MXnT27IbtDB4Vbe1p5aYG72Rn8KhIa08vNi14fSA9g1cEWnpG8L1Sk4LvjbBj8IpAS68HvB6CwSsCLT0f+H6hKcFXoy/G2xk8KrraM5SZELxhKDWDVwRaei7wpiJTgu/HYPCKQEuvA7zp3gkGrwi09EzgjSUmAy8MDZ7BqwItPQ94c4HpwBcvDB4TaOlZwFvKSwXePAcCg1cEWnoF4I0dPYPXBFp6DvC24tKAt90Uy+AVgZaeAby1tETgLTEYvCLQ0uHB2wtLAt56FzyDVwRaeungLRv4YTuDR+Vfe0hZScAXLwx+UKClQ4PHikoAHpnuhMErAi0dGHzAaWik3d7RM3hNoKUXDn66ncGj8qw9vKDe4LEGz+BVgZYOCn6gnL7ghX3PbtjO4FF51V7Y2Ujw9s7gNYGWDgg+8KyiyJHcGDuDR5Uw+IEHETB4VaClw4EPPA2NKGZERWqCwSsCLR0MfOBJKYTvjKgMHtXk2hNe7uHYgo/j3QRaeqHghWiP4yfY/YIb3IBnp1L64APPRlIQ93vABYNHNbH2hJd7OPbAkVzY4CY34NmplDr40LORlMh5585FoKWXCL46ZcfgXQRaOkTtBZ6Uol48g3cRaOkAtdeWLkjdN6foGbyLQEvT117oSSma5TN4F4GWXhz49pocg3cRaGny2gs8N0HnGjyDdxFoaeraU4pGX/fdY3cGr+v6VYjb1+wgxM3z5VHss/PDa/0daHmJay/03ASi88rgdZ3usuywvz49y/e788PvxbtSoOVdFnjlZB2DN+m4v/x0L+4K8N/vKlsueAspEXTpb0LMEGSSICjvRsPg80Z/+vAi8T+KL08/y56/FGgZSX/4ermIG512cp5bfF+Hqo2fdvnL8cdvL4d99Q1oOSnXP/At6qK7gXe3+wUfcAOenUqDO3cSs4R+zN9cPv82D/h+qYjBl68M3qqD3Jjv5B/Z4A+77DRLVx8YfG80NYN3EWhpuvUPPDdB/+4JBu8i0NJk6x/4TmXDqAsG7yLQ0lTrbywSXd3rO3aOdr/gI9yAZ6fSBsH72YO7Ac9OpfTAB75F3XibHIN3EWhpmvUPfMOqeVglg3cRaGmS9Q888ZRpA+9g9ws+zg14diptC3zNncGnBn6WO5X5cC5LDXzgiacs7Z3Buwm0tP/6B75T2T7vBYN3EWjp1MFbduzG2v2Cj3cDnp1KKYEPe8Mqdn8cg3cRaGnf9UeL4l33SHtn8G4CLe25/mFvWMXvh2XwLgItnTb44q8tBoN3EWhpv/UfKIhn3Q/cAM/gXQRa2mv9w96pPDCBIYN3Emhpn/UPO/HU0Dx2DN5JoKU91j/sncqinBCVD+e62gB4Ifg4vq8kwAe9YVUCfx9YUQbvItDSk9c/6PxDRUMfeMwBg3cSaOmp6x/0htWygx94zAGDdxJo6RTB20ZejLT7BZ/mBjw7leKDF17ugdhilJvBOwm09LT1rwsQpO7rBs/ge4oNPuh9i00Pz+B7WjP49kosg+8pMvg2PH3dd/boGHxPccGHvGG1O/KCwfcUFXzI+YeUIzgG39NawasjrRh8TzHBB7xTWTtjw+B7igheDU1ae/rISgbfUzzwAe9U7p2hZfA9RQMf8L7F/khqBt/TCsEbVonB9xQLfC8uWe3V/TwfzqGKBD7cDasNdwaPKg54Q1Si2jO1dwZv0MrAG9s7gzcoCvhgdyqb2zuDNygGeGNMitqztHcGb1AE8MHuVLa1dwZv0IrAW9s7gzfIB/y7qrf3URLmj0e6LcrdQqDLH7L7BSd0AxlbVLO3+FC3qCPtnVu8QXODt8bzrD10phMG39dKwA/cMcHge5oZfKC5CfD2zuANmhd8mDuVhfCcT4PBOwm09PD6Y8Gm156o7q5Hls7ge1o+eIKbrBm8k0BLD65/kLkJRAUeXTiD72lG8EHmJhAUN1kzeCeBlh5Y/yC3qNtPz49xewYP4wY8O5VmAz90q/Kk2msO37nFu2rJ4EXb3hm8q+YCL+hrr9vNM3hXzQR++B5159pTrsoweFfNA15GIa49dbeOwbtqqeC1q7AM3lWzgB8zOYFT7Qn9MI7Bu2oO8GUMwtprjuL4cG6yZgA/bnICh9oznLVh8K5aHnhhGnTB4F0VHnwdgaj2RO+Ni9sz+BxuwLNTKTj4sbNSjKw9y8l5Bu+q0ODb5VPUnrCNpWXwrloU+HZvforbM/hcbsCzUykw+PHTkYwZsdc7inNxewafzQ14diqFBe8wOcHw+B3s2juDd1VQ8MrCPWsv5DNCGbyTQEuHBG/dqxvlZvB9hQTvNCsFfjW/HsYR5s47Bu8k0NL6GmiLnl57QojmcM7dPSI2g3cSaGltDRxnpUCu7dUXdcPch+NvZ/DogifWXrV1DzQqn8TO4NEFT6q9ZqcuzKh8GjuDR5c7pfbaUzZB657BOwm0dHcNDIt1r73uKRsGT6ww4CdMR9I/GFTO0DJ4YqUKXmgXZBg8sYKANy7UZf3b43XiYRxB7AweXabD+ne4M/hACgDessix6y/0Xt7JPSk2g3cSaGkS8KLfyzu4bWLwPdGDty1xzPp3R9AKBh9S5OCtCxxef2HYto93Y2LwPVGDty9vYP2FrZMf5WbwrkoEPE59yM3g3UUMHlmcff1FPVMdsgAGTyxa8NjSzOsv6i6+/NlYR1oweGKRgkcX1l9/0d2uvyHUjW4tNioG39M48Adx85xdHsU+Oz+81h+ClskJvAJdGv3mn2bwrhoF/nT7Kv/tzg+/Pz03n4KW620UOlGpLUH5NmbdM3iLjrvs8vlFgv9+V9lywZsqMU4dg/S8sVRBQNodjQO/z67fXvKu/svTz+K27uuhvyiB9NntOFljLm7xlQDPTiWHFi/f/Pjt5bCvPgUtV+eyrLD/t4nBVwI8O5UctvFZTv+3UeCNmrX23NxJFR3w7FRy2KvP/+yyk72rT6n23NxJFR3w7FQKfX98KwY/zg14diox+NjBGXw8d1JFBzw7lRh87OAMPp47qaIDnp1KDD52cAYfz51U0QHPTiUGHzs4g4/nTqrogGenEoOPHZzBx3MnVXTAs1OJwccOzuDjuZMqOuDZqcTgYwdn8PHcSRUd8OxUYvCxgzP4eO6kig54dir5gNck9A+cFNOdVtHJ2KLyAE+7qJjuJRc9gbALrr0FFz2BsAuuvQUXfWFhWbHF4DcqBr9RMfiNisFvVAmAvzwK8UHeklnemDnNff0q2pu7JgQ/CLEfzm1zF/eV+sS+eR7OTqv44C+f8pU+5hVwqupwkvt0l1egO7qOfcLPril6XnZ38LX7+jQ79SwF8Keiyg776y/Xb+7ga7d8PbqD79gngG/c54fv7uBr9+Wne3Hn7PZVfPAlLtlVTgHfurPThNpr7YcJbbZ2F9OFTHaf8i5jwm/WU/HBl1Um13x6i5fuw5RW09qnbKZr91FO8TLZ3b6fU/HBXx73l8cvf3mdBr52X79OajO1XVa8O/i26FPIKbE32OKLnVsht3JTwNfuw6RG1wY/iCnb2abok5psJ/bsDT4F8KwYYvAbFYPfqBj8RsXgN6rlg5dn6cXgifry3J5+dvT8w4TjiHVo+eCzUfzM5/EZ/LJV8jvfyytsh112LI7IT8WlL/mV/H/4s/xStvj86FleVsn/3PxVvj2JKReHFq/1gJcXu/I3l89/+1xf481/AQ3429f8jwRf/jLkmb7T7d9l/pfql7ItrQe8VEGxPA1WXPTMWvD74grg07P8PM9WdRI5+E8xLorG15rAH8rO/WNJMu/5b54b8L8+1+DledKb5/JJG8W39xGGQcTXesBfHvfV1rzpuE9F/163+Lx3l+DLy+5Ni6/yRSp5PK0HfIH443P9+BQJM/8ve3I5RuZQbO6rbXz+udzGn3/4rx9eqnyxV2F2rQd8vnEX//SvX4qdNsmx7Pjlp3/8XOzV5x16tVcvu/biz/Xrh5cD79WvX1vdkzNoU+CPkwbirlObAs9qxeA3Kga/UTH4jYrBb1QMfqNi8BsVg9+o/h9SEF0QJ+RScQAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-17"/> </p>
+
+<h2>Change of inequality measured with calcGEI (THEIL)</h2>
+
+<pre><code class="r"># calcGEI kann nix mit 0 anfangen, macht aber das selbe
+x.2006&lt;-datenju$R590[datenju$steuerjahr==2006]
+x.2006[x.2006&lt;1]&lt;-1
+calcGEI(x.2006)
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##    GEI 
+## 0.3474 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 0
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+<pre><code class="r">Theil(x.2006)
+</code></pre>
+
+<pre><code>## [1] 0.3474
+</code></pre>
+
+<pre><code class="r">x.2012&lt;-datenju$R590[datenju$steuerjahr==2012]
+x.2012[x.2012&lt;1]&lt;-1
+calcGEI(x.2012)
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##    GEI 
+## 0.3857 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 0
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+<pre><code class="r">Theil(x.2012)
+</code></pre>
+
+<pre><code>## [1] 0.3857
+</code></pre>
+
+<h2>Households</h2>
+
+<h3>2006</h3>
+
+<pre><code class="r">decompGEI(x.2006,datenju$household[datenju$steuerjahr==2006])
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##    GEI 
+## 0.3483 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $decomp
+## $decomp$within
+## [1] 0.2364
+## 
+## $decomp$between
+## [1] 0.1119
+## 
+## $decomp$betweenELMO
+## [1] 0.2819
+## 
+## 
+## $intra
+## $intra$GEIGroups
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##                 0.1640                 0.1485                 0.4364 
+##           Single women             Single dad             Single mom 
+##                 0.3204                 0.2348                 0.1857 
+## 
+## $intra$contribGEIGroups
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.046078               0.050537               0.080424 
+##           Single women             Single dad             Single mom 
+##               0.054818               0.001032               0.003522 
+## 
+## 
+## $ws
+## $ws$wIntra
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##                0.20291                0.19256                0.28371 
+##           Single women             Single dad             Single mom 
+##                0.29902                0.00365                0.01814 
+## 
+## $ws$sIntra
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.280896               0.340369               0.184288 
+##           Single women             Single dad             Single mom 
+##               0.171084               0.004398               0.018966 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$zNA
+## [1] 1314
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 1314
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+<h3>2012</h3>
+
+<pre><code class="r">decompGEI(x.2012,datenju$household[datenju$steuerjahr==2012])
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##    GEI 
+## 0.3921 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $decomp
+## $decomp$within
+## [1] 0.2644
+## 
+## $decomp$between
+## [1] 0.1277
+## 
+## $decomp$betweenELMO
+## [1] 0.3202
+## 
+## 
+## $intra
+## $intra$GEIGroups
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##                 0.1653                 0.1404                 0.5053 
+##           Single women             Single dad             Single mom 
+##                 0.3743                 0.1553                 0.2040 
+## 
+## $intra$contribGEIGroups
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##              0.0445542              0.0452570              0.1006772 
+##           Single women             Single dad             Single mom 
+##              0.0693859              0.0008726              0.0036467 
+## 
+## 
+## $ws
+## $ws$wIntra
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.183622               0.168758               0.308905 
+##           Single women             Single dad             Single mom 
+##               0.317723               0.003809               0.017182 
+## 
+## $ws$sIntra
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.269485               0.322401               0.199224 
+##           Single women             Single dad             Single mom 
+##               0.185391               0.005619               0.017879 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$zNA
+## [1] 1490
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 1490
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+<h2>Agegroups</h2>
+
+<h3>2006</h3>
+
+<pre><code class="r">decompGEI(x.2006,datenju$agegroup[datenju$steuerjahr==2006])
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##    GEI 
+## 0.3474 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $decomp
+## $decomp$within
+## [1] 0.2648
+## 
+## $decomp$between
+## [1] 0.08267
+## 
+## $decomp$betweenELMO
+## [1] 0.2295
+## 
+## 
+## $intra
+## $intra$GEIGroups
+##  18-25  26-65    66+ 
+## 0.6391 0.2458 0.2276 
+## 
+## $intra$contribGEIGroups
+##   18-25   26-65     66+ 
+## 0.03614 0.18744 0.04119 
+## 
+## 
+## $ws
+## $ws$wIntra
+##  18-25  26-65    66+ 
+## 0.1834 0.6023 0.2144 
+## 
+## $ws$sIntra
+##   18-25   26-65     66+ 
+## 0.05654 0.76245 0.18101 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$zNA
+## [1] 0
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 0
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+<h3>2012</h3>
+
+<pre><code class="r">decompGEI(x.2012,datenju$agegroup[datenju$steuerjahr==2012])
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##    GEI 
+## 0.3857 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $decomp
+## $decomp$within
+## [1] 0.288
+## 
+## $decomp$between
+## [1] 0.09765
+## 
+## $decomp$betweenELMO
+## [1] 0.2652
+## 
+## 
+## $intra
+## $intra$GEIGroups
+##  18-25  26-65    66+ 
+## 0.7629 0.2702 0.2241 
+## 
+## $intra$contribGEIGroups
+##   18-25   26-65     66+ 
+## 0.04212 0.20015 0.04574 
+## 
+## 
+## $ws
+## $ws$wIntra
+##  18-25  26-65    66+ 
+## 0.2034 0.5780 0.2186 
+## 
+## $ws$sIntra
+##   18-25   26-65     66+ 
+## 0.05521 0.74065 0.20414 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$zNA
+## [1] 0
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 0
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
 
 </body>
 
