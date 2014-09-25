@@ -84,9 +84,8 @@ daten$household<-factor(daten$household,
                         labels=c("Married with Kid(s)","Married without Kid(s)",
                                  "Single man","Single women","Single dad","Single mom"))
 
-# Jahre Steuerperiode reicht bis 2012 (wird hier als Proxy für 2011 gesetzt) 
+# Jahre Steuerperiode 
 
-daten$PERIODE[daten$PERIODE==2012]<-2011
 daten$steuerjahr<-daten$PERIODE
 
 
@@ -94,7 +93,7 @@ daten$steuerjahr<-daten$PERIODE
 ##
 # Subset datasets
 datenju<-daten
-save(datenju,file="datenju.Rda")
+save(datenju,file="P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenju.Rda")
 
 
 

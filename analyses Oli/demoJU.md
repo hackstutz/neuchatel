@@ -635,7 +635,7 @@ decompGEI(x.2011,datenju$agegroup[datenju$steuerjahr==2011])
 
 
 * Beitrag der Between-Group Ungleichheit zur Overall Ungleichheit ist auch bezüglich Altersgruppen sehr hoch (2006:26.2%) und hat geringfügig zugenommen (2011: 27.0%)
-* 
+
 
 
 
