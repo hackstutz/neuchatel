@@ -15,8 +15,7 @@ library(IC2,quietly=TRUE,warn.conflicts=FALSE)
 
 Load Data 
 ```{r}
-load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs1.Rda")
-load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs2.Rda")
+load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs.Rda")
 ```
 
 
@@ -37,14 +36,14 @@ Achtung:
 
 **Agegroup and mean taxable income**
 ```{r}
-prop.table(table(datenbs1$agegroup[datenbs1$steuerjahr==1991]))
-by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==1991],datenbs1$agegroup[datenbs1$steuerjahr==1991],mean)
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==1991]))
+by(datenbs$einkommen_steuerbar[datenbs$steuerjahr==1991],datenbs$agegroup[datenbs$steuerjahr==1991],mean)
 ```
 
 **Housholdstructur and mean income**
 ```{r}
-prop.table(table(datenbs1$household[datenbs1$steuerjahr==1991]))
-by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==1991],datenbs1$household[datenbs1$steuerjahr==1991],mean)
+prop.table(table(datenbs$household[datenbs$steuerjahr==1991]))
+by(datenbs$einkommen_steuerbar[datenbs$steuerjahr==1991],datenbs$household[datenbs$steuerjahr==1991],mean)
 ```
 
 
@@ -52,14 +51,14 @@ by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==1991],datenbs1$household[da
 
 **Agegroup and mean income**
 ```{r}
-prop.table(table(datenbs1$agegroup[datenbs1$steuerjahr==2003]))
-by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==2003],datenbs1$agegroup[datenbs1$steuerjahr==2003],mean)
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==2003]))
+by(datenbs$einkommen_steuerbar[datenbs$steuerjahr==2003],datenbs$agegroup[datenbs$steuerjahr==2003],mean)
 ```
 
 **Housholdstructur and mean income**
 ```{r}
-prop.table(table(datenbs1$household[datenbs1$steuerjahr==2003]))
-by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==2003],datenbs1$household[datenbs1$steuerjahr==2003],mean)
+prop.table(table(datenbs$household[datenbs$steuerjahr==2003]))
+by(datenbs$einkommen_steuerbar[datenbs$steuerjahr==2003],datenbs$household[datenbs$steuerjahr==2003],mean)
 ```
 
 <br><br>
@@ -71,14 +70,14 @@ by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==2003],datenbs1$household[da
 
 **Agegroup and mean Total income**
 ```{r}
-prop.table(table(datenbs2$agegroup[datenbs2$steuerjahr==2006]))
-by(datenbs2$TOTEINK[datenbs2$steuerjahr==2006],datenbs2$agegroup[datenbs2$steuerjahr==2006],mean)
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==2006]))
+by(datenbs$TOTEINK[datenbs$steuerjahr==2006],datenbs$agegroup[datenbs$steuerjahr==2006],mean)
 ```
 
 **Housholdstructur and mean income**
 ```{r}
-prop.table(table(datenbs2$household[datenbs2$steuerjahr==2006]))
-by(datenbs2$TOTEINK[datenbs2$steuerjahr==2006],datenbs2$household[datenbs2$steuerjahr==2006],mean)
+prop.table(table(datenbs$household[datenbs$steuerjahr==2006]))
+by(datenbs$TOTEINK[datenbs$steuerjahr==2006],datenbs$household[datenbs$steuerjahr==2006],mean)
 ```
 
 
@@ -86,14 +85,14 @@ by(datenbs2$TOTEINK[datenbs2$steuerjahr==2006],datenbs2$household[datenbs2$steue
 
 **Agegroup and mean income**
 ```{r}
-prop.table(table(datenbs2$agegroup[datenbs2$steuerjahr==2011]))
-by(datenbs2$TOTEINK[datenbs2$steuerjahr==2011],datenbs2$agegroup[datenbs2$steuerjahr==2011],mean)
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==2011]))
+by(datenbs$TOTEINK[datenbs$steuerjahr==2011],datenbs$agegroup[datenbs$steuerjahr==2011],mean)
 ```
 
 **Housholdstructur and mean income**
 ```{r}
-prop.table(table(datenbs2$household[datenbs2$steuerjahr==2011]))
-by(datenbs2$TOTEINK[datenbs2$steuerjahr==2011],datenbs2$household[datenbs2$steuerjahr==2011],mean)
+prop.table(table(datenbs$household[datenbs$steuerjahr==2011]))
+by(datenbs$TOTEINK[datenbs$steuerjahr==2011],datenbs$household[datenbs$steuerjahr==2011],mean)
 ```
 
 <br><br>
@@ -106,41 +105,41 @@ by(datenbs2$TOTEINK[datenbs2$steuerjahr==2011],datenbs2$household[datenbs2$steue
 
 **Agegroup and mean Reineinkommen**
 ```{r}
-prop.table(table(datenbs1$agegroup[datenbs1$steuerjahr==1991]))
-by(datenbs1$reineinkommen[datenbs1$steuerjahr==1991],datenbs1$agegroup[datenbs1$steuerjahr==1991],mean)
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==1991]))
+by(datenbs$reineinkommen[datenbs$steuerjahr==1991],datenbs$agegroup[datenbs$steuerjahr==1991],mean)
 ```
 
 **Agegroup (more categories) and mean Reineinkommen**
 ```{r}
-prop.table(table(datenbs1$alterskategorie[datenbs1$steuerjahr==1991]))
-by(datenbs1$reineinkommen[datenbs1$steuerjahr==1991],datenbs1$alterskategorie[datenbs1$steuerjahr==1991],mean)
+prop.table(table(datenbs$alterskategorie[datenbs$steuerjahr==1991]))
+by(datenbs$reineinkommen[datenbs$steuerjahr==1991],datenbs$alterskategorie[datenbs$steuerjahr==1991],mean)
 ```
 
 **Housholdstructur and mean income**
 ```{r}
-prop.table(table(datenbs1$household[datenbs1$steuerjahr==1991]))
-by(datenbs1$reineinkommen[datenbs1$steuerjahr==1991],datenbs1$household[datenbs1$steuerjahr==1991],mean)
+prop.table(table(datenbs$household[datenbs$steuerjahr==1991]))
+by(datenbs$reineinkommen[datenbs$steuerjahr==1991],datenbs$household[datenbs$steuerjahr==1991],mean)
 ```
 
 ### 2011
 
 **Agegroup and mean income**
 ```{r}
-prop.table(table(datenbs2$agegroup[datenbs2$steuerjahr==2011]))
-by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$agegroup[datenbs2$steuerjahr==2011],mean)
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==2011]))
+by(datenbs$reineinkommen[datenbs$steuerjahr==2011],datenbs$agegroup[datenbs$steuerjahr==2011],mean)
 ```
 
 **Agegroup (more categories) and mean income**
 ```{r}
-prop.table(table(datenbs2$alterskategorie[datenbs2$steuerjahr==2011]))
-by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$alterskategorie[datenbs2$steuerjahr==2011],mean)
+prop.table(table(datenbs$alterskategorie[datenbs$steuerjahr==2011]))
+by(datenbs$reineinkommen[datenbs$steuerjahr==2011],datenbs$alterskategorie[datenbs$steuerjahr==2011],mean)
 ```
 
 
 **Housholdstructur and mean income**
 ```{r}
-prop.table(table(datenbs2$household[datenbs2$steuerjahr==2011]))
-by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$household[datenbs2$steuerjahr==2011],mean)
+prop.table(table(datenbs$household[datenbs$steuerjahr==2011]))
+by(datenbs$reineinkommen[datenbs$steuerjahr==2011],datenbs$household[datenbs$steuerjahr==2011],mean)
 ```
 
 <br><br>
@@ -153,16 +152,16 @@ by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$household[datenbs2
 ### 1991
 
 ```{r}
-Gini(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
-Theil(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
+Gini(datenbs$reineinkommen[datenbs$steuerjahr==1991])
+Theil(datenbs$reineinkommen[datenbs$steuerjahr==1991])
 ```
 
 
 ### 2011
 
 ```{r}
-Gini(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
-Theil(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
+Gini(datenbs$reineinkommen[datenbs$steuerjahr==2011])
+Theil(datenbs$reineinkommen[datenbs$steuerjahr==2011])
 
 ```
 
@@ -170,8 +169,8 @@ Theil(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
 ### Lorenz curve
 
 ```{r}
-Lc.1991<-Lc(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
-Lc.2011<-Lc(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
+Lc.1991<-Lc(datenbs$reineinkommen[datenbs$steuerjahr==1991])
+Lc.2011<-Lc(datenbs$reineinkommen[datenbs$steuerjahr==2011])
 
 plot(Lc.1991,lty="dotted")
 lines(Lc.2011$p, Lc.2011$L,lty="dashed", lwd=1.2, col=4)
@@ -181,12 +180,12 @@ lines(Lc.2011$p, Lc.2011$L,lty="dashed", lwd=1.2, col=4)
 
 ```{r}
 # calcGEI kann nix mit 0 anfangen, macht aber das selbe
-x.1991<-datenbs1$reineinkommen[datenbs1$steuerjahr==1991]
+x.1991<-datenbs$reineinkommen[datenbs$steuerjahr==1991]
 x.1991[x.1991==0]<-1
 calcGEI(x.1991)
 Theil(x.1991)
 
-x.2011<-datenbs1$reineinkommen[datenbs2$steuerjahr==2011]
+x.2011<-datenbs$reineinkommen[datenbs$steuerjahr==2011]
 x.2011[x.2011==0]<-1
 calcGEI(x.2011)
 Theil(x.2011)
@@ -205,14 +204,14 @@ Theil(x.2011)
 ### 1991
  
 ```{r}
-decompGEI(x.1991,datenbs1$household[datenbs1$steuerjahr==1991])
+decompGEI(x.1991,datenbs$household[datenbs$steuerjahr==1991])
 ```
 
 
 ### 2011
 
 ```{r}
-decompGEI(x.2011,datenbs2$household[datenbs2$steuerjahr==2011])
+decompGEI(x.2011,datenbs$household[datenbs$steuerjahr==2011])
 ```
 
 
@@ -230,14 +229,14 @@ decompGEI(x.2011,datenbs2$household[datenbs2$steuerjahr==2011])
 ### 1991
  
 ```{r}
-decompGEI(x.1991,datenbs1$agegroup[datenbs1$steuerjahr==1991])
+decompGEI(x.1991,datenbs$agegroup[datenbs$steuerjahr==1991])
 ```
 
 
 ### 2011
 
 ```{r}
-decompGEI(x.2011,datenbs2$agegroup[datenbs2$steuerjahr==2011])
+decompGEI(x.2011,datenbs$agegroup[datenbs$steuerjahr==2011])
 ```
 
 

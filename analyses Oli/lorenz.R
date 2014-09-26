@@ -34,21 +34,21 @@ jura<-ggplot(lorenz, aes(x=p,y=L,shape=Lorenzkurve)) +
   xlab("Share of Tax subjects")+
   ylab("Share of total net income")+
   annotate("text",label="2006",x=0.1,y=0.9,size=8)+
-  annotate("text",label="Gini=0.42",x=0.1,y=0.86,size=5)+
-  annotate("text",label="Theil=0.32",x=0.1,y=0.835,size=5)+
+  annotate("text",label="Gini=0.42",x=0.1,y=0.85,size=5)+
+  annotate("text",label="Theil=0.32",x=0.1,y=0.80,size=5)+
   annotate("text",label="2012",x=0.1,y=0.7,size=8)+
-  annotate("text",label="Gini=0.45",x=0.1,y=0.66,size=5)+
-  annotate("text",label="Theil=0.36",x=0.1,y=0.635,size=5)+
+  annotate("text",label="Gini=0.45",x=0.1,y=0.65,size=5)+
+  annotate("text",label="Theil=0.36",x=0.1,y=0.60,size=5)+
   scale_x_continuous(breaks=c(0,0.2,0.4,0.6,0.8,1),labels=c("0%","20%","40%","60%","80%","100%"))+
   scale_y_continuous(labels=c("0%","25%","50%","75%","100%"))
 jura
 
 # Load Basel-Data
-load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs1.Rda")
-load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs2.Rda")
+load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs.Rda")
 
-Lc.1991<-Lc(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
-Lc.2011<-Lc(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
+
+Lc.1991<-Lc(datenbs$reineinkommen[datenbs$steuerjahr==1991])
+Lc.2011<-Lc(datenbs$reineinkommen[datenbs$steuerjahr==2011])
 
 lorenz.1991 <- data.frame(Lc.1991$p, Lc.1991$L)
 lorenz.2011 <- data.frame(Lc.2011$p, Lc.2011$L)
@@ -67,11 +67,11 @@ basel<-ggplot(lorenz, aes(x=p,y=L,shape=Lorenzkurve)) +
   xlab("Share of Tax subjects")+
   ylab("Share of total net income")+
   annotate("text",label="1991",x=0.1,y=0.9,size=8)+
-  annotate("text",label="Gini=0.43",x=0.1,y=0.86,size=5)+
-  annotate("text",label="Theil=0.39",x=0.1,y=0.835,size=5)+
+  annotate("text",label="Gini=0.43",x=0.1,y=0.85,size=5)+
+  annotate("text",label="Theil=0.39",x=0.1,y=0.80,size=5)+
   annotate("text",label="2011",x=0.1,y=0.7,size=8)+
-  annotate("text",label="Gini=0.49",x=0.1,y=0.66,size=5)+
-  annotate("text",label="Theil=0.48",x=0.1,y=0.635,size=5)+
+  annotate("text",label="Gini=0.49",x=0.1,y=0.65,size=5)+
+  annotate("text",label="Theil=0.50",x=0.1,y=0.60,size=5)+
   scale_x_continuous(breaks=c(0,0.2,0.4,0.6,0.8,1),labels=c("0%","20%","40%","60%","80%","100%"))+
   scale_y_continuous(labels=c("0%","25%","50%","75%","100%"))
 basel
@@ -118,7 +118,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 multiplot(jura,basel, cols=2)
 
 
-
+# Exporting it with 1000 / 500
 
 
 

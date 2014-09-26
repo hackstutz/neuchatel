@@ -17,8 +17,7 @@ library(IC2,quietly=TRUE,warn.conflicts=FALSE)
 Load Data 
 
 ```r
-load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs1.Rda")
-load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs2.Rda")
+load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs.Rda")
 ```
 
 
@@ -40,66 +39,66 @@ Achtung:
 **Agegroup and mean taxable income**
 
 ```r
-prop.table(table(datenbs1$agegroup[datenbs1$steuerjahr==1991]))
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==1991]))
 ```
 
 ```
 ## 
 ##  18-25  26-65    66+ 
-## 0.1185 0.6255 0.2561
+## 0.1190 0.6259 0.2551
 ```
 
 ```r
-by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==1991],datenbs1$agegroup[datenbs1$steuerjahr==1991],mean)
+by(datenbs$einkommen_steuerbar[datenbs$steuerjahr==1991],datenbs$agegroup[datenbs$steuerjahr==1991],mean)
 ```
 
 ```
-## datenbs1$agegroup[datenbs1$steuerjahr == 1991]: 18-25
-## [1] 22675
+## datenbs$agegroup[datenbs$steuerjahr == 1991]: 18-25
+## [1] 22636
 ## -------------------------------------------------------- 
-## datenbs1$agegroup[datenbs1$steuerjahr == 1991]: 26-65
-## [1] 57229
+## datenbs$agegroup[datenbs$steuerjahr == 1991]: 26-65
+## [1] 57268
 ## -------------------------------------------------------- 
-## datenbs1$agegroup[datenbs1$steuerjahr == 1991]: 66+
-## [1] 46521
+## datenbs$agegroup[datenbs$steuerjahr == 1991]: 66+
+## [1] 45275
 ```
 
 **Housholdstructur and mean income**
 
 ```r
-prop.table(table(datenbs1$household[datenbs1$steuerjahr==1991]))
+prop.table(table(datenbs$household[datenbs$steuerjahr==1991]))
 ```
 
 ```
 ## 
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##               0.294072               0.140257               0.228321 
+##               0.295989               0.141344               0.229389 
 ##           Single women             Single dad             Single mom 
-##               0.325016               0.005760               0.006575
+##               0.321332               0.005724               0.006221
 ```
 
 ```r
-by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==1991],datenbs1$household[datenbs1$steuerjahr==1991],mean)
+by(datenbs$einkommen_steuerbar[datenbs$steuerjahr==1991],datenbs$household[datenbs$steuerjahr==1991],mean)
 ```
 
 ```
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Married with Kid(s)
-## [1] 63978
+## datenbs$household[datenbs$steuerjahr == 1991]: Married with Kid(s)
+## [1] 62937
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Married without Kid(s)
-## [1] 73856
+## datenbs$household[datenbs$steuerjahr == 1991]: Married without Kid(s)
+## [1] 74390
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Single man
-## [1] 40975
+## datenbs$household[datenbs$steuerjahr == 1991]: Single man
+## [1] 40735
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Single women
-## [1] 34986
+## datenbs$household[datenbs$steuerjahr == 1991]: Single women
+## [1] 34585
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Single dad
-## [1] 68334
+## datenbs$household[datenbs$steuerjahr == 1991]: Single dad
+## [1] 67091
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Single mom
-## [1] 34010
+## datenbs$household[datenbs$steuerjahr == 1991]: Single mom
+## [1] 33590
 ```
 
 
@@ -108,66 +107,66 @@ by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==1991],datenbs1$household[da
 **Agegroup and mean income**
 
 ```r
-prop.table(table(datenbs1$agegroup[datenbs1$steuerjahr==2003]))
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==2003]))
 ```
 
 ```
 ## 
 ##  18-25  26-65    66+ 
-## 0.1180 0.6274 0.2545
+## 0.1186 0.6268 0.2546
 ```
 
 ```r
-by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==2003],datenbs1$agegroup[datenbs1$steuerjahr==2003],mean)
+by(datenbs$einkommen_steuerbar[datenbs$steuerjahr==2003],datenbs$agegroup[datenbs$steuerjahr==2003],mean)
 ```
 
 ```
-## datenbs1$agegroup[datenbs1$steuerjahr == 2003]: 18-25
-## [1] 17961
+## datenbs$agegroup[datenbs$steuerjahr == 2003]: 18-25
+## [1] 18217
 ## -------------------------------------------------------- 
-## datenbs1$agegroup[datenbs1$steuerjahr == 2003]: 26-65
-## [1] 65479
+## datenbs$agegroup[datenbs$steuerjahr == 2003]: 26-65
+## [1] 64825
 ## -------------------------------------------------------- 
-## datenbs1$agegroup[datenbs1$steuerjahr == 2003]: 66+
-## [1] 56526
+## datenbs$agegroup[datenbs$steuerjahr == 2003]: 66+
+## [1] 57303
 ```
 
 **Housholdstructur and mean income**
 
 ```r
-prop.table(table(datenbs1$household[datenbs1$steuerjahr==2003]))
+prop.table(table(datenbs$household[datenbs$steuerjahr==2003]))
 ```
 
 ```
 ## 
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##               0.244465               0.133485               0.269064 
+##               0.243120               0.134682               0.267215 
 ##           Single women             Single dad             Single mom 
-##               0.343172               0.001384               0.008430
+##               0.345038               0.001302               0.008642
 ```
 
 ```r
-by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==2003],datenbs1$household[datenbs1$steuerjahr==2003],mean)
+by(datenbs$einkommen_steuerbar[datenbs$steuerjahr==2003],datenbs$household[datenbs$steuerjahr==2003],mean)
 ```
 
 ```
-## datenbs1$household[datenbs1$steuerjahr == 2003]: Married with Kid(s)
-## [1] 81716
+## datenbs$household[datenbs$steuerjahr == 2003]: Married with Kid(s)
+## [1] 81836
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 2003]: Married without Kid(s)
-## [1] 83996
+## datenbs$household[datenbs$steuerjahr == 2003]: Married without Kid(s)
+## [1] 83011
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 2003]: Single man
-## [1] 43989
+## datenbs$household[datenbs$steuerjahr == 2003]: Single man
+## [1] 44111
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 2003]: Single women
-## [1] 42405
+## datenbs$household[datenbs$steuerjahr == 2003]: Single women
+## [1] 41619
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 2003]: Single dad
-## [1] 61012
+## datenbs$household[datenbs$steuerjahr == 2003]: Single dad
+## [1] 64957
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 2003]: Single mom
-## [1] 39298
+## datenbs$household[datenbs$steuerjahr == 2003]: Single mom
+## [1] 53008
 ```
 
 <br><br>
@@ -180,66 +179,66 @@ by(datenbs1$einkommen_steuerbar[datenbs1$steuerjahr==2003],datenbs1$household[da
 **Agegroup and mean Total income**
 
 ```r
-prop.table(table(datenbs2$agegroup[datenbs2$steuerjahr==2006]))
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==2006]))
 ```
 
 ```
 ## 
 ##  18-25  26-65    66+ 
-## 0.1229 0.6244 0.2527
+## 0.1223 0.6236 0.2541
 ```
 
 ```r
-by(datenbs2$TOTEINK[datenbs2$steuerjahr==2006],datenbs2$agegroup[datenbs2$steuerjahr==2006],mean)
+by(datenbs$TOTEINK[datenbs$steuerjahr==2006],datenbs$agegroup[datenbs$steuerjahr==2006],mean)
 ```
 
 ```
-## datenbs2$agegroup[datenbs2$steuerjahr == 2006]: 18-25
-## [1] 20135
+## datenbs$agegroup[datenbs$steuerjahr == 2006]: 18-25
+## [1] 20197
 ## -------------------------------------------------------- 
-## datenbs2$agegroup[datenbs2$steuerjahr == 2006]: 26-65
-## [1] 84115
+## datenbs$agegroup[datenbs$steuerjahr == 2006]: 26-65
+## [1] 82165
 ## -------------------------------------------------------- 
-## datenbs2$agegroup[datenbs2$steuerjahr == 2006]: 66+
-## [1] 71721
+## datenbs$agegroup[datenbs$steuerjahr == 2006]: 66+
+## [1] 71762
 ```
 
 **Housholdstructur and mean income**
 
 ```r
-prop.table(table(datenbs2$household[datenbs2$steuerjahr==2006]))
+prop.table(table(datenbs$household[datenbs$steuerjahr==2006]))
 ```
 
 ```
 ## 
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##               0.232347               0.129318               0.278446 
+##               0.231597               0.129073               0.277327 
 ##           Single women             Single dad             Single mom 
-##               0.348484               0.001999               0.009405
+##               0.350736               0.001816               0.009452
 ```
 
 ```r
-by(datenbs2$TOTEINK[datenbs2$steuerjahr==2006],datenbs2$household[datenbs2$steuerjahr==2006],mean)
+by(datenbs$TOTEINK[datenbs$steuerjahr==2006],datenbs$household[datenbs$steuerjahr==2006],mean)
 ```
 
 ```
-## datenbs2$household[datenbs2$steuerjahr == 2006]: Married with Kid(s)
-## [1] 101553
+## datenbs$household[datenbs$steuerjahr == 2006]: Married with Kid(s)
+## [1] 102664
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2006]: Married without Kid(s)
-## [1] 126485
+## datenbs$household[datenbs$steuerjahr == 2006]: Married without Kid(s)
+## [1] 121860
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2006]: Single man
-## [1] 51005
+## datenbs$household[datenbs$steuerjahr == 2006]: Single man
+## [1] 51323
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2006]: Single women
-## [1] 51798
+## datenbs$household[datenbs$steuerjahr == 2006]: Single women
+## [1] 49936
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2006]: Single dad
-## [1] 90459
+## datenbs$household[datenbs$steuerjahr == 2006]: Single dad
+## [1] 92635
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2006]: Single mom
-## [1] 113626
+## datenbs$household[datenbs$steuerjahr == 2006]: Single mom
+## [1] 87158
 ```
 
 
@@ -248,66 +247,66 @@ by(datenbs2$TOTEINK[datenbs2$steuerjahr==2006],datenbs2$household[datenbs2$steue
 **Agegroup and mean income**
 
 ```r
-prop.table(table(datenbs2$agegroup[datenbs2$steuerjahr==2011]))
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==2011]))
 ```
 
 ```
 ## 
 ##  18-25  26-65    66+ 
-## 0.1219 0.6272 0.2509
+## 0.1220 0.6278 0.2502
 ```
 
 ```r
-by(datenbs2$TOTEINK[datenbs2$steuerjahr==2011],datenbs2$agegroup[datenbs2$steuerjahr==2011],mean)
+by(datenbs$TOTEINK[datenbs$steuerjahr==2011],datenbs$agegroup[datenbs$steuerjahr==2011],mean)
 ```
 
 ```
-## datenbs2$agegroup[datenbs2$steuerjahr == 2011]: 18-25
-## [1] 20306
+## datenbs$agegroup[datenbs$steuerjahr == 2011]: 18-25
+## [1] 20531
 ## -------------------------------------------------------- 
-## datenbs2$agegroup[datenbs2$steuerjahr == 2011]: 26-65
-## [1] 89110
+## datenbs$agegroup[datenbs$steuerjahr == 2011]: 26-65
+## [1] 88042
 ## -------------------------------------------------------- 
-## datenbs2$agegroup[datenbs2$steuerjahr == 2011]: 66+
-## [1] 76405
+## datenbs$agegroup[datenbs$steuerjahr == 2011]: 66+
+## [1] 77587
 ```
 
 **Housholdstructur and mean income**
 
 ```r
-prop.table(table(datenbs2$household[datenbs2$steuerjahr==2011]))
+prop.table(table(datenbs$household[datenbs$steuerjahr==2011]))
 ```
 
 ```
 ## 
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##               0.207103               0.127996               0.295390 
+##               0.205975               0.129297               0.294826 
 ##           Single women             Single dad             Single mom 
-##               0.356978               0.001906               0.010628
+##               0.357226               0.001951               0.010725
 ```
 
 ```r
-by(datenbs2$TOTEINK[datenbs2$steuerjahr==2011],datenbs2$household[datenbs2$steuerjahr==2011],mean)
+by(datenbs$TOTEINK[datenbs$steuerjahr==2011],datenbs$household[datenbs$steuerjahr==2011],mean)
 ```
 
 ```
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Married with Kid(s)
-## [1] 114502
+## datenbs$household[datenbs$steuerjahr == 2011]: Married with Kid(s)
+## [1] 113979
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Married without Kid(s)
-## [1] 134290
+## datenbs$household[datenbs$steuerjahr == 2011]: Married without Kid(s)
+## [1] 135567
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Single man
-## [1] 54428
+## datenbs$household[datenbs$steuerjahr == 2011]: Single man
+## [1] 54013
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Single women
-## [1] 55952
+## datenbs$household[datenbs$steuerjahr == 2011]: Single women
+## [1] 53785
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Single dad
-## [1] 92523
+## datenbs$household[datenbs$steuerjahr == 2011]: Single dad
+## [1] 98841
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Single mom
-## [1] 67811
+## datenbs$household[datenbs$steuerjahr == 2011]: Single mom
+## [1] 64015
 ```
 
 <br><br>
@@ -321,113 +320,113 @@ by(datenbs2$TOTEINK[datenbs2$steuerjahr==2011],datenbs2$household[datenbs2$steue
 **Agegroup and mean Reineinkommen**
 
 ```r
-prop.table(table(datenbs1$agegroup[datenbs1$steuerjahr==1991]))
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==1991]))
 ```
 
 ```
 ## 
 ##  18-25  26-65    66+ 
-## 0.1185 0.6255 0.2561
+## 0.1190 0.6259 0.2551
 ```
 
 ```r
-by(datenbs1$reineinkommen[datenbs1$steuerjahr==1991],datenbs1$agegroup[datenbs1$steuerjahr==1991],mean)
+by(datenbs$reineinkommen[datenbs$steuerjahr==1991],datenbs$agegroup[datenbs$steuerjahr==1991],mean)
 ```
 
 ```
-## datenbs1$agegroup[datenbs1$steuerjahr == 1991]: 18-25
-## [1] 23915
+## datenbs$agegroup[datenbs$steuerjahr == 1991]: 18-25
+## [1] 23892
 ## -------------------------------------------------------- 
-## datenbs1$agegroup[datenbs1$steuerjahr == 1991]: 26-65
-## [1] 64720
+## datenbs$agegroup[datenbs$steuerjahr == 1991]: 26-65
+## [1] 64890
 ## -------------------------------------------------------- 
-## datenbs1$agegroup[datenbs1$steuerjahr == 1991]: 66+
-## [1] 52669
+## datenbs$agegroup[datenbs$steuerjahr == 1991]: 66+
+## [1] 51706
 ```
 
 **Agegroup (more categories) and mean Reineinkommen**
 
 ```r
-prop.table(table(datenbs1$alterskategorie[datenbs1$steuerjahr==1991]))
+prop.table(table(datenbs$alterskategorie[datenbs$steuerjahr==1991]))
 ```
 
 ```
 ## 
 ##    00_26    26_35    36_45    46_55    56_65    66_75    76_85    86_95 
-## 0.118457 0.191556 0.154902 0.143182 0.135847 0.120052 0.102037 0.032700 
+## 0.118994 0.192969 0.153221 0.143052 0.136680 0.118630 0.102896 0.032310 
 ##     95_+ 
-## 0.001266
+## 0.001248
 ```
 
 ```r
-by(datenbs1$reineinkommen[datenbs1$steuerjahr==1991],datenbs1$alterskategorie[datenbs1$steuerjahr==1991],mean)
+by(datenbs$reineinkommen[datenbs$steuerjahr==1991],datenbs$alterskategorie[datenbs$steuerjahr==1991],mean)
 ```
 
 ```
-## datenbs1$alterskategorie[datenbs1$steuerjahr == 1991]: 00_26
-## [1] 23915
+## datenbs$alterskategorie[datenbs$steuerjahr == 1991]: 00_26
+## [1] 23892
 ## -------------------------------------------------------- 
-## datenbs1$alterskategorie[datenbs1$steuerjahr == 1991]: 26_35
-## [1] 46726
+## datenbs$alterskategorie[datenbs$steuerjahr == 1991]: 26_35
+## [1] 46674
 ## -------------------------------------------------------- 
-## datenbs1$alterskategorie[datenbs1$steuerjahr == 1991]: 36_45
-## [1] 66642
+## datenbs$alterskategorie[datenbs$steuerjahr == 1991]: 36_45
+## [1] 66918
 ## -------------------------------------------------------- 
-## datenbs1$alterskategorie[datenbs1$steuerjahr == 1991]: 46_55
-## [1] 78017
+## datenbs$alterskategorie[datenbs$steuerjahr == 1991]: 46_55
+## [1] 78919
 ## -------------------------------------------------------- 
-## datenbs1$alterskategorie[datenbs1$steuerjahr == 1991]: 56_65
-## [1] 73888
+## datenbs$alterskategorie[datenbs$steuerjahr == 1991]: 56_65
+## [1] 73652
 ## -------------------------------------------------------- 
-## datenbs1$alterskategorie[datenbs1$steuerjahr == 1991]: 66_75
-## [1] 60182
+## datenbs$alterskategorie[datenbs$steuerjahr == 1991]: 66_75
+## [1] 57825
 ## -------------------------------------------------------- 
-## datenbs1$alterskategorie[datenbs1$steuerjahr == 1991]: 76_85
-## [1] 47569
+## datenbs$alterskategorie[datenbs$steuerjahr == 1991]: 76_85
+## [1] 47700
 ## -------------------------------------------------------- 
-## datenbs1$alterskategorie[datenbs1$steuerjahr == 1991]: 86_95
-## [1] 41979
+## datenbs$alterskategorie[datenbs$steuerjahr == 1991]: 86_95
+## [1] 42875
 ## -------------------------------------------------------- 
-## datenbs1$alterskategorie[datenbs1$steuerjahr == 1991]: 95_+
-## [1] 27367
+## datenbs$alterskategorie[datenbs$steuerjahr == 1991]: 95_+
+## [1] 28946
 ```
 
 **Housholdstructur and mean income**
 
 ```r
-prop.table(table(datenbs1$household[datenbs1$steuerjahr==1991]))
+prop.table(table(datenbs$household[datenbs$steuerjahr==1991]))
 ```
 
 ```
 ## 
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##               0.294072               0.140257               0.228321 
+##               0.295989               0.141344               0.229389 
 ##           Single women             Single dad             Single mom 
-##               0.325016               0.005760               0.006575
+##               0.321332               0.005724               0.006221
 ```
 
 ```r
-by(datenbs1$reineinkommen[datenbs1$steuerjahr==1991],datenbs1$household[datenbs1$steuerjahr==1991],mean)
+by(datenbs$reineinkommen[datenbs$steuerjahr==1991],datenbs$household[datenbs$steuerjahr==1991],mean)
 ```
 
 ```
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Married with Kid(s)
-## [1] 70837
+## datenbs$household[datenbs$steuerjahr == 1991]: Married with Kid(s)
+## [1] 69759
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Married without Kid(s)
-## [1] 92126
+## datenbs$household[datenbs$steuerjahr == 1991]: Married without Kid(s)
+## [1] 92966
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Single man
-## [1] 43487
+## datenbs$household[datenbs$steuerjahr == 1991]: Single man
+## [1] 43174
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Single women
-## [1] 37755
+## datenbs$household[datenbs$steuerjahr == 1991]: Single women
+## [1] 37683
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Single dad
-## [1] 88073
+## datenbs$household[datenbs$steuerjahr == 1991]: Single dad
+## [1] 88125
 ## -------------------------------------------------------- 
-## datenbs1$household[datenbs1$steuerjahr == 1991]: Single mom
-## [1] 52446
+## datenbs$household[datenbs$steuerjahr == 1991]: Single mom
+## [1] 51969
 ```
 
 ### 2011
@@ -435,114 +434,114 @@ by(datenbs1$reineinkommen[datenbs1$steuerjahr==1991],datenbs1$household[datenbs1
 **Agegroup and mean income**
 
 ```r
-prop.table(table(datenbs2$agegroup[datenbs2$steuerjahr==2011]))
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==2011]))
 ```
 
 ```
 ## 
 ##  18-25  26-65    66+ 
-## 0.1219 0.6272 0.2509
+## 0.1220 0.6278 0.2502
 ```
 
 ```r
-by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$agegroup[datenbs2$steuerjahr==2011],mean)
+by(datenbs$reineinkommen[datenbs$steuerjahr==2011],datenbs$agegroup[datenbs$steuerjahr==2011],mean)
 ```
 
 ```
-## datenbs2$agegroup[datenbs2$steuerjahr == 2011]: 18-25
-## [1] 16176
+## datenbs$agegroup[datenbs$steuerjahr == 2011]: 18-25
+## [1] 16385
 ## -------------------------------------------------------- 
-## datenbs2$agegroup[datenbs2$steuerjahr == 2011]: 26-65
-## [1] 73350
+## datenbs$agegroup[datenbs$steuerjahr == 2011]: 26-65
+## [1] 72964
 ## -------------------------------------------------------- 
-## datenbs2$agegroup[datenbs2$steuerjahr == 2011]: 66+
-## [1] 67091
+## datenbs$agegroup[datenbs$steuerjahr == 2011]: 66+
+## [1] 68001
 ```
 
 **Agegroup (more categories) and mean income**
 
 ```r
-prop.table(table(datenbs2$alterskategorie[datenbs2$steuerjahr==2011]))
+prop.table(table(datenbs$alterskategorie[datenbs$steuerjahr==2011]))
 ```
 
 ```
 ## 
 ##    00_26    26_35    36_45    46_55    56_65    66_75    76_85    86_95 
-## 0.121892 0.163054 0.157586 0.168929 0.137642 0.110973 0.093914 0.042595 
+## 0.122034 0.163346 0.156984 0.170398 0.137058 0.110929 0.094215 0.041206 
 ##     95_+ 
-## 0.003415
+## 0.003831
 ```
 
 ```r
-by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$alterskategorie[datenbs2$steuerjahr==2011],mean)
+by(datenbs$reineinkommen[datenbs$steuerjahr==2011],datenbs$alterskategorie[datenbs$steuerjahr==2011],mean)
 ```
 
 ```
-## datenbs2$alterskategorie[datenbs2$steuerjahr == 2011]: 00_26
-## [1] 16176
+## datenbs$alterskategorie[datenbs$steuerjahr == 2011]: 00_26
+## [1] 16385
 ## -------------------------------------------------------- 
-## datenbs2$alterskategorie[datenbs2$steuerjahr == 2011]: 26_35
-## [1] 50810
+## datenbs$alterskategorie[datenbs$steuerjahr == 2011]: 26_35
+## [1] 50935
 ## -------------------------------------------------------- 
-## datenbs2$alterskategorie[datenbs2$steuerjahr == 2011]: 36_45
-## [1] 76068
+## datenbs$alterskategorie[datenbs$steuerjahr == 2011]: 36_45
+## [1] 77221
 ## -------------------------------------------------------- 
-## datenbs2$alterskategorie[datenbs2$steuerjahr == 2011]: 46_55
-## [1] 82379
+## datenbs$alterskategorie[datenbs$steuerjahr == 2011]: 46_55
+## [1] 82534
 ## -------------------------------------------------------- 
-## datenbs2$alterskategorie[datenbs2$steuerjahr == 2011]: 56_65
-## [1] 85860
+## datenbs$alterskategorie[datenbs$steuerjahr == 2011]: 56_65
+## [1] 82446
 ## -------------------------------------------------------- 
-## datenbs2$alterskategorie[datenbs2$steuerjahr == 2011]: 66_75
-## [1] 71582
+## datenbs$alterskategorie[datenbs$steuerjahr == 2011]: 66_75
+## [1] 74886
 ## -------------------------------------------------------- 
-## datenbs2$alterskategorie[datenbs2$steuerjahr == 2011]: 76_85
-## [1] 67855
+## datenbs$alterskategorie[datenbs$steuerjahr == 2011]: 76_85
+## [1] 65806
 ## -------------------------------------------------------- 
-## datenbs2$alterskategorie[datenbs2$steuerjahr == 2011]: 86_95
-## [1] 56056
+## datenbs$alterskategorie[datenbs$steuerjahr == 2011]: 86_95
+## [1] 56961
 ## -------------------------------------------------------- 
-## datenbs2$alterskategorie[datenbs2$steuerjahr == 2011]: 95_+
-## [1] 37840
+## datenbs$alterskategorie[datenbs$steuerjahr == 2011]: 95_+
+## [1] 41353
 ```
 
 
 **Housholdstructur and mean income**
 
 ```r
-prop.table(table(datenbs2$household[datenbs2$steuerjahr==2011]))
+prop.table(table(datenbs$household[datenbs$steuerjahr==2011]))
 ```
 
 ```
 ## 
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##               0.207103               0.127996               0.295390 
+##               0.205975               0.129297               0.294826 
 ##           Single women             Single dad             Single mom 
-##               0.356978               0.001906               0.010628
+##               0.357226               0.001951               0.010725
 ```
 
 ```r
-by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$household[datenbs2$steuerjahr==2011],mean)
+by(datenbs$reineinkommen[datenbs$steuerjahr==2011],datenbs$household[datenbs$steuerjahr==2011],mean)
 ```
 
 ```
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Married with Kid(s)
-## [1] 96862
+## datenbs$household[datenbs$steuerjahr == 2011]: Married with Kid(s)
+## [1] 96860
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Married without Kid(s)
-## [1] 111522
+## datenbs$household[datenbs$steuerjahr == 2011]: Married without Kid(s)
+## [1] 112782
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Single man
-## [1] 45887
+## datenbs$household[datenbs$steuerjahr == 2011]: Single man
+## [1] 45636
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Single women
-## [1] 45971
+## datenbs$household[datenbs$steuerjahr == 2011]: Single women
+## [1] 45157
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Single dad
-## [1] 76478
+## datenbs$household[datenbs$steuerjahr == 2011]: Single dad
+## [1] 81604
 ## -------------------------------------------------------- 
-## datenbs2$household[datenbs2$steuerjahr == 2011]: Single mom
-## [1] 56811
+## datenbs$household[datenbs$steuerjahr == 2011]: Single mom
+## [1] 54343
 ```
 
 <br><br>
@@ -556,19 +555,19 @@ by(datenbs2$reineinkommen[datenbs2$steuerjahr==2011],datenbs2$household[datenbs2
 
 
 ```r
-Gini(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
+Gini(datenbs$reineinkommen[datenbs$steuerjahr==1991])
 ```
 
 ```
-## [1] 0.4349
+## [1] 0.4318
 ```
 
 ```r
-Theil(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
+Theil(datenbs$reineinkommen[datenbs$steuerjahr==1991])
 ```
 
 ```
-## [1] 0.3903
+## [1] 0.3793
 ```
 
 
@@ -576,19 +575,19 @@ Theil(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
 
 
 ```r
-Gini(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
+Gini(datenbs$reineinkommen[datenbs$steuerjahr==2011])
 ```
 
 ```
-## [1] 0.4916
+## [1] 0.4937
 ```
 
 ```r
-Theil(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
+Theil(datenbs$reineinkommen[datenbs$steuerjahr==2011])
 ```
 
 ```
-## [1] 0.4864
+## [1] 0.4973
 ```
 
 
@@ -596,8 +595,8 @@ Theil(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
 
 
 ```r
-Lc.1991<-Lc(datenbs1$reineinkommen[datenbs1$steuerjahr==1991])
-Lc.2011<-Lc(datenbs2$reineinkommen[datenbs2$steuerjahr==2011])
+Lc.1991<-Lc(datenbs$reineinkommen[datenbs$steuerjahr==1991])
+Lc.2011<-Lc(datenbs$reineinkommen[datenbs$steuerjahr==2011])
 
 plot(Lc.1991,lty="dotted")
 lines(Lc.2011$p, Lc.2011$L,lty="dashed", lwd=1.2, col=4)
@@ -610,7 +609,7 @@ lines(Lc.2011$p, Lc.2011$L,lty="dashed", lwd=1.2, col=4)
 
 ```r
 # calcGEI kann nix mit 0 anfangen, macht aber das selbe
-x.1991<-datenbs1$reineinkommen[datenbs1$steuerjahr==1991]
+x.1991<-datenbs$reineinkommen[datenbs$steuerjahr==1991]
 x.1991[x.1991==0]<-1
 calcGEI(x.1991)
 ```
@@ -619,7 +618,7 @@ calcGEI(x.1991)
 ## $ineq
 ## $ineq$index
 ##    GEI 
-## 0.4222 
+## 0.4115 
 ## 
 ## $ineq$parameter
 ## alpha 
@@ -646,11 +645,11 @@ Theil(x.1991)
 ```
 
 ```
-## [1] 0.4222
+## [1] 0.4115
 ```
 
 ```r
-x.2011<-datenbs1$reineinkommen[datenbs2$steuerjahr==2011]
+x.2011<-datenbs$reineinkommen[datenbs$steuerjahr==2011]
 x.2011[x.2011==0]<-1
 calcGEI(x.2011)
 ```
@@ -659,7 +658,7 @@ calcGEI(x.2011)
 ## $ineq
 ## $ineq$index
 ##    GEI 
-## 0.5021 
+## 0.5626 
 ## 
 ## $ineq$parameter
 ## alpha 
@@ -686,7 +685,7 @@ Theil(x.2011)
 ```
 
 ```
-## [1] 0.5021
+## [1] 0.5626
 ```
 
 
@@ -701,14 +700,14 @@ Theil(x.2011)
  
 
 ```r
-decompGEI(x.1991,datenbs1$household[datenbs1$steuerjahr==1991])
+decompGEI(x.1991,datenbs$household[datenbs$steuerjahr==1991])
 ```
 
 ```
 ## $ineq
 ## $ineq$index
-##   GEI 
-## 0.427 
+##    GEI 
+## 0.4152 
 ## 
 ## $ineq$parameter
 ## alpha 
@@ -717,41 +716,41 @@ decompGEI(x.1991,datenbs1$household[datenbs1$steuerjahr==1991])
 ## 
 ## $decomp
 ## $decomp$within
-## [1] 0.3676
+## [1] 0.3552
 ## 
 ## $decomp$between
-## [1] 0.05944
+## [1] 0.05998
 ## 
 ## $decomp$betweenELMO
-## [1] 0.2769
+## [1] 0.2725
 ## 
 ## 
 ## $intra
 ## $intra$GEIGroups
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##                 0.4287                 0.2458                 0.3775 
+##                 0.3881                 0.2554                 0.3642 
 ##           Single women             Single dad             Single mom 
-##                 0.3973                 0.1821                 0.1609 
+##                 0.4123                 0.1830                 0.1678 
 ## 
 ## $intra$contribGEIGroups
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##              0.1572244              0.0559204              0.0659917 
+##              0.1415248              0.0592669              0.0636980 
 ##           Single women             Single dad             Single mom 
-##              0.0858167              0.0016264              0.0009766 
+##              0.0881610              0.0016301              0.0009578 
 ## 
 ## 
 ## $ws
 ## $ws$wIntra
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##               0.294072               0.140257               0.228321 
+##               0.295989               0.141344               0.229389 
 ##           Single women             Single dad             Single mom 
-##               0.325016               0.005760               0.006575 
+##               0.321332               0.005724               0.006221 
 ## 
 ## $ws$sIntra
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##               0.366718               0.227468               0.174792 
+##               0.364623               0.232041               0.174889 
 ##           Single women             Single dad             Single mom 
-##               0.216022               0.008930               0.006071 
+##               0.213831               0.008908               0.005709 
 ## 
 ## 
 ## $nas
@@ -759,13 +758,13 @@ decompGEI(x.1991,datenbs1$household[datenbs1$steuerjahr==1991])
 ## [1] 0
 ## 
 ## $nas$zNA
-## [1] 1250
+## [1] 2498
 ## 
 ## $nas$wNA
 ## NULL
 ## 
 ## $nas$totalNA
-## [1] 1250
+## [1] 2498
 ## 
 ## 
 ## attr(,"class")
@@ -777,14 +776,14 @@ decompGEI(x.1991,datenbs1$household[datenbs1$steuerjahr==1991])
 
 
 ```r
-decompGEI(x.2011,datenbs2$household[datenbs2$steuerjahr==2011])
+decompGEI(x.2011,datenbs$household[datenbs$steuerjahr==2011])
 ```
 
 ```
 ## $ineq
 ## $ineq$index
 ##    GEI 
-## 0.5067 
+## 0.5594 
 ## 
 ## $ineq$parameter
 ## alpha 
@@ -793,41 +792,41 @@ decompGEI(x.2011,datenbs2$household[datenbs2$steuerjahr==2011])
 ## 
 ## $decomp
 ## $decomp$within
-## [1] 0.5063
+## [1] 0.4757
 ## 
 ## $decomp$between
-## [1] 0.000462
+## [1] 0.08372
 ## 
 ## $decomp$betweenELMO
-## [1] 0.26
+## [1] 0.3641
 ## 
 ## 
 ## $intra
 ## $intra$GEIGroups
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##                 0.3850                 0.4476                 0.4333 
+##                 0.5532                 0.3848                 0.4597 
 ##           Single women             Single dad             Single mom 
-##                 0.6540                 0.4260                 0.3450 
+##                 0.4849                 0.2353                 0.2765 
 ## 
 ## $intra$contribGEIGroups
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##              0.0772986              0.0569042              0.1259467 
+##              0.1701708              0.0865137              0.0953516 
 ##           Single women             Single dad             Single mom 
-##              0.2421479              0.0006771              0.0033105 
+##              0.1205982              0.0005776              0.0024845 
 ## 
 ## 
 ## $ws
 ## $ws$wIntra
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##               0.207103               0.127996               0.295390 
+##               0.205975               0.129297               0.294826 
 ##           Single women             Single dad             Single mom 
-##               0.356978               0.001906               0.010628 
+##               0.357226               0.001951               0.010725 
 ## 
 ## $ws$sIntra
 ##    Married with Kid(s) Married without Kid(s)             Single man 
-##               0.200791               0.127129               0.290640 
+##               0.307591               0.224824               0.207440 
 ##           Single women             Single dad             Single mom 
-##               0.370254               0.001590               0.009597 
+##               0.248705               0.002454               0.008986 
 ## 
 ## 
 ## $nas
@@ -835,13 +834,13 @@ decompGEI(x.2011,datenbs2$household[datenbs2$steuerjahr==2011])
 ## [1] 0
 ## 
 ## $nas$zNA
-## [1] 1937
+## [1] 3835
 ## 
 ## $nas$wNA
 ## NULL
 ## 
 ## $nas$totalNA
-## [1] 1937
+## [1] 3835
 ## 
 ## 
 ## attr(,"class")
@@ -864,14 +863,14 @@ decompGEI(x.2011,datenbs2$household[datenbs2$steuerjahr==2011])
  
 
 ```r
-decompGEI(x.1991,datenbs1$agegroup[datenbs1$steuerjahr==1991])
+decompGEI(x.1991,datenbs$agegroup[datenbs$steuerjahr==1991])
 ```
 
 ```
 ## $ineq
 ## $ineq$index
 ##    GEI 
-## 0.4222 
+## 0.4115 
 ## 
 ## $ineq$parameter
 ## alpha 
@@ -880,33 +879,33 @@ decompGEI(x.1991,datenbs1$agegroup[datenbs1$steuerjahr==1991])
 ## 
 ## $decomp
 ## $decomp$within
-## [1] 0.3902
+## [1] 0.3787
 ## 
 ## $decomp$between
-## [1] 0.03195
+## [1] 0.0328
 ## 
 ## $decomp$betweenELMO
-## [1] 0.174
+## [1] 0.1732
 ## 
 ## 
 ## $intra
 ## $intra$GEIGroups
 ##  18-25  26-65    66+ 
-## 0.3876 0.3059 0.6439 
+## 0.3889 0.3072 0.5966 
 ## 
 ## $intra$contribGEIGroups
 ##   18-25   26-65     66+ 
-## 0.01933 0.21803 0.15287 
+## 0.01952 0.22024 0.13891 
 ## 
 ## 
 ## $ws
 ## $ws$wIntra
 ##  18-25  26-65    66+ 
-## 0.1185 0.6255 0.2561 
+## 0.1190 0.6259 0.2551 
 ## 
 ## $ws$sIntra
 ##   18-25   26-65     66+ 
-## 0.04987 0.71270 0.23743 
+## 0.05019 0.71698 0.23283 
 ## 
 ## 
 ## $nas
@@ -932,14 +931,14 @@ decompGEI(x.1991,datenbs1$agegroup[datenbs1$steuerjahr==1991])
 
 
 ```r
-decompGEI(x.2011,datenbs2$agegroup[datenbs2$steuerjahr==2011])
+decompGEI(x.2011,datenbs$agegroup[datenbs$steuerjahr==2011])
 ```
 
 ```
 ## $ineq
 ## $ineq$index
 ##    GEI 
-## 0.5021 
+## 0.5626 
 ## 
 ## $ineq$parameter
 ## alpha 
@@ -948,33 +947,33 @@ decompGEI(x.2011,datenbs2$agegroup[datenbs2$steuerjahr==2011])
 ## 
 ## $decomp
 ## $decomp$within
-## [1] 0.502
+## [1] 0.5088
 ## 
 ## $decomp$between
-## [1] 4.234e-05
+## [1] 0.05382
 ## 
 ## $decomp$betweenELMO
-## [1] 0.2626
+## [1] 0.2252
 ## 
 ## 
 ## $intra
 ## $intra$GEIGroups
 ##  18-25  26-65    66+ 
-## 0.4003 0.4981 0.5594 
+## 0.6397 0.4846 0.5586 
 ## 
 ## $intra$contribGEIGroups
 ##   18-25   26-65     66+ 
-## 0.04774 0.31245 0.14183 
+## 0.01974 0.34243 0.14660 
 ## 
 ## 
 ## $ws
 ## $ws$wIntra
 ##  18-25  26-65    66+ 
-## 0.1219 0.6272 0.2509 
+## 0.1220 0.6278 0.2502 
 ## 
 ## $ws$sIntra
-##  18-25  26-65    66+ 
-## 0.1193 0.6272 0.2535 
+##   18-25   26-65     66+ 
+## 0.03085 0.70669 0.26247 
 ## 
 ## 
 ## $nas

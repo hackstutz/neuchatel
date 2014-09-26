@@ -72,12 +72,11 @@ daten$household<-factor(daten$household,
 
 daten$reineinkommen[daten$steuerjahr>2004]<-daten$z739_reineinkommen[daten$steuerjahr>2004]
 
-##
-# Subset datasets
-datenbs1<-filter(daten,steuerjahr==c(1991,2003))
-save(datenbs1,file="datenbs1.Rda")
-datenbs2<-filter(daten,steuerjahr==c(2006,2011))
-save(datenbs2,file="datenbs2.Rda")
+datenbs<-daten
+
+save(datenbs,file="P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs.Rda")
+
+
 
 
 
