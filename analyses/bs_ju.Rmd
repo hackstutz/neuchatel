@@ -1,0 +1,278 @@
+---
+title: "BS und JU density plots"
+author: "Rudi Farys"
+date: "Sunday, September 28, 2014"
+output: html_document
+---
+
+### Libraries
+```{r libs}
+library(foreign)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(ineq)
+```
+
+### Data
+```{r data}
+setwd("G:/stick/")
+ju <- read.csv("jura/taxdata_JU.csv")
+bs <- read.dta("basel/taxdata_BS.dta")
+bs$household <- NA
+bs$agegroup <- NA
+ju$alterskategorie<-NA
+ju$household <- NA
+ju$agegroup <- NA
+bs <- within(bs, {
+agegroup <-NA
+agegroup[alterskategorie=="00_26"]<-1
+agegroup[alterskategorie=="26_35"]<-2
+agegroup[alterskategorie=="36_45"]<-2
+agegroup[alterskategorie=="46_55"]<-2
+agegroup[alterskategorie=="56_65"]<-2
+agegroup[alterskategorie=="66_75"]<-3
+agegroup[alterskategorie=="76_85"]<-3
+agegroup[alterskategorie=="86_95"]<-3
+agegroup[alterskategorie=="95_+"]<-3
+
+agegroup<-factor(agegroup,
+                      levels=c(1,2,3),
+                      labels=c("18-25","26-65","66+"))
+# Housholdstructure
+household < NA
+household[ZIVILSTAND=="verheiratet" & anzahl_kinder==0]<-1
+household[ZIVILSTAND=="verheiratet" & anzahl_kinder>0]<-2
+household[ZIVILSTAND=="ledig" 
+                & anzahl_kinder==0 & GESCHLECHT_P1=="Mann"]<-3
+household[ZIVILSTAND=="geschieden/getrennt"
+                & anzahl_kinder==0 & GESCHLECHT_P1=="Mann"]<-3
+household[ZIVILSTAND=="verwittwet"
+                & anzahl_kinder==0 & GESCHLECHT_P1=="Mann"]<-3
+household[ZIVILSTAND=="ledig" 
+                & anzahl_kinder==0 & GESCHLECHT_P1=="Frau"]<-4
+household[ZIVILSTAND=="geschieden/getrennt" 
+                & anzahl_kinder==0 & GESCHLECHT_P1=="Frau"]<-4
+household[ZIVILSTAND=="verwittwet" 
+                & anzahl_kinder==0 & GESCHLECHT_P1=="Frau"]<-4
+household[ZIVILSTAND=="ledig"
+                & anzahl_kinder>1 & GESCHLECHT_P1=="Mann"]<-5
+household[ZIVILSTAND=="geschieden/getrennt"
+                & anzahl_kinder>1 & GESCHLECHT_P1=="Mann"]<-5
+household[ZIVILSTAND=="verwittwet"
+                & anzahl_kinder>1 & GESCHLECHT_P1=="Mann"]<-5
+household[ZIVILSTAND=="ledig"
+                & anzahl_kinder>1 & GESCHLECHT_P1=="Frau"]<-6
+household[ZIVILSTAND=="geschieden/getrennt"
+                & anzahl_kinder>1 & GESCHLECHT_P1=="Frau"]<-6
+household[ZIVILSTAND=="verwittwet"
+                & anzahl_kinder>1 & GESCHLECHT_P1=="Frau"]<-6
+
+household<-factor(household,
+                       levels=c(1,2,3,4,5,6),
+                       labels=c("Married with Kid(s)","Married without Kid(s)",
+                                "Single man","Single women","Single dad","Single mom"))
+reineinkommen[steuerjahr>2004]<-z739_reineinkommen[steuerjahr>2004]
+})
+
+ju <- within(ju, {
+ageP1<-(PERIODE-GEBURTSJAHR_P1)
+ageP2<-(PERIODE-GEBURTSJAHR_P2)
+
+
+# Agegroups (according to age of dossier carrier)
+
+agegroup[ageP1<26]<-1
+agegroup[ageP1>25 & ageP1<66 ]<-2
+agegroup[ageP1>65]<-3
+
+agegroup<-factor(agegroup,
+                       levels=c(1,2,3),
+                       labels=c("18-25","26-65","66+"))
+
+# Agegroups - detailled
+alterskategorie[ageP1<26]<-1
+alterskategorie[ageP1>25 & ageP1<36 ]<-2
+alterskategorie[ageP1>35 & ageP1<46 ]<-3
+alterskategorie[ageP1>45 & ageP1<56 ]<-4
+alterskategorie[ageP1>55 & ageP1<66 ]<-5
+alterskategorie[ageP1>65 & ageP1<76 ]<-6
+alterskategorie[ageP1>75 & ageP1<86 ]<-7
+alterskategorie[ageP1>85 & ageP1<96 ]<-8
+alterskategorie[ageP1>95]<-9
+
+alterskategorie<-factor(alterskategorie,
+                       levels=c(1,2,3,4,5,6,7,8,9),
+                       labels=c("18-25","26-35","36-45","46-55","56-65","66-75","76-85","86-95","95_+"))
+
+
+# Housholdstructure
+household[ZIVILSTAND=="verheiratet" & ANZAHL_KINDER==0]<-1
+household[ZIVILSTAND=="verheiratet" & ANZAHL_KINDER>0]<-2
+household[ZIVILSTAND=="ledig" 
+                & ANZAHL_KINDER==0 & GESCHLECHT_P1==0]<-3
+household[ZIVILSTAND=="geschieden/getrennt"
+                & ANZAHL_KINDER==0 & GESCHLECHT_P1==0]<-3
+household[ZIVILSTAND=="verwittwet"
+                & ANZAHL_KINDER==0 & GESCHLECHT_P1==0]<-3
+household[ZIVILSTAND=="ledig" 
+                & ANZAHL_KINDER==0 & GESCHLECHT_P1==1]<-4
+household[ZIVILSTAND=="geschieden/getrennt" 
+                & ANZAHL_KINDER==0 & GESCHLECHT_P1==1]<-4
+household[ZIVILSTAND=="verwittwet" 
+                & ANZAHL_KINDER==0 & GESCHLECHT_P1==1]<-4
+household[ZIVILSTAND=="ledig"
+                & ANZAHL_KINDER>1 & GESCHLECHT_P1==0]<-5
+household[ZIVILSTAND=="geschieden/getrennt"
+                & ANZAHL_KINDER>1 & GESCHLECHT_P1==0]<-5
+household[ZIVILSTAND=="verwittwet"
+                & ANZAHL_KINDER>1 & GESCHLECHT_P1==0]<-5
+household[ZIVILSTAND=="ledig"
+                & ANZAHL_KINDER>1 & GESCHLECHT_P1==1]<-6
+household[ZIVILSTAND=="geschieden/getrennt"
+                & ANZAHL_KINDER>1 & GESCHLECHT_P1==1]<-6
+household[ZIVILSTAND=="verwittwet"
+                & ANZAHL_KINDER>1 & GESCHLECHT_P1==1]<-6
+
+household<-factor(household,
+                        levels=c(1,2,3,4,5,6),
+                        labels=c("Married with Kid(s)","Married without Kid(s)",
+                                 "Single man","Single women","Single dad","Single mom"))
+
+# Jahre Steuerperiode 
+
+steuerjahr<-PERIODE
+
+})
+bs91_11 <- filter(bs, steuerjahr%in%c(1991,2011)) %.% select(steuerjahr, household, reineinkommen,agegroup,alterskategorie) %.% mutate(steuerjahr=factor(steuerjahr))
+ju06_12 <- filter(ju, steuerjahr%in%c(2006,2012)&stbeink_BUND>=0) %.% select(steuerjahr, household, stbeink_BUND,agegroup,alterskategorie)%.% mutate(steuerjahr=factor(steuerjahr))
+```
+
+### Optionen
+```{r opts}
+opts_chunk$set(fig.width=12, fig.height=7.5) 
+```
+
+### Density Plots
+
+#### Basel 1991 vs 2011
+
+```{r}
+# Basel Households
+p50s <- aggregate(log(bs91_11$reineinkommen)~bs91_11$household+factor(bs91_11$steuerjahr),FUN=median,na.rm=TRUE)
+names(p50s) <- c("household","steuerjahr","log_income")
+p50s <- p50s[order(p50s$household),]
+theils <- aggregate(bs91_11$reineinkommen~bs91_11$household+factor(bs91_11$steuerjahr),FUN=Theil)
+names(theils) <- c("household","steuerjahr","Theil")
+theils <- theils[order(theils$household),]
+
+ggplot(bs91_11,aes(x=log(reineinkommen),fill=steuerjahr))+
+  geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
+  geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
+  geom_text(data=theils, position=position_dodge(width=9), aes(x = 10.5, y = 0.5, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+  facet_wrap(~household,ncol=1)+
+  scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
+  scale_color_manual(values=c("1991"="blue","2011"="red" )) +
+  ggtitle("Basel-City: log net income by tax period and household situation")+
+  xlab("log net income")+
+  theme_bw()
+
+# Basel: Agegroups
+p50s <- aggregate(log(bs91_11$reineinkommen)~bs91_11$agegroup+factor(bs91_11$steuerjahr),FUN=median,na.rm=TRUE)
+names(p50s) <- c("agegroup","steuerjahr","log_income")
+p50s <- p50s[order(p50s$agegroup),]
+theils <- aggregate(bs91_11$reineinkommen~bs91_11$agegroup+factor(bs91_11$steuerjahr),FUN=Theil)
+names(theils) <- c("agegroup","steuerjahr","Theil")
+theils <- theils[order(theils$agegroup),]
+ggplot(bs91_11,aes(x=log(reineinkommen),fill=steuerjahr))+
+  geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
+  geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
+  geom_text(data=theils, position=position_dodge(width=9), aes(x = 10.5, y = 0.5, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+  facet_wrap(~agegroup,ncol=1)+
+  scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
+  scale_color_manual(values=c("1991"="blue","2011"="red" )) +
+  ggtitle("Basel-City: log net income by tax period and agegroup")+
+  xlab("log net income")+
+  theme_bw()
+
+
+# Basel: Agegroups detailed
+p50s <- aggregate(log(bs91_11$reineinkommen)~bs91_11$alterskategorie+factor(bs91_11$steuerjahr),FUN=median,na.rm=TRUE)
+names(p50s) <- c("alterskategorie","steuerjahr","log_income")
+p50s <- p50s[order(p50s$alterskategorie),]
+theils <- aggregate(bs91_11$reineinkommen~bs91_11$alterskategorie+factor(bs91_11$steuerjahr),FUN=Theil)
+names(theils) <- c("alterskategorie","steuerjahr","Theil")
+theils <- theils[order(theils$alterskategorie),]
+ggplot(bs91_11,aes(x=log(reineinkommen),fill=steuerjahr))+
+  geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
+  geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
+  geom_text(data=theils, position=position_dodge(width=9), aes(x = 10.5, y = 0.5, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+  facet_wrap(~alterskategorie,ncol=1)+
+  scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
+  scale_color_manual(values=c("1991"="blue","2011"="red" )) +
+  ggtitle("Basel-City: log net income by tax period and agegroup (detailed)")+
+  xlab("log net income")+
+  theme_bw()
+
+```
+
+#### Jura 2006 vs 2012
+
+```{r}
+# JURA Households
+p50s <- aggregate(log(ju06_12$stbeink_BUND)~ju06_12$household+factor(ju06_12$steuerjahr),FUN=median,na.rm=TRUE)
+names(p50s) <- c("household","steuerjahr","log_income")
+p50s <- p50s[order(p50s$household),]
+theils <- aggregate(ju06_12$stbeink_BUND~ju06_12$household+factor(ju06_12$steuerjahr),FUN=Theil)
+names(theils) <- c("household","steuerjahr","Theil")
+theils <- theils[order(theils$household),]
+ggplot(ju06_12,aes(x=log(stbeink_BUND),fill=steuerjahr))+
+  geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
+  geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
+  geom_text(data=theils, position=position_dodge(width=9), aes(x = 10.5, y = 0.5, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+  facet_wrap(~household,ncol=1)+
+  scale_fill_manual(values=c("2006"="blue","2012"="red" )) +
+  scale_color_manual(values=c("2006"="blue","2012"="red" )) +
+  ggtitle("Jura: log net income by tax period and household situation")+
+  xlab("log net income")+
+  theme_bw()
+
+# JURA Agegroups
+p50s <- aggregate(log(ju06_12$stbeink_BUND)~ju06_12$agegroup+factor(ju06_12$steuerjahr),FUN=median,na.rm=TRUE)
+names(p50s) <- c("agegroup","steuerjahr","log_income")
+p50s <- p50s[order(p50s$agegroup),]
+theils <- aggregate(ju06_12$stbeink_BUND~ju06_12$agegroup+factor(ju06_12$steuerjahr),FUN=Theil)
+names(theils) <- c("agegroup","steuerjahr","Theil")
+theils <- theils[order(theils$agegroup),]
+ggplot(ju06_12,aes(x=log(stbeink_BUND),fill=steuerjahr))+
+  geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
+  geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
+  geom_text(data=theils, position=position_dodge(width=9), aes(x = 10.5, y = 0.5, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+  facet_wrap(~agegroup,ncol=1)+
+  scale_fill_manual(values=c("2006"="blue","2012"="red" )) +
+  scale_color_manual(values=c("2006"="blue","2012"="red" )) +
+  ggtitle("Jura: log net income by tax period and agegroup")+
+  xlab("log net income")+
+  theme_bw()
+
+# Jura Agegroups detailed
+p50s <- aggregate(log(ju06_12$stbeink_BUND)~ju06_12$alterskategorie+factor(ju06_12$steuerjahr),FUN=median,na.rm=TRUE)
+names(p50s) <- c("alterskategorie","steuerjahr","log_income")
+p50s <- p50s[order(p50s$alterskategorie),]
+theils <- aggregate(ju06_12$stbeink_BUND~ju06_12$alterskategorie+factor(ju06_12$steuerjahr),FUN=Theil)
+names(theils) <- c("alterskategorie","steuerjahr","Theil")
+theils <- theils[order(theils$alterskategorie),]
+ggplot(ju06_12,aes(x=log(stbeink_BUND),fill=steuerjahr))+
+  geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
+  geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
+  geom_text(data=theils, position=position_dodge(width=9), aes(x = 10.5, y = 0.5, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+  facet_wrap(~alterskategorie,ncol=1)+
+  scale_fill_manual(values=c("2006"="blue","2012"="red" )) +
+  scale_color_manual(values=c("2006"="blue","2012"="red" )) +
+  ggtitle("Jura: log net income by tax period and agegroup (detailed")+
+  xlab("log net income")+
+  theme_bw()
+
+
+```
+
