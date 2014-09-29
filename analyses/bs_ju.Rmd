@@ -12,6 +12,7 @@ library(ggplot2)
 library(dplyr)
 library(knitr)
 library(ineq)
+library(ebal)
 ```
 
 ### Data
@@ -275,4 +276,62 @@ ggplot(ju06_12,aes(x=log(stbeink_BUND),fill=steuerjahr))+
 
 
 ```
+
+### Detailliertere Altersanalysen Basel
+
+```{r}
+bs91_11$single <- factor(bs91_11$household%in%c("Single women", "Single man", "Single mom", "Single dad"),labels=c("married","single"))
+p50s <- aggregate(log(bs91_11$reineinkommen)~bs91_11$alterskategorie+factor(bs91_11$steuerjahr)+bs91_11$single,FUN=median,na.rm=TRUE)
+names(p50s) <- c("alterskategorie","steuerjahr","single","log_income")
+p50s <- p50s[order(p50s$alterskategorie),]
+theils <- aggregate(bs91_11$reineinkommen~bs91_11$alterskategorie+factor(bs91_11$steuerjahr)+bs91_11$single,FUN=Theil)
+names(theils) <- c("alterskategorie","steuerjahr","single","Theil")
+theils <- theils[order(theils$alterskategorie),]
+
+ggplot(theils, aes(x=alterskategorie, y=Theil,group=steuerjahr,color=steuerjahr))+geom_line()+
+scale_color_manual(values=c("1991"="blue","2011"="red" ))+
+facet_wrap(~single)+
+theme_bw()
+```
+
+### Kontrafaktische Verteilung Basel
+
+Wie würde 2011 in Basel aussehen wenn Alter und Haushaltsstruktur wie 1991 wären?
+
+```{r}
+# Dinardo (2002) beschreibt nochmal was in DiNardo Fortin Lemieux (1996) steht: http://www-personal.umich.edu/~jdinardo/bztalk5.pdf verwenden wir aber nicht, sondern entropy balancing (Hainmüller 2011)
+
+# wir gewichten 2011 mit dem Inversen Propensity score.
+
+# Datensatz ohne Missings erstellen
+bs_nomiss <- na.omit(bs91_11)
+bs_nomiss$T <- bs_nomiss$steuerjahr=="1991"
+# gewichte durch entroy balancing ermitteln
+fit <- glm(T~alterskategorie*household,data=bs_nomiss,family=binomial)
+bs_nomiss$ps <- plogis(predict(fit))
+bs_nomiss$w <- bs_nomiss$ps/(1-bs_nomiss$ps)
+counterfactual <- bs_nomiss[bs_nomiss$steuerjahr=="2011",]
+counterfactual$steuerjahr <- "2011 CF"
+bs_nomiss$w<-1
+counterfactual$w <- counterfactual$w/mean(counterfactual$w[counterfactual$steuerjahr=="2011 CF"])
+bs_nomiss<-rbind(bs_nomiss,counterfactual)
+
+#p50s <- aggregate(log(bs_nomiss$reineinkommen)~factor(bs_nomiss$steuerjahr),FUN=median,na.rm=TRUE)
+#names(p50s) <- c("steuerjahr","log_income")
+theils <- aggregate(bs_nomiss$reineinkommen~factor(bs_nomiss$steuerjahr),FUN=Theil)
+names(theils) <- c("steuerjahr","Theil")
+theils$w<-1
+
+ggplot(bs_nomiss,aes(x=log(reineinkommen),fill=steuerjahr,weight=w))+
+  geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
+ #   geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
+   geom_text(data=theils, position=position_dodge(width=6), aes(x = 1, y = 60000, color=steuerjahr, label = paste("Theil:",round(theils$Theil,3))))+
+  scale_fill_manual(values=c("1991"="blue","2011"="red","2011 CF" = "orange")) +
+  scale_color_manual(values=c("1991"="blue","2011"="red","2011 CF" = "orange")) +
+    ggtitle("Basel: log net income 1991, 2011 and counterfactual")+
+  xlab("log net income")+
+  theme_bw()
+
+```
+
 
