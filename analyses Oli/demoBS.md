@@ -1005,3 +1005,111 @@ decompGEI(x.2011,datenbs$agegroup[datenbs$steuerjahr==2011])
 * Ebenso die Bedeutung der Ungleichheit dieser Gruppe für die Overall Ungleichheit
 
 
+
+### Medianes Einkommen
+
+
+### 1991
+
+**Agegroup and medianes Reineinkommen**
+
+```r
+by(datenbs$reineinkommen[datenbs$steuerjahr==1991],datenbs$agegroup[datenbs$steuerjahr==1991],median)
+```
+
+```
+## datenbs$agegroup[datenbs$steuerjahr == 1991]: 18-25
+## [1] 22500
+## -------------------------------------------------------- 
+## datenbs$agegroup[datenbs$steuerjahr == 1991]: 26-65
+## [1] 55400
+## -------------------------------------------------------- 
+## datenbs$agegroup[datenbs$steuerjahr == 1991]: 66+
+## [1] 34800
+```
+
+
+**Housholdstructur and mean income**
+
+```r
+by(datenbs$reineinkommen[datenbs$steuerjahr==1991],datenbs$household[datenbs$steuerjahr==1991],median)
+```
+
+```
+## datenbs$household[datenbs$steuerjahr == 1991]: Married with Kid(s)
+## [1] 55600
+## -------------------------------------------------------- 
+## datenbs$household[datenbs$steuerjahr == 1991]: Married without Kid(s)
+## [1] 75700
+## -------------------------------------------------------- 
+## datenbs$household[datenbs$steuerjahr == 1991]: Single man
+## [1] 38800
+## -------------------------------------------------------- 
+## datenbs$household[datenbs$steuerjahr == 1991]: Single women
+## [1] 31000
+## -------------------------------------------------------- 
+## datenbs$household[datenbs$steuerjahr == 1991]: Single dad
+## [1] 73950
+## -------------------------------------------------------- 
+## datenbs$household[datenbs$steuerjahr == 1991]: Single mom
+## [1] 46100
+```
+
+### 2011
+
+**Agegroup and mean income**
+
+```r
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==2011]))
+```
+
+```
+## 
+##  18-25  26-65    66+ 
+## 0.1220 0.6278 0.2502
+```
+
+```r
+by(datenbs$reineinkommen[datenbs$steuerjahr==2011],datenbs$agegroup[datenbs$steuerjahr==2011],median)
+```
+
+```
+## datenbs$agegroup[datenbs$steuerjahr == 2011]: 18-25
+## [1] 8916
+## -------------------------------------------------------- 
+## datenbs$agegroup[datenbs$steuerjahr == 2011]: 26-65
+## [1] 55504
+## -------------------------------------------------------- 
+## datenbs$agegroup[datenbs$steuerjahr == 2011]: 66+
+## [1] 49348
+```
+
+
+**Housholdstructur and mean income**
+
+```r
+by(datenbs$reineinkommen[datenbs$steuerjahr==2011],datenbs$household[datenbs$steuerjahr==2011],median)
+```
+
+```
+## datenbs$household[datenbs$steuerjahr == 2011]: Married with Kid(s)
+## [1] 71384
+## -------------------------------------------------------- 
+## datenbs$household[datenbs$steuerjahr == 2011]: Married without Kid(s)
+## [1] 85023
+## -------------------------------------------------------- 
+## datenbs$household[datenbs$steuerjahr == 2011]: Single man
+## [1] 37197
+## -------------------------------------------------------- 
+## datenbs$household[datenbs$steuerjahr == 2011]: Single women
+## [1] 37949
+## -------------------------------------------------------- 
+## datenbs$household[datenbs$steuerjahr == 2011]: Single dad
+## [1] 68704
+## -------------------------------------------------------- 
+## datenbs$household[datenbs$steuerjahr == 2011]: Single mom
+## [1] 48923
+```
+
+
+

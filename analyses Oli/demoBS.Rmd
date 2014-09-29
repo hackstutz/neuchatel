@@ -250,3 +250,36 @@ decompGEI(x.2011,datenbs$agegroup[datenbs$steuerjahr==2011])
 * Ebenso die Bedeutung der Ungleichheit dieser Gruppe für die Overall Ungleichheit
 
 
+
+### Medianes Einkommen
+
+
+### 1991
+
+**Agegroup and medianes Reineinkommen**
+```{r}
+by(datenbs$reineinkommen[datenbs$steuerjahr==1991],datenbs$agegroup[datenbs$steuerjahr==1991],median)
+```
+
+
+**Housholdstructur and mean income**
+```{r}
+by(datenbs$reineinkommen[datenbs$steuerjahr==1991],datenbs$household[datenbs$steuerjahr==1991],median)
+```
+
+### 2011
+
+**Agegroup and mean income**
+```{r}
+prop.table(table(datenbs$agegroup[datenbs$steuerjahr==2011]))
+by(datenbs$reineinkommen[datenbs$steuerjahr==2011],datenbs$agegroup[datenbs$steuerjahr==2011],median)
+```
+
+
+**Housholdstructur and mean income**
+```{r}
+by(datenbs$reineinkommen[datenbs$steuerjahr==2011],datenbs$household[datenbs$steuerjahr==2011],median)
+```
+
+
+
