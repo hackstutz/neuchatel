@@ -1,5 +1,5 @@
 ---
-title: "BS und JU density plots"
+title: "BS Auswertungen"
 author: "Rudi Farys"
 date: "Sunday, September 28, 2014"
 output: html_document
@@ -13,18 +13,21 @@ library(dplyr)
 library(knitr)
 library(ineq)
 library(ebal)
+library(IC2)
 ```
 
 ### Data
 ```{r data}
 setwd("G:/stick/")
-ju <- read.csv("jura/taxdata_JU.csv")
-bs <- read.dta("basel/taxdata_BS.dta")
+#ju <- read.csv("jura/taxdata_JU.csv")
+#bs <- read.dta("basel/taxdata_BS.dta")
+#save(bs, file="G:/stick/basel/taxdata_BS.Rdata")
+load("G:/stick/basel/taxdata_BS.Rdata")
 bs$household <- NA
 bs$agegroup <- NA
-ju$alterskategorie<-NA
-ju$household <- NA
-ju$agegroup <- NA
+#ju$alterskategorie<-NA
+#ju$household <- NA
+#ju$agegroup <- NA
 bs <- within(bs, {
 agegroup <-NA
 agegroup[alterskategorie=="00_26"]<-1
@@ -40,6 +43,21 @@ agegroup[alterskategorie=="95_+"]<-3
 agegroup<-factor(agegroup,
                       levels=c(1,2,3),
                       labels=c("18-25","26-65","66+"))
+
+agegroup_det <-NA
+agegroup_det[alterskategorie=="00_26"]<-1
+agegroup_det[alterskategorie=="26_35"]<-2
+agegroup_det[alterskategorie=="36_45"]<-3
+agegroup_det[alterskategorie=="46_55"]<-4
+agegroup_det[alterskategorie=="56_65"]<-5
+agegroup_det[alterskategorie=="66_75"]<-6
+agegroup_det[alterskategorie=="76_85"]<-7
+agegroup_det[alterskategorie=="86_95"]<-7
+agegroup_det[alterskategorie=="95_+"]<-7
+agegroup_det<-factor(agegroup_det,
+                      levels=c(1,2,3,4,5,6,7),
+                      labels=c("18-25","26-35","36-45","46-55","56-65","66-75","76+"))
+
 # Housholdstructure
 household < NA
 household[ZIVILSTAND=="verheiratet" & anzahl_kinder==0]<-1
@@ -75,78 +93,82 @@ household<-factor(household,
                                 "Single man","Single women","Single dad","Single mom"))
 reineinkommen[steuerjahr>2004]<-z739_reineinkommen[steuerjahr>2004]
 })
+# Einkommen mit 0 setzen wir auf 1 CHF, damit Theil berechnet werden kann und der Logarithmus gezogen werden kann
+bs$reineinkommen[bs$reineinkommen==0]<-1
 
-ju <- within(ju, {
-ageP1<-(PERIODE-GEBURTSJAHR_P1)
-ageP2<-(PERIODE-GEBURTSJAHR_P2)
+
+#ju <- within(ju, {
+#ageP1<-(PERIODE-GEBURTSJAHR_P1)
+#ageP2<-(PERIODE-GEBURTSJAHR_P2)
 
 
 # Agegroups (according to age of dossier carrier)
 
-agegroup[ageP1<26]<-1
-agegroup[ageP1>25 & ageP1<66 ]<-2
-agegroup[ageP1>65]<-3
+#agegroup[ageP1<26]<-1
+#agegroup[ageP1>25 & ageP1<66 ]<-2
+#agegroup[ageP1>65]<-3
 
-agegroup<-factor(agegroup,
-                       levels=c(1,2,3),
-                       labels=c("18-25","26-65","66+"))
+#agegroup<-factor(agegroup,
+#                       levels=c(1,2,3),
+#                       labels=c("18-25","26-65","66+"))
 
 # Agegroups - detailled
-alterskategorie[ageP1<26]<-1
-alterskategorie[ageP1>25 & ageP1<36 ]<-2
-alterskategorie[ageP1>35 & ageP1<46 ]<-3
-alterskategorie[ageP1>45 & ageP1<56 ]<-4
-alterskategorie[ageP1>55 & ageP1<66 ]<-5
-alterskategorie[ageP1>65 & ageP1<76 ]<-6
-alterskategorie[ageP1>75 & ageP1<86 ]<-7
-alterskategorie[ageP1>85 & ageP1<96 ]<-8
-alterskategorie[ageP1>95]<-9
+#alterskategorie[ageP1<26]<-1
+#alterskategorie[ageP1>25 & ageP1<36 ]<-2
+#alterskategorie[ageP1>35 & ageP1<46 ]<-3
+#alterskategorie[ageP1>45 & ageP1<56 ]<-4
+#alterskategorie[ageP1>55 & ageP1<66 ]<-5
+#alterskategorie[ageP1>65 & ageP1<76 ]<-6
+#alterskategorie[ageP1>75 & ageP1<86 ]<-7
+#alterskategorie[ageP1>85 & ageP1<96 ]<-8
+#alterskategorie[ageP1>95]<-9
 
-alterskategorie<-factor(alterskategorie,
-                       levels=c(1,2,3,4,5,6,7,8,9),
-                       labels=c("18-25","26-35","36-45","46-55","56-65","66-75","76-85","86-95","95_+"))
+#alterskategorie<-factor(alterskategorie,
+#                       levels=c(1,2,3,4,5,6,7,8,9),
+#                       labels=c("18-25","26-35","36-45","46-55","56-65","66-75","76-85","86-95","95_+"))
 
 
 # Housholdstructure
-household[ZIVILSTAND=="verheiratet" & ANZAHL_KINDER==0]<-1
-household[ZIVILSTAND=="verheiratet" & ANZAHL_KINDER>0]<-2
-household[ZIVILSTAND=="ledig" 
-                & ANZAHL_KINDER==0 & GESCHLECHT_P1==0]<-3
-household[ZIVILSTAND=="geschieden/getrennt"
-                & ANZAHL_KINDER==0 & GESCHLECHT_P1==0]<-3
-household[ZIVILSTAND=="verwittwet"
-                & ANZAHL_KINDER==0 & GESCHLECHT_P1==0]<-3
-household[ZIVILSTAND=="ledig" 
-                & ANZAHL_KINDER==0 & GESCHLECHT_P1==1]<-4
-household[ZIVILSTAND=="geschieden/getrennt" 
-                & ANZAHL_KINDER==0 & GESCHLECHT_P1==1]<-4
-household[ZIVILSTAND=="verwittwet" 
-                & ANZAHL_KINDER==0 & GESCHLECHT_P1==1]<-4
-household[ZIVILSTAND=="ledig"
-                & ANZAHL_KINDER>1 & GESCHLECHT_P1==0]<-5
-household[ZIVILSTAND=="geschieden/getrennt"
-                & ANZAHL_KINDER>1 & GESCHLECHT_P1==0]<-5
-household[ZIVILSTAND=="verwittwet"
-                & ANZAHL_KINDER>1 & GESCHLECHT_P1==0]<-5
-household[ZIVILSTAND=="ledig"
-                & ANZAHL_KINDER>1 & GESCHLECHT_P1==1]<-6
-household[ZIVILSTAND=="geschieden/getrennt"
-                & ANZAHL_KINDER>1 & GESCHLECHT_P1==1]<-6
-household[ZIVILSTAND=="verwittwet"
-                & ANZAHL_KINDER>1 & GESCHLECHT_P1==1]<-6
+#household[ZIVILSTAND=="verheiratet" & ANZAHL_KINDER==0]<-1
+#household[ZIVILSTAND=="verheiratet" & ANZAHL_KINDER>0]<-2
+#household[ZIVILSTAND=="ledig" 
+#                & ANZAHL_KINDER==0 & GESCHLECHT_P1==0]<-3
+#household[ZIVILSTAND=="geschieden/getrennt"
+#                & ANZAHL_KINDER==0 & GESCHLECHT_P1==0]<-3
+#household[ZIVILSTAND=="verwittwet"
+#                & ANZAHL_KINDER==0 & GESCHLECHT_P1==0]<-3
+#household[ZIVILSTAND=="ledig" 
+#                & ANZAHL_KINDER==0 & GESCHLECHT_P1==1]<-4
+#household[ZIVILSTAND=="geschieden/getrennt" 
+#                & ANZAHL_KINDER==0 & GESCHLECHT_P1==1]<-4
+#household[ZIVILSTAND=="verwittwet" 
+#                & ANZAHL_KINDER==0 & GESCHLECHT_P1==1]<-4
+#household[ZIVILSTAND=="ledig"
+#                & ANZAHL_KINDER>1 & GESCHLECHT_P1==0]<-5
+#household[ZIVILSTAND=="geschieden/getrennt"
+#                & ANZAHL_KINDER>1 & GESCHLECHT_P1==0]<-5
+#household[ZIVILSTAND=="verwittwet"
+#                & ANZAHL_KINDER>1 & GESCHLECHT_P1==0]<-5
+#household[ZIVILSTAND=="ledig"
+#                & ANZAHL_KINDER>1 & GESCHLECHT_P1==1]<-6
+#household[ZIVILSTAND=="geschieden/getrennt"
+#                & ANZAHL_KINDER>1 & GESCHLECHT_P1==1]<-6
+#household[ZIVILSTAND=="verwittwet"
+#                & ANZAHL_KINDER>1 & GESCHLECHT_P1==1]<-6
 
-household<-factor(household,
-                        levels=c(1,2,3,4,5,6),
-                        labels=c("Married with Kid(s)","Married without Kid(s)",
-                                 "Single man","Single women","Single dad","Single mom"))
+#household<-factor(household,
+#                        levels=c(1,2,3,4,5,6),
+#                        labels=c("Married with Kid(s)","Married without Kid(s)",
+#                                 "Single man","Single women","Single dad","Single mom"))
 
 # Jahre Steuerperiode 
 
-steuerjahr<-PERIODE
+#steuerjahr<-PERIODE
 
-})
-bs91_11 <- filter(bs, steuerjahr%in%c(1991,2011)) %.% select(steuerjahr, household, reineinkommen,agegroup,alterskategorie) %.% mutate(steuerjahr=factor(steuerjahr))
-ju06_12 <- filter(ju, steuerjahr%in%c(2006,2012)&stbeink_BUND>=0) %.% select(steuerjahr, household, stbeink_BUND,agegroup,alterskategorie)%.% mutate(steuerjahr=factor(steuerjahr))
+#})
+
+bs91_11 <- filter(bs, steuerjahr%in%c(1991,2011)) %.% select(steuerjahr, household, reineinkommen,agegroup,alterskategorie,agegroup_det) %.% mutate(steuerjahr=factor(steuerjahr))
+#ju06_12 <- filter(ju, steuerjahr%in%c(2006,2012)&stbeink_BUND>=0) %.% select(steuerjahr, household, stbeink_BUND,agegroup,alterskategorie)%.% mutate(steuerjahr=factor(steuerjahr))
 ```
 
 ### Optionen
@@ -219,7 +241,7 @@ ggplot(bs91_11,aes(x=log(reineinkommen),fill=steuerjahr))+
 
 #### Jura 2006 vs 2012
 
-```{r}
+```{r eval=FALSE}
 # JURA Households
 p50s <- aggregate(log(ju06_12$stbeink_BUND)~ju06_12$household+factor(ju06_12$steuerjahr),FUN=median,na.rm=TRUE)
 names(p50s) <- c("household","steuerjahr","log_income")
@@ -281,14 +303,14 @@ ggplot(ju06_12,aes(x=log(stbeink_BUND),fill=steuerjahr))+
 
 ```{r}
 bs91_11$single <- factor(bs91_11$household%in%c("Single women", "Single man", "Single mom", "Single dad"),labels=c("married","single"))
-p50s <- aggregate(log(bs91_11$reineinkommen)~bs91_11$alterskategorie+factor(bs91_11$steuerjahr)+bs91_11$single,FUN=median,na.rm=TRUE)
-names(p50s) <- c("alterskategorie","steuerjahr","single","log_income")
-p50s <- p50s[order(p50s$alterskategorie),]
-theils <- aggregate(bs91_11$reineinkommen~bs91_11$alterskategorie+factor(bs91_11$steuerjahr)+bs91_11$single,FUN=Theil)
-names(theils) <- c("alterskategorie","steuerjahr","single","Theil")
-theils <- theils[order(theils$alterskategorie),]
+p50s <- aggregate(log(bs91_11$reineinkommen)~bs91_11$agegroup_det+factor(bs91_11$steuerjahr)+bs91_11$single,FUN=median,na.rm=TRUE)
+names(p50s) <- c("agegroup_det","steuerjahr","single","log_income")
+p50s <- p50s[order(p50s$agegroup_det),]
+theils <- aggregate(bs91_11$reineinkommen~bs91_11$agegroup_det+factor(bs91_11$steuerjahr)+bs91_11$single,FUN=Theil)
+names(theils) <- c("agegroup_det","steuerjahr","single","Theil")
+theils <- theils[order(theils$agegroup_det),]
 
-ggplot(theils, aes(x=alterskategorie, y=Theil,group=steuerjahr,color=steuerjahr))+geom_line()+
+ggplot(theils, aes(x=agegroup_det, y=Theil,group=steuerjahr,color=steuerjahr))+geom_line(size=1)+
 scale_color_manual(values=c("1991"="blue","2011"="red" ))+
 facet_wrap(~single)+
 theme_bw()
@@ -298,7 +320,7 @@ theme_bw()
 
 Wie würde 2011 in Basel aussehen wenn Alter und Haushaltsstruktur wie 1991 wären?
 
-```{r}
+```{r cf}
 # Dinardo (2002) beschreibt nochmal was in DiNardo Fortin Lemieux (1996) steht: http://www-personal.umich.edu/~jdinardo/bztalk5.pdf verwenden wir aber nicht, sondern entropy balancing (Hainmüller 2011)
 
 # wir gewichten 2011 mit dem Inversen Propensity score.
@@ -321,6 +343,8 @@ bs_nomiss<-rbind(bs_nomiss,counterfactual)
 theils <- aggregate(bs_nomiss$reineinkommen~factor(bs_nomiss$steuerjahr),FUN=Theil)
 names(theils) <- c("steuerjahr","Theil")
 theils$w<-1
+# den CF Theil müssen wir mit calcGEI() berechnen da Theil() keine Gewichte unterstützt
+theils$Theil[theils$steuerjahr=="2011 CF"] <- calcGEI(x=counterfactual$reineinkommen,w=counterfactual$w,alpha=1)$ineq$index
 
 ggplot(bs_nomiss,aes(x=log(reineinkommen),fill=steuerjahr,weight=w))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
