@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Inequality by Demographic Factors - Züirch</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<h1>Inequality by Demographic Factors - Züirch</h1>
+
+<p>Load Library</p>
+
+<pre><code class="r">library(foreign,quietly=TRUE,warn.conflicts=FALSE)
+library(plyr,quietly=TRUE,warn.conflicts=FALSE)
+library(dplyr,quietly=TRUE,warn.conflicts=FALSE)
+library(ggplot2,quietly=TRUE,warn.conflicts=FALSE)
+library(ineq,quietly=TRUE,warn.conflicts=FALSE)
+library(IC2,quietly=TRUE,warn.conflicts=FALSE)
+</code></pre>
+
+<p>Load Data </p>
+
+<pre><code class="r">load(&quot;P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenzh.Rda&quot;)
+</code></pre>
+
+<p>Achtung: </p>
+
+<ul>
+<li>Einkommen sind nicht preisbereinigt. Vergleich der Mittelwerte über die Zeit sind damit nicht zu interpretieren</li>
+<li>Es wird die Ungleichheit zwischen Steuereinheiten und nicht zwischen Haushalten untersucht</li>
+<li>Es wurde keine Äquivalenzgewichtung vorgenommen</li>
+</ul>
+
+<p><br><br>
+<br><br></p>
+
+<h1>Change of social structure and between group inequality</h1>
+
+<p>Werte kleiner 1 werden 1 gesetzt, der Theil möchte das so.</p>
+
+<pre><code class="r">datenzh$STE&lt;-datenzh$STEUERBARES_EINKOMMEN
+datenzh$STE[datenzh$STE&lt;1]&lt;-1
+</code></pre>
+
+<h2>Periode: 1991 bis 2007</h2>
+
+<h3>1991</h3>
+
+<p><strong>Agegroup and median income</strong></p>
+
+<pre><code class="r">prop.table(table(datenzh$agegroup[datenzh$steuerjahr==1991]))
+</code></pre>
+
+<pre><code>## 
+##  18-25  26-65    66+ 
+## 0.1323 0.6649 0.2028
+</code></pre>
+
+<pre><code class="r">by(datenzh$STE[datenzh$steuerjahr==1991],datenzh$agegroup[datenzh$steuerjahr==1991],median)
+</code></pre>
+
+<pre><code>## datenzh$agegroup[datenzh$steuerjahr == 1991]: 18-25
+## [1] 18.9
+## -------------------------------------------------------- 
+## datenzh$agegroup[datenzh$steuerjahr == 1991]: 26-65
+## [1] 42
+## -------------------------------------------------------- 
+## datenzh$agegroup[datenzh$steuerjahr == 1991]: 66+
+## [1] 18.8
+</code></pre>
+
+<p><strong>Housholdstructur and median income</strong></p>
+
+<pre><code class="r">prop.table(table(datenzh$household[datenzh$steuerjahr==1991]))
+</code></pre>
+
+<pre><code>## 
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.232612               0.211306               0.251178 
+##           Single women             Single dad             Single mom 
+##               0.296815               0.006072               0.002017
+</code></pre>
+
+<pre><code class="r">by(datenzh$STE[datenzh$steuerjahr==1991],datenzh$household[datenzh$steuerjahr==1991],median)
+</code></pre>
+
+<pre><code>## datenzh$household[datenzh$steuerjahr == 1991]: Married with Kid(s)
+## [1] 51
+## -------------------------------------------------------- 
+## datenzh$household[datenzh$steuerjahr == 1991]: Married without Kid(s)
+## [1] 48.1
+## -------------------------------------------------------- 
+## datenzh$household[datenzh$steuerjahr == 1991]: Single man
+## [1] 30.9
+## -------------------------------------------------------- 
+## datenzh$household[datenzh$steuerjahr == 1991]: Single women
+## [1] 24.5
+## -------------------------------------------------------- 
+## datenzh$household[datenzh$steuerjahr == 1991]: Single dad
+## [1] 37.4
+## -------------------------------------------------------- 
+## datenzh$household[datenzh$steuerjahr == 1991]: Single mom
+## [1] 25.2
+</code></pre>
+
+<h3>2007</h3>
+
+<p><strong>Agegroup and median income</strong></p>
+
+<pre><code class="r">prop.table(table(datenzh$agegroup[datenzh$steuerjahr==2007]))
+</code></pre>
+
+<pre><code>## 
+##  18-25  26-65    66+ 
+## 0.1299 0.6557 0.2144
+</code></pre>
+
+<pre><code class="r">by(datenzh$STE[datenzh$steuerjahr==2007],datenzh$agegroup[datenzh$steuerjahr==2007],median)
+</code></pre>
+
+<pre><code>## datenzh$agegroup[datenzh$steuerjahr == 2007]: 18-25
+## [1] 12.7
+## -------------------------------------------------------- 
+## datenzh$agegroup[datenzh$steuerjahr == 2007]: 26-65
+## [1] 54.9
+## -------------------------------------------------------- 
+## datenzh$agegroup[datenzh$steuerjahr == 2007]: 66+
+## [1] 41.9
+</code></pre>
+
+<p><strong>Housholdstructur and median income</strong></p>
+
+<pre><code class="r">prop.table(table(datenzh$household[datenzh$steuerjahr==2007]))
+</code></pre>
+
+<pre><code>## 
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.244408               0.129145               0.302249 
+##           Single women             Single dad             Single mom 
+##               0.305325               0.007608               0.011264
+</code></pre>
+
+<pre><code class="r">by(datenzh$STE[datenzh$steuerjahr==2007],datenzh$household[datenzh$steuerjahr==2007],median)
+</code></pre>
+
+<pre><code>## datenzh$household[datenzh$steuerjahr == 2007]: Married with Kid(s)
+## [1] 68.6
+## -------------------------------------------------------- 
+## datenzh$household[datenzh$steuerjahr == 2007]: Married without Kid(s)
+## [1] 64.85
+## -------------------------------------------------------- 
+## datenzh$household[datenzh$steuerjahr == 2007]: Single man
+## [1] 42
+## -------------------------------------------------------- 
+## datenzh$household[datenzh$steuerjahr == 2007]: Single women
+## [1] 36.9
+## -------------------------------------------------------- 
+## datenzh$household[datenzh$steuerjahr == 2007]: Single dad
+## [1] 48.65
+## -------------------------------------------------------- 
+## datenzh$household[datenzh$steuerjahr == 2007]: Single mom
+## [1] 31.2
+</code></pre>
+
+<p><br><br>
+<br><br></p>
+
+<h1>Change of overall inequality</h1>
+
+<h2>Periode 1991 to 2007</h2>
+
+<h3>1991</h3>
+
+<pre><code class="r">Gini(datenzh$STE[datenzh$steuerjahr==1991])
+</code></pre>
+
+<pre><code>## [1] 0.4914
+</code></pre>
+
+<pre><code class="r">Theil(datenzh$STE[datenzh$steuerjahr==1991])
+</code></pre>
+
+<pre><code>## [1] 0.5646
+</code></pre>
+
+<h3>2007</h3>
+
+<pre><code class="r">Gini(datenzh$STE[datenzh$steuerjahr==2007])
+</code></pre>
+
+<pre><code>## [1] 0.4639
+</code></pre>
+
+<pre><code class="r">Theil(datenzh$STE[datenzh$steuerjahr==2007])
+</code></pre>
+
+<pre><code>## [1] 0.4685
+</code></pre>
+
+<h3>Lorenz curve</h3>
+
+<pre><code class="r">Lc.1991&lt;-Lc(datenzh$STE[datenzh$steuerjahr==1991])
+Lc.2007&lt;-Lc(datenzh$STE[datenzh$steuerjahr==2007])
+
+plot(Lc.1991,lty=&quot;dotted&quot;)
+lines(Lc.2007$p, Lc.2007$L,lty=&quot;dashed&quot;, lwd=1.2, col=4)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAhFBMVEX9/v0AAAAAADkAAGUAAP8AOY8AZrU5AAA5ADk5AGU5OQA5OWU5OY85j9plAABlADllAGVlOQBlOY9lZjllZrVltbVltf2POQCPOTmPZgCPjzmPj2WPtY+P29qP2/21ZgC1ZmW1tWW1/v3ajznatWXa/rXa/v39tWX924/9/rX9/tr9/v1MSME5AAAALHRSTlP/////////////////////////////////////////////////////////AMfWCYwAAAAJcEhZcwAACxIAAAsSAdLdfvwAABKDSURBVHic7Z0Lm+K2FYbjWZjZbRZmk7RM0iYz7dBy8///f0WyMTYYW7aOdI50vvd5kjUD6HJedMU2P5VAJT9xFwDwAPFKgXilQLxSIF4pEK8UiFcKxCsF4pUC8UqBeKVAvFIgXikQrxSIVwrEKwXilQLxSoF4pUC8UiBeKRCvFIhXCsQrBeKVkrP4w8tyx10GsUC8UnSI3xZFsSrL09vTb8XTu324MQ+//KcovnyW+6KoXlCaP9o/nZ/7LI/r5a56z9+K5/NzH+b/9ZtTR4X4Dyv22UotlruP2rN9aP5uxZ9Fl2X9ty+fLfHmPf89v+388Pyh+Wh9SFJGg/jDy1mYsXaW+Fz/2Yg9P1ydpdsXbetWfHg5C/8oNm3xz7aveLcvbd7MWTEKNIjf2356a2ye9dUde2E+B/YDYV50eHmu3rNvevxrV/9u370yn4frm5nqRIZu8bXcVhOuXnsv/nz4v3UzHYB40fR09UZYM/RfxW+b6Zrt6s/N+9zDb87/NuLLj6d/mc4gm5VC3uLridh1cmclVg+N01p89ULb1C+Tu9aLKvHn13TezFkxClSIby3nqtZbqWvEb4tGvH3SvOq4Lop/XLv6ei13fXPq5CweDADxSoF4pUC8UiBeKRCvFIhXCsQrBeKVAvFKgXilQLxSIF4pEK8UiFcKxCsF4pUC8UqBeKVAvFJGxB++VeebH9c5nGAIrgyL3zdXlG3K7XOUAoE4DIr/ePqzavHHH59N4wdZ4NbVH77vyuPr5bKhAiTAgkL8ftkWf6EYfi/ghEZ8t8U3aXuUC4SlGLPjJr5/jId4sRSjdtzEn95WPbN6iBdKYcz4izf/9a7jIV4mlRe/Md4hAyCMSovn5M4hByCL2grEK+MiBeJ1cXUC8Zooeg/7gPicKB4c9wDxGVE8fHAPxGdD0fWBMV4JNzYwq1fCrQyI18GdC4hXQY8KiFdAnwnM6vOnVwTEZ0+vhwXE506/BojPnOKBBYjPm4cOID5rHiuA+JwZMgDx+TIoAOKzZSj+C4jPlsHwQ3y2DEd/8WiZdwHi02TMK8TnyWjoIT5LXCIP8fnhFHiIzw6HuC8gPj9cwg7x+eEU9YXvHTH8iwBocQs6xOeGY8whPi/GFued1w4/DfEJMSngEJ8N7vFejL8a4pNhgneIz4gJ0bYb9RCfB1OCDfH5MC3WEJ8LM0IN8ekzZfleXq6ThfjkmRpniM+DyWGG+CyY7n1BcPfqQSA+AnOCDPHpMz/GEJ8yHiGG+ISZE+HFwum9EC+YWQG+3O0K4lNl4rbNhculFBCfKHOjC/Fp4zGdh/iE8Y8txKfI7NAumjuZQnyCzI/s9Q62EJ8eHoG9XjsF8cnhE9fznB7iE8UvrM3qH+LTYua2TU9Cw09DvCz8Yrpo/ToBxKeEZ0jbv0oB8Qnh6719PwSITweC7boC4tODIJ6tqaGP+OO6WO7s0eGl+PJ5l8ucooFHeIez+7tTHuJPb5ty+2yOjq/v5bb+DDgnDSbhH00y8ccfn+Xhm2noh+87+6gLxNNBsHxfkIm3us9t/bbFFxd8ignaUITy5qJ4D/H75UV8a7RvAfFUEEWy0xZJWvzh63u5v5vdQTwRZLu07YRIxvhW23dPGjhCE8fb35L1mtWv6lk9WnxAiLwTiq9HdtPo90XxdNvgIZ4Eoije/Xg0du5kQxXEuxtdQbxoCGN4s76GeMGQboXcJAbxcqEL4N3UDuIFQxi/e+8QLxZK7xCfDsTRu5suQLxMqIMH8WlAGju7hof4FKD13jPCQ7xIaCPX6x3i5UF9BgvEp0GIsPV8liBeGEGiBvHiIQ9a/9QO4oVBH7MH3iFeFAG8Q3wChIlY/yoB4uUQKGAQL5sgF6D07tZW2Q2/EeJjESRaD0d4iJdCmGA99g7xMggUK4gXTsBQPZo6QLwAQrZ3iJdLKO8DHT3ECyBUnAa9Qzw7wcIE8ZIJe9+QgdQhnpVwMRqc2Y3nDPFBCRgiiBdMSO/DIzzEcxIyQGPeIZ6P8PEZygHiuQje3ofvNAjxTASNztjMbjx/iA9D2OX76MyuhHgeAofGwTvEcxAlMiOZQHx8YrT30XtIQ3x0QsfFYWY3XgqIJye4d5cRHuKjEzwqbt4hPjKRgjKeDcRHJU57d/l1EIiPSIRfa3Gb2ZUQH5MIAXGc2ZUQH5EY8XD2DvHREBYOiI9EvPbuNpOA+DhECQbEiyOOd/cRHuLjECcUU7xDfAxiRsI1L4gPTqQf2XXes6uA+NBECsPCec+uAuIDEysKkwb4EuJDEy0IEC+KyDGYkB3EhyRue3ef2ZUQH5R43ifO7EqID0lk79OA+FBEWr7PBeIDEb/203KE+DBErPxi+syu9BN/XBfLnT06vRVP7xOTzpqYdZ/yZewVD/Gnt025fbaHH5tyX38GnJPOmajeZ8zsSi/xxx+f5eHbZ300OemMSaHmHuIP33fl8fXdHv3R6uqLCzQlTA+Ged30LD3Em869Fv+ysR+DSUlnS9R6z9i6qSBq8ZejCUnnCoP3yOJbY/yvEF8TeYCbN7EzeM3qV61ZPbp6Qzp19l/Hm0Z/PvpyN7FPJwhkRK7y7H6+xM4dKbG9Q7wMYld4/gBfQjwh0esL8SJgqu7cbCGeiOj9/Kzv5K5APA1M/fz8bQOIpyD+9xIzv5O7AvEEpFhTiPcnfkUvzd0jZ4j3hqGelwEe4hnh8O47sysh3huOWvpO7AwQ70eylYR4L/jau+8KEuI9YDmtkGKALyHeB5YKeu/c1ED8bNKuH8TPhbV6/plD/Ex4auf7ndwViJ8Hp3eSSSXEz4KpbkQTO4Ob+L29JGpDmnTKZFA1F/H7wp49f3qbpj6D6DyAtb0TbR44iDfXydT8u++q2JlJJwvX1aCEA3yJMX46XNWi2rmpcRN/7uWLqr+nSzpRcqmVk3hzlVx5uU6OKuk0YWvv1Pk7ia/ueNF/34vZSScJcz9PeLcJt67eNna0eL4q1Q2ecF7p1uLX9c1N7i+JnZ90gvDViHZiZ8Cs3p2sKuSyjv9781DzOp7vZk60C/ga7Nw5wtjN0w/wJfbqXWGsDP34bsAY70ROdamYIF7xOp69vdNPMCDeAU7vEM8Hv3eI5yCXenSB+DHYx/cwRXDZwJm1YZuJeM57cNN/M9MCy7lBWOsQbHy3qQ4/rVw8bxXC7NzUQPwA6dfgMRD/GN5+PtQCvgbiHyLBO8THJ+Px3QDxD0i79ONAfD8S+vmgewgQ3wfvT6cFH99t4sNP6xTPXPLg47sB4u9JtuBTgPg7hLT3wMWA+Fu4vYf8ZqYFxN8gw3v46SXEd0my0HOA+A7c7b3+N0IxIL4F9y+fxxrfbSbDT6sSz13gaOO7zWT4aU3iUyuvHxB/gbu4Ecd3h2z0iOcubczx3WY0/LQa8dyFjTq+24yGn9YiPqWy0gDxBu6iRh7fHbIaFH9cF8vLTS9Pb3dXz3NH0x3uksYe321mw08PiTeumzthbe9vm8AdTle4t23ij+82s+Gnh8Sba+kO36rLqg4//5Kq+ESKSY2H+MP3XXl8fTeHp9//unb1xQWSAoaGvZRRzre5x0P8ftmI365SHePZC8nSz5dELf58lKh49jJevacj/jrGb23PvpqWtATkFDH6wOg1q19dZ/VJtnj2EjKN7wb/dXzV6FMUz17ABcPGzQXFO3fs5WMb322mw0/nK17QapOlKFrF8xeOcXw3KBXPX7YYF0YOoVM8f9G49m0aVIqXW7J4aBTPXzDm8d2gUDx/ubjHd5v58NMZiucvFvv4bjMffjo78YKW77woEy+gTALGd4Mu8QKKJGF8twUYfjov8QJKJGJ8twUYfjor8eIKxIki8QLKI2R8N+gRL6A4UsZ3gxrxAkojZnw3aBEvqjAS0CFeQBtbCBrfDSrECyiJqG7eoEG8hII0p1VKKIxBgXgp5ZBF/uIFFKPp53mL0SF78QJKwXH5+yi5i5dQCGnzOkvm4iWUQSZ5ixdQBInjuyFn8QL61oXI8d2QsXju/NuI856xeAGhFrZL2yFb8RK8C/oW9o5cxQsItrjt+Q6ZihcZa1HkKV6Ad6GruIYsxfNHu17GyVvFNWQoXkKwRQ/vlvzEy421KLITL8C71F3aDrmJFxBssbu0HTITLyHW8sd3Q17i+WMteZe2Q1biBXiXvEvbISfx/NGWvUvbISPx8oMtiWzE8zeyJFZxDbmI5492Gqu4hkzECwh2OsO7JQ/xiQRbElmIZ/fefBnHXRB3chDPHu6EVnENGYhPKNqCSF88u/ekVnENqYtn713ln2vTT+Li+aOd4PBuSVt8atEWRNLiub0nuIprSFk8d7xTXMU1JCw+xXDLIV3xzN7T+i7unmTFy/Ce3CquIVXx3PFOeXi3pCmeOd7JnFE5QJLipXTzvMXwI0XxMrxD/MykxaWri/TEMw/vOXTzBh/xx3Wx3Nmjw0tRbCYmPRMh3jWLP71tyu2zOTq+vpeHr+/Tkp4H9/jOmz0hHuKPPz7Lw7fP89He6P+4bfIhHLF6T3yvrouH+MP3nW3rFdej4gJB8W7gjHmqZ1w8wEP8ftkSf3pbTUx6Orwhz2IRd4WoxR/Xd97JxWcScSGQjPHnWf3dnJ5clIhunrEMxHjN6lf1rL7XO7EpXu91GSDeUq3jz41+a+dyQWf1GYVcBons3DF6z6+Xt6Qhni/qi2z2aG9IQnxuQZdAAuL5Gluurd0gXzxnN18VAOJJk46ayizy+UamB+ni+bp55vxDI1w8V9wz+0amB9ni2dt7tt5li2cKe+69vEWyeC7vuffyFsHiWb3n3MtbxIpnDXzm0g1SxfOEvprM597LW4SK5/JeZa7Au1DxjJHXIN0gUjxH8BX18haJ4nm8V1lr8S5RPFvs1Ug3yBMfP/zaenmLOPEc3quMVXmXJp4r+rqkG2SJjx5/lb28RZR4Bu9Vvvq8ixLPE36F0g2CxEc2oLeXt8gRH917latS73LERxWgXLpBivi43lWcYzOMDPFxFSyyPmHeERHiY2pHL18hQXxECfmfL++KAPHx2zuQID6a90zvcDATdvGxPGR7h4OZcIuPqgHOrzCLj6NC+e5sL7ziY3mvMoP3Fpzio5iA9H4YxUfRjnX7A/jER1GBdfsj2MSH9451+xBc4oPrwLp9GCbxUWzA+QA84gMbwbp9HBbxwb1jj24UBvFBGyLauiPxxYfVjpm8I9HFh3MC51OILT6YFzT2aUQWH7K9w/kU4ooPowartxlEFR/KO5RPJ6Z4ej1o67OJKD6EdyifSzTx1IrQ1v2IJZ5c+wLKvYgkntIS2joFccQTSkJbpyGKeCJTmMMTEkM8mXcYpyOCeH9di0tb904JXAgv3s9WYYxjuU5PcPFeyhYL3L0iEIHFz22qi0o5WnowfMQf18Vyd3PUTXqSt/rFmLtHwUP86W1Tbp+7R92kRy6pKNr/FnW3jrl7HDzEH398lodvn52jTtJds3emi6I2XfXqGMyj4iH+8H1XHl/fO0c2yRprdPjfArAxX/x+edF9PZrwmZpBgEEASfYzp8U7Jj2DLEKaRpJeY7xn0e7JIqRpJDk8q181s/pV76yemixCmkaSDut409QfreOJySKkaSTJ+vvxEVJEkg+AeKVJ+ogHCQPxSoF4pUC8UiBeKRCvFIhXCsQrBeKVAvFKmSN+5BxMrxQPL0WxIUixUzRzyiBpkqe34un27ATPJM8V/3L7vfdMLl+gD9qZIX7sHEyfFM3ZHoevBDHtFG1L8llqJfmxsSclESZpKr4laUTlvv4EDduZIX7s/AyfFPemoB8EmtpFO/z8C4X4br1JuCZpz3EiSfbj6c+q3sN2ZogfOyPLJ0UDRYrtJE+//0XS1bfr/QdNV39NkrDFX2wP25khfuwcTJ8Uy+psH39aSW5XNGP8NcnDy8aGlTBJsulS2YgftiOuxR/XFN67haQRT1/vdpLnic2eaHYXqsWHHONtY6LgmuTWnmRO8Glq1ftXIvGtyQ1R52k4BBrjx87B9EmRynu3aDQtvpXkB1FX36o4fYsftjN/Hf/wHEyfFKvmSTIHbwpJvI6v600j6ZrkviDaGqjEj9rBzp1SIF4pEK8UiFcKxCsF4pUC8UqBeKVAvFIgXikQrxSIVwrEKwXilQLxSoF4pUC8UiBeKRCvFIhXCsQrBeKVAvGW449/kp3dnAYQbzmulzuq6xnSAOItx/WmPP2uqclDvMVetkZxXX4yQLzFiEeLV8hx/Uxzc5NkgHjL8fU3zOo1QnVpejpAvAXigRIgXikQrxSIVwrEKwXilQLxSoF4pUC8UiBeKRCvFIhXCsQrBeKVAvFKgXil/B9ULzw0lf2YRgAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-10"/> </p>
+
+<h2>Change of inequality measured with calcGEI (THEIL)</h2>
+
+<pre><code class="r"># calcGEI kann nix mit 0 anfangen, macht aber das selbe
+x.1991&lt;-datenzh$STE[datenzh$steuerjahr==1991]
+x.1991[x.1991&lt;1]&lt;-1
+calcGEI(x.1991)
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##    GEI 
+## 0.5646 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 0
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+<pre><code class="r">Theil(x.1991)
+</code></pre>
+
+<pre><code>## [1] 0.5646
+</code></pre>
+
+<pre><code class="r">x.2007&lt;-datenzh$STE[datenzh$steuerjahr==2007]
+x.2007[x.2007&lt;1]&lt;-1
+calcGEI(x.2007)
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##    GEI 
+## 0.4685 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 0
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+<pre><code class="r">Theil(x.2007)
+</code></pre>
+
+<pre><code>## [1] 0.4685
+</code></pre>
+
+<p><br><br>
+<br><br></p>
+
+<h1>Decomposing overall inequality</h1>
+
+<h2>Households</h2>
+
+<h3>1991</h3>
+
+<pre><code class="r">decompGEI(x.1991,datenzh$household[datenzh$steuerjahr==1991])
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##   GEI 
+## 0.546 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $decomp
+## $decomp$within
+## [1] 0.47
+## 
+## $decomp$between
+## [1] 0.07599
+## 
+## $decomp$betweenELMO
+## [1] 0.3153
+## 
+## 
+## $intra
+## $intra$GEIGroups
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##                 0.5151                 0.4630                 0.4227 
+##           Single women             Single dad             Single mom 
+##                 0.4479                 0.2891                 0.7966 
+## 
+## $intra$contribGEIGroups
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.172040               0.139650               0.076152 
+##           Single women             Single dad             Single mom 
+##               0.079253               0.001635               0.001306 
+## 
+## 
+## $ws
+## $ws$wIntra
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.232612               0.211306               0.251178 
+##           Single women             Single dad             Single mom 
+##               0.296815               0.006072               0.002017 
+## 
+## $ws$sIntra
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.333992               0.301603               0.180158 
+##           Single women             Single dad             Single mom 
+##               0.176952               0.005655               0.001639 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$zNA
+## [1] 4409
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 4409
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+<h3>2007</h3>
+
+<pre><code class="r">decompGEI(x.2007,datenzh$household[datenzh$steuerjahr==2007])
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##    GEI 
+## 0.4764 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $decomp
+## $decomp$within
+## [1] 0.416
+## 
+## $decomp$between
+## [1] 0.06045
+## 
+## $decomp$betweenELMO
+## [1] 0.3288
+## 
+## 
+## $intra
+## $intra$GEIGroups
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##                 0.4030                 0.4628                 0.4240 
+##           Single women             Single dad             Single mom 
+##                 0.3753                 0.6193                 0.4539 
+## 
+## $intra$contribGEIGroups
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.141362               0.088282               0.101172 
+##           Single women             Single dad             Single mom 
+##               0.076620               0.005395               0.003137 
+## 
+## 
+## $ws
+## $ws$wIntra
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.244408               0.129145               0.302249 
+##           Single women             Single dad             Single mom 
+##               0.305325               0.007608               0.011264 
+## 
+## $ws$sIntra
+##    Married with Kid(s) Married without Kid(s)             Single man 
+##               0.350812               0.190765               0.238620 
+##           Single women             Single dad             Single mom 
+##               0.204181               0.008711               0.006912 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$zNA
+## [1] 19346
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 19346
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+<h2>Agegroups</h2>
+
+<h3>1991</h3>
+
+<pre><code class="r">decompGEI(x.1991,datenzh$agegroup[datenzh$steuerjahr==1991])
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##    GEI 
+## 0.5646 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $decomp
+## $decomp$within
+## [1] 0.5211
+## 
+## $decomp$between
+## [1] 0.04342
+## 
+## $decomp$betweenELMO
+## [1] 0.2096
+## 
+## 
+## $intra
+## $intra$GEIGroups
+##  18-25  26-65    66+ 
+## 0.3721 0.4117 1.0860 
+## 
+## $intra$contribGEIGroups
+##   18-25   26-65     66+ 
+## 0.01998 0.32145 0.17970 
+## 
+## 
+## $ws
+## $ws$wIntra
+##  18-25  26-65    66+ 
+## 0.1323 0.6649 0.2028 
+## 
+## $ws$sIntra
+##   18-25   26-65     66+ 
+## 0.05371 0.78082 0.16548 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$zNA
+## [1] 0
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 0
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+<h3>2007</h3>
+
+<pre><code class="r">decompGEI(x.2007,datenzh$agegroup[datenzh$steuerjahr==2007])
+</code></pre>
+
+<pre><code>## $ineq
+## $ineq$index
+##  GEI 
+## 0.48 
+## 
+## $ineq$parameter
+## alpha 
+##     1 
+## 
+## 
+## $decomp
+## $decomp$within
+## [1] 0.4333
+## 
+## $decomp$between
+## [1] 0.04669
+## 
+## $decomp$betweenELMO
+## [1] 0.2022
+## 
+## 
+## $intra
+## $intra$GEIGroups
+##  18-25  26-65    66+ 
+## 0.5755 0.4179 0.4607 
+## 
+## $intra$contribGEIGroups
+##   18-25   26-65     66+ 
+## 0.02475 0.31504 0.09355 
+## 
+## 
+## $ws
+## $ws$wIntra
+##  18-25  26-65    66+ 
+## 0.1299 0.6557 0.2144 
+## 
+## $ws$sIntra
+##  18-25  26-65    66+ 
+## 0.0430 0.7539 0.2031 
+## 
+## 
+## $nas
+## $nas$xNA
+## [1] 0
+## 
+## $nas$zNA
+## [1] 7976
+## 
+## $nas$wNA
+## NULL
+## 
+## $nas$totalNA
+## [1] 7976
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;ICI&quot;
+</code></pre>
+
+</body>
+
+</html>
+

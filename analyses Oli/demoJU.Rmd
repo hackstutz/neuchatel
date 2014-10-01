@@ -15,7 +15,7 @@ library(IC2,quietly=TRUE,warn.conflicts=FALSE)
 
 Load Data 
 ```{r}
-load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenju.Rda")
+load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenzh.Rda")
 ```
 
 

@@ -1,0 +1,164 @@
+Inequality by Demographic Factors - Züirch
+========================================================
+
+
+
+Load Library
+```{r}
+library(foreign,quietly=TRUE,warn.conflicts=FALSE)
+library(plyr,quietly=TRUE,warn.conflicts=FALSE)
+library(dplyr,quietly=TRUE,warn.conflicts=FALSE)
+library(ggplot2,quietly=TRUE,warn.conflicts=FALSE)
+library(ineq,quietly=TRUE,warn.conflicts=FALSE)
+library(IC2,quietly=TRUE,warn.conflicts=FALSE)
+```
+
+Load Data 
+```{r}
+load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenzh.Rda")
+```
+
+
+Achtung: 
+* Einkommen sind nicht preisbereinigt. Vergleich der Mittelwerte über die Zeit sind damit nicht zu interpretieren
+* Es wird die Ungleichheit zwischen Steuereinheiten und nicht zwischen Haushalten untersucht
+* Es wurde keine Äquivalenzgewichtung vorgenommen
+
+
+<br><br>
+<br><br>
+
+# Change of social structure and between group inequality
+
+Werte kleiner 1 werden 1 gesetzt, der Theil möchte das so.
+```{r}
+datenzh$STE<-datenzh$STEUERBARES_EINKOMMEN
+datenzh$STE[datenzh$STE<1]<-1
+```
+
+## Periode: 1991 bis 2007
+
+
+
+
+### 1991
+
+**Agegroup and median income**
+```{r}
+prop.table(table(datenzh$agegroup[datenzh$steuerjahr==1991]))
+by(datenzh$STE[datenzh$steuerjahr==1991],datenzh$agegroup[datenzh$steuerjahr==1991],median)
+```
+
+**Housholdstructur and median income**
+```{r}
+prop.table(table(datenzh$household[datenzh$steuerjahr==1991]))
+by(datenzh$STE[datenzh$steuerjahr==1991],datenzh$household[datenzh$steuerjahr==1991],median)
+```
+
+
+### 2007
+
+**Agegroup and median income**
+```{r}
+prop.table(table(datenzh$agegroup[datenzh$steuerjahr==2007]))
+by(datenzh$STE[datenzh$steuerjahr==2007],datenzh$agegroup[datenzh$steuerjahr==2007],median)
+```
+
+**Housholdstructur and median income**
+```{r}
+prop.table(table(datenzh$household[datenzh$steuerjahr==2007]))
+by(datenzh$STE[datenzh$steuerjahr==2007],datenzh$household[datenzh$steuerjahr==2007],median)
+```
+
+<br><br>
+<br><br>
+
+
+
+
+# Change of overall inequality
+
+## Periode 1991 to 2007
+
+### 1991
+
+```{r}
+Gini(datenzh$STE[datenzh$steuerjahr==1991])
+Theil(datenzh$STE[datenzh$steuerjahr==1991])
+```
+
+
+### 2007
+
+```{r}
+Gini(datenzh$STE[datenzh$steuerjahr==2007])
+Theil(datenzh$STE[datenzh$steuerjahr==2007])
+
+```
+
+
+### Lorenz curve
+
+```{r}
+Lc.1991<-Lc(datenzh$STE[datenzh$steuerjahr==1991])
+Lc.2007<-Lc(datenzh$STE[datenzh$steuerjahr==2007])
+
+plot(Lc.1991,lty="dotted")
+lines(Lc.2007$p, Lc.2007$L,lty="dashed", lwd=1.2, col=4)
+```
+
+## Change of inequality measured with calcGEI (THEIL)
+
+```{r}
+# calcGEI kann nix mit 0 anfangen, macht aber das selbe
+x.1991<-datenzh$STE[datenzh$steuerjahr==1991]
+x.1991[x.1991<1]<-1
+calcGEI(x.1991)
+Theil(x.1991)
+
+x.2007<-datenzh$STE[datenzh$steuerjahr==2007]
+x.2007[x.2007<1]<-1
+calcGEI(x.2007)
+Theil(x.2007)
+
+
+```
+
+
+<br><br>
+<br><br>
+
+# Decomposing overall inequality
+
+## Households
+
+### 1991
+ 
+```{r}
+decompGEI(x.1991,datenzh$household[datenzh$steuerjahr==1991])
+```
+
+
+### 2007
+
+```{r}
+decompGEI(x.2007,datenzh$household[datenzh$steuerjahr==2007])
+```
+
+
+
+## Agegroups
+
+### 1991
+ 
+```{r}
+decompGEI(x.1991,datenzh$agegroup[datenzh$steuerjahr==1991])
+```
+
+
+### 2007
+
+```{r}
+decompGEI(x.2007,datenzh$agegroup[datenzh$steuerjahr==2007])
+```
+
