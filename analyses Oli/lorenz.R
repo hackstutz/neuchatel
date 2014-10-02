@@ -9,6 +9,8 @@
 # libraries 
 library(reshape2)
 library(gridExtra)
+library(ineq,quietly=TRUE,warn.conflicts=FALSE)
+library(ggplot2)
 
 
 # Load Jura-Data
@@ -46,7 +48,7 @@ jura
 # Load Basel-Data
 load("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/Auswertungen/datenbs.Rda")
 
-
+datenbs$reineinkommen[datenbs$reineinkommen==0]<-1
 Lc.1991<-Lc(datenbs$reineinkommen[datenbs$steuerjahr==1991])
 Lc.2011<-Lc(datenbs$reineinkommen[datenbs$steuerjahr==2011])
 
@@ -59,8 +61,8 @@ names(lorenz.2011)<- c("p","L","Lorenzkurve")
 lorenz <- rbind(lorenz.1991, lorenz.2011)
 
 
-basel<-ggplot(lorenz, aes(x=p,y=L,shape=Lorenzkurve)) + 
-  geom_line(data=lorenz,aes(linetype=Lorenzkurve),size=0.5) +
+basel<-ggplot(lorenz, aes(x=p,y=L,fill=Lorenzkurve)) + 
+  geom_line(data=lorenz,aes(colour=Lorenzkurve),size=0.5) +
   geom_segment(y=0, x=0,yend=1,xend=1,colour="black",size=0.5)+theme_bw()+
   ggtitle("Basel-City")+
   theme(plot.title=element_text(size=30,face="bold"))+
@@ -68,14 +70,19 @@ basel<-ggplot(lorenz, aes(x=p,y=L,shape=Lorenzkurve)) +
   ylab("Share of total net income")+
   annotate("text",label="1991",x=0.1,y=0.9,size=8)+
   annotate("text",label="Gini=0.43",x=0.1,y=0.85,size=5)+
-  annotate("text",label="Theil=0.39",x=0.1,y=0.80,size=5)+
+  annotate("text",label="Theil=0.41",x=0.1,y=0.80,size=5)+
   annotate("text",label="2011",x=0.1,y=0.7,size=8)+
   annotate("text",label="Gini=0.49",x=0.1,y=0.65,size=5)+
-  annotate("text",label="Theil=0.50",x=0.1,y=0.60,size=5)+
+  annotate("text",label="Theil=0.56",x=0.1,y=0.60,size=5)+
   scale_x_continuous(breaks=c(0,0.2,0.4,0.6,0.8,1),labels=c("0%","20%","40%","60%","80%","100%"))+
-  scale_y_continuous(labels=c("0%","25%","50%","75%","100%"))
+  scale_y_continuous(labels=c("0%","25%","50%","75%","100%"))+
+  scale_color_manual(values=c("1991"="blue","2011"="red" )) +
+  scale_fill_manual(values=c("1991"="blue","2011"="red" )) 
 basel
 
+png("C:/Users/hlo1/neuchatel/analyses Oli/figure/lorenzbs.png",width=760, height=615)
+basel
+dev.off()
 
 # Ploting together
 
