@@ -1,5 +1,5 @@
 ## program:     demoZH
-## task:        Prepare Basel data
+## task:        Prepare Zürich data
 ## project:     Inequality of income and wealth in switzerland
 ## subproject:  Inequality by Demographic Factors
 ## author:      Oliver Hümbelin
