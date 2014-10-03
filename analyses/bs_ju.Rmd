@@ -169,11 +169,15 @@ bs$reineinkommen[bs$reineinkommen==0]<-1
 
 bs91_11 <- filter(bs, steuerjahr%in%c(1991,2011)) %.% select(steuerjahr, household, reineinkommen,agegroup,alterskategorie,agegroup_det) %.% mutate(steuerjahr=factor(steuerjahr))
 #ju06_12 <- filter(ju, steuerjahr%in%c(2006,2012)&stbeink_BUND>=0) %.% select(steuerjahr, household, stbeink_BUND,agegroup,alterskategorie)%.% mutate(steuerjahr=factor(steuerjahr))
+
+# real einkommen. wir gewichten 1991 mit dem preisindex von 2011
+#bs91_11$reineinkommen[bs91_11$steuerjahr=="1991"] <- bs91_11$reineinkommen[bs91_11$steuerjahr=="1991"]*99.342/79.9968
+# enspricht juni 1991 vs juni 2011
 ```
 
 ### Optionen
 ```{r opts}
-opts_chunk$set(fig.width=12, fig.height=7.5) 
+opts_chunk$set(fig.width=10, fig.height=10) 
 ```
 
 ### Density Plots
@@ -189,10 +193,11 @@ theils <- aggregate(bs91_11$reineinkommen~bs91_11$household+factor(bs91_11$steue
 names(theils) <- c("household","steuerjahr","Theil")
 theils <- theils[order(theils$household),]
 
-ggplot(bs91_11,aes(x=log(reineinkommen),fill=steuerjahr))+
+ggplot(filter(bs91_11,!is.na(household)),aes(x=log(reineinkommen),fill=steuerjahr))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
   geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
-  geom_text(data=theils, position=position_dodge(width=9), aes(x = 10.5, y = 0.5, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+  geom_text(data=theils, position=position_dodge(width=10), aes(size=0.5,x = 11, y = 0.65, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+geom_text(data=p50s, position=position_dodge(width=10), aes(size=0.5,x = 11, y = 0.45, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
   facet_wrap(~household,ncol=1)+
   scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
   scale_color_manual(values=c("1991"="blue","2011"="red" )) +
@@ -210,7 +215,8 @@ theils <- theils[order(theils$agegroup),]
 ggplot(bs91_11,aes(x=log(reineinkommen),fill=steuerjahr))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
   geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
-  geom_text(data=theils, position=position_dodge(width=9), aes(x = 10.5, y = 0.5, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+geom_text(data=theils, position=position_dodge(width=10), aes(x = 11, y = 0.6, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+geom_text(data=p50s, position=position_dodge(width=10), aes(x = 11, y = 0.5, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
   facet_wrap(~agegroup,ncol=1)+
   scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
   scale_color_manual(values=c("1991"="blue","2011"="red" )) +
@@ -229,7 +235,8 @@ theils <- theils[order(theils$alterskategorie),]
 ggplot(bs91_11,aes(x=log(reineinkommen),fill=steuerjahr))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
   geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
-  geom_text(data=theils, position=position_dodge(width=9), aes(x = 10.5, y = 0.5, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+geom_text(data=theils, position=position_dodge(width=10), aes(x = 11, y = 0.62, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+geom_text(data=p50s, position=position_dodge(width=10), aes(x = 11, y = 0.48, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
   facet_wrap(~alterskategorie,ncol=1)+
   scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
   scale_color_manual(values=c("1991"="blue","2011"="red" )) +
@@ -349,7 +356,7 @@ theils$Theil[theils$steuerjahr=="2011 CF"] <- calcGEI(x=counterfactual$reineinko
 ggplot(bs_nomiss,aes(x=log(reineinkommen),fill=steuerjahr,weight=w))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
  #   geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
-   geom_text(data=theils, position=position_dodge(width=6), aes(x = 1, y = 60000, color=steuerjahr, label = paste("Theil:",round(theils$Theil,3))))+
+   geom_text(data=theils, position=position_stack(), aes(x = 3, y = 10000,color=steuerjahr, label = paste("Theil:",round(theils$Theil,3))))+
   scale_fill_manual(values=c("1991"="blue","2011"="red","2011 CF" = "orange")) +
   scale_color_manual(values=c("1991"="blue","2011"="red","2011 CF" = "orange")) +
     ggtitle("Basel: log net income 1991, 2011 and counterfactual")+
