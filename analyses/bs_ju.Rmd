@@ -196,14 +196,16 @@ theils <- theils[order(theils$household),]
 ggplot(filter(bs91_11,!is.na(household)),aes(x=log(reineinkommen),fill=steuerjahr))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
   geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
-  geom_text(data=theils, position=position_dodge(width=10), aes(size=0.5,x = 11, y = 0.65, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
-geom_text(data=p50s, position=position_dodge(width=10), aes(size=0.5,x = 11, y = 0.45, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
+  geom_text(data=theils, position=position_dodge(width=14),size=5, aes(x = 11, y = 0.68, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+geom_text(data=p50s, position=position_dodge(width=14), size=5, aes(x = 11, y = 0.42, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
   facet_wrap(~household,ncol=1)+
   scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
   scale_color_manual(values=c("1991"="blue","2011"="red" )) +
   ggtitle("Basel-City: log net income by tax period and household situation")+
   xlab("log net income")+
-  theme_bw()
+  theme_bw()+ 
+  theme(plot.title = element_text(size = rel(1.8)),legend.text=element_text(size=rel(1.2)))+ 
+  theme(strip.text.x = element_text(size = 16))
 
 # Basel: Agegroups
 p50s <- aggregate(log(bs91_11$reineinkommen)~bs91_11$agegroup+factor(bs91_11$steuerjahr),FUN=median,na.rm=TRUE)
@@ -215,14 +217,16 @@ theils <- theils[order(theils$agegroup),]
 ggplot(bs91_11,aes(x=log(reineinkommen),fill=steuerjahr))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
   geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
-geom_text(data=theils, position=position_dodge(width=10), aes(x = 11, y = 0.6, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
-geom_text(data=p50s, position=position_dodge(width=10), aes(x = 11, y = 0.5, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
+geom_text(data=theils, position=position_dodge(width=16), size=6, aes(x = 11, y = 0.6, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+geom_text(data=p50s, position=position_dodge(width=16), size=6, aes(x = 11, y = 0.5, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
   facet_wrap(~agegroup,ncol=1)+
   scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
   scale_color_manual(values=c("1991"="blue","2011"="red" )) +
   ggtitle("Basel-City: log net income by tax period and agegroup")+
   xlab("log net income")+
-  theme_bw()
+  theme_bw()+ 
+  theme(plot.title = element_text(size = rel(1.8)),legend.text=element_text(size=rel(1.2)))+ 
+  theme(strip.text.x = element_text(size = 16))
 
 
 # Basel: Agegroups detailed
@@ -235,14 +239,16 @@ theils <- theils[order(theils$alterskategorie),]
 ggplot(bs91_11,aes(x=log(reineinkommen),fill=steuerjahr))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
   geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
-geom_text(data=theils, position=position_dodge(width=10), aes(x = 11, y = 0.62, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
-geom_text(data=p50s, position=position_dodge(width=10), aes(x = 11, y = 0.48, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
+geom_text(data=theils, position=position_dodge(width=12), size=6, aes(x = 11, y = 0.62, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
+geom_text(data=p50s, position=position_dodge(width=12), size=6, aes(x = 11, y = 0.48, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
   facet_wrap(~alterskategorie,ncol=1)+
   scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
   scale_color_manual(values=c("1991"="blue","2011"="red" )) +
   ggtitle("Basel-City: log net income by tax period and agegroup (detailed)")+
   xlab("log net income")+
-  theme_bw()
+  theme_bw()+ 
+  theme(plot.title = element_text(size = rel(1.8)),legend.text=element_text(size=rel(1.2)))+ 
+  theme(strip.text.x = element_text(size = 16))
 
 ```
 
@@ -320,7 +326,9 @@ theils <- theils[order(theils$agegroup_det),]
 ggplot(theils, aes(x=agegroup_det, y=Theil,group=steuerjahr,color=steuerjahr))+geom_line(size=1)+
 scale_color_manual(values=c("1991"="blue","2011"="red" ))+
 facet_wrap(~single)+
-theme_bw()
+theme_bw()+ 
+  theme(plot.title = element_text(size = rel(2)))+ 
+  theme(strip.text.x = element_text(size = 16))
 ```
 
 ### Kontrafaktische Verteilung Basel
@@ -356,12 +364,14 @@ theils$Theil[theils$steuerjahr=="2011 CF"] <- calcGEI(x=counterfactual$reineinko
 ggplot(bs_nomiss,aes(x=log(reineinkommen),fill=steuerjahr,weight=w))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
  #   geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
-   geom_text(data=theils, position=position_stack(), aes(x = 3, y = 10000,color=steuerjahr, label = paste("Theil:",round(theils$Theil,3))))+
+   geom_text(data=theils, position=position_stack(), size=7, aes(x = 3, y = 10000,color=steuerjahr, label = paste("Theil:",round(theils$Theil,3))))+
   scale_fill_manual(values=c("1991"="blue","2011"="red","2011 CF" = "orange")) +
   scale_color_manual(values=c("1991"="blue","2011"="red","2011 CF" = "orange")) +
     ggtitle("Basel: log net income 1991, 2011 and counterfactual")+
   xlab("log net income")+
-  theme_bw()
+  theme_bw()+
+  theme(plot.title = element_text(size = rel(1.8)),legend.text=element_text(size=rel(1.2)))+ 
+  theme(strip.text.x = element_text(size = 16))
 
 ```
 
