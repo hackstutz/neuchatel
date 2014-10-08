@@ -60,28 +60,26 @@ names(lorenz.1991)<- c("p","L","Lorenzkurve")
 names(lorenz.2011)<- c("p","L","Lorenzkurve")
 lorenz <- rbind(lorenz.1991, lorenz.2011)
 
+png("C:/Users/hlo1/neuchatel/analyses Oli/figure/lorenzbs.png",width=760, height=615)
 
-basel<-ggplot(lorenz, aes(x=p,y=L,fill=Lorenzkurve)) + 
+ggplot(lorenz, aes(x=p,y=L,fill=Lorenzkurve)) + 
   geom_line(data=lorenz,aes(colour=Lorenzkurve),size=0.5) +
   geom_segment(y=0, x=0,yend=1,xend=1,colour="black",size=0.5)+theme_bw()+
   ggtitle("Basel-City")+
   theme(plot.title=element_text(size=30,face="bold"))+
   xlab("Share of Tax subjects")+
   ylab("Share of total net income")+
-  annotate("text",label="1991",x=0.1,y=0.9,size=8)+
-  annotate("text",label="Gini=0.43",x=0.1,y=0.85,size=5)+
-  annotate("text",label="Theil=0.41",x=0.1,y=0.80,size=5)+
-  annotate("text",label="2011",x=0.1,y=0.7,size=8)+
-  annotate("text",label="Gini=0.49",x=0.1,y=0.65,size=5)+
-  annotate("text",label="Theil=0.56",x=0.1,y=0.60,size=5)+
+  annotate("text",label="1991",x=0.1,y=0.9,size=8,color="blue")+
+  annotate("text",label="Gini=0.43",x=0.1,y=0.85,size=5,color="blue")+
+  annotate("text",label="Theil=0.41",x=0.1,y=0.80,size=5,color="blue")+
+  annotate("text",label="2011",x=0.1,y=0.7,size=8,color="red")+
+  annotate("text",label="Gini=0.49",x=0.1,y=0.65,size=5,color="red")+
+  annotate("text",label="Theil=0.56",x=0.1,y=0.60,size=5,color="red")+
   scale_x_continuous(breaks=c(0,0.2,0.4,0.6,0.8,1),labels=c("0%","20%","40%","60%","80%","100%"))+
   scale_y_continuous(labels=c("0%","25%","50%","75%","100%"))+
   scale_color_manual(values=c("1991"="blue","2011"="red" )) +
   scale_fill_manual(values=c("1991"="blue","2011"="red" )) 
-basel
 
-png("C:/Users/hlo1/neuchatel/analyses Oli/figure/lorenzbs.png",width=760, height=615)
-basel
 dev.off()
 
 # Ploting together
