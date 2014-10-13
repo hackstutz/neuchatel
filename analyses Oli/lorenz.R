@@ -78,8 +78,7 @@ ggplot(lorenz, aes(x=p,y=L,fill=Lorenzkurve)) +
   scale_x_continuous(breaks=c(0,0.2,0.4,0.6,0.8,1),labels=c("0%","20%","40%","60%","80%","100%"))+
   scale_y_continuous(labels=c("0%","25%","50%","75%","100%"))+
   scale_color_manual(values=c("1991"="blue","2011"="red" )) +
-  scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
-  theme(axis.text=element_text(size=20),axis.title.y = element_text(size=20),axis.title.x = element_text(size=20),legend.title = element_text(size=20),legend.text = element_text(size=20))
+  scale_fill_manual(values=c("1991"="blue","2011"="red" )) 
 
 dev.off()
 

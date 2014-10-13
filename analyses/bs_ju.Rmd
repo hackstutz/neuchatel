@@ -186,18 +186,18 @@ opts_chunk$set(fig.width=10, fig.height=10)
 
 ```{r}
 # Basel Households
-p50s <- aggregate(log(bs91_11$reineinkommen)~bs91_11$household+factor(bs91_11$steuerjahr),FUN=median,na.rm=TRUE)
-names(p50s) <- c("household","steuerjahr","log_income")
-p50s <- p50s[order(p50s$household),]
+means <- aggregate(bs91_11$reineinkommen~bs91_11$household+factor(bs91_11$steuerjahr),FUN=mean,na.rm=TRUE)
+names(means) <- c("household","steuerjahr","income")
+means <- means[order(means$household),]
 theils <- aggregate(bs91_11$reineinkommen~bs91_11$household+factor(bs91_11$steuerjahr),FUN=Theil)
 names(theils) <- c("household","steuerjahr","Theil")
 theils <- theils[order(theils$household),]
 
 ggplot(filter(bs91_11,!is.na(household)),aes(x=log(reineinkommen),fill=steuerjahr))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
-  geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
+  geom_vline(data=means, aes(xintercept=log(income),color=steuerjahr))+
   geom_text(data=theils, position=position_dodge(width=14),size=5, aes(x = 11, y = 0.68, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
-geom_text(data=p50s, position=position_dodge(width=14), size=5, aes(x = 11, y = 0.42, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
+geom_text(data=means, position=position_dodge(width=14), size=5, aes(x = 11, y = 0.42, color=steuerjahr, label = paste("Mean:",round(means$income,0),"CHF")))+
   facet_wrap(~household,ncol=1)+
   scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
   scale_color_manual(values=c("1991"="blue","2011"="red" )) +
@@ -208,17 +208,18 @@ geom_text(data=p50s, position=position_dodge(width=14), size=5, aes(x = 11, y = 
   theme(strip.text.x = element_text(size = 16))
 
 # Basel: Agegroups
-p50s <- aggregate(log(bs91_11$reineinkommen)~bs91_11$agegroup+factor(bs91_11$steuerjahr),FUN=median,na.rm=TRUE)
-names(p50s) <- c("agegroup","steuerjahr","log_income")
-p50s <- p50s[order(p50s$agegroup),]
+means <- aggregate(bs91_11$reineinkommen~bs91_11$agegroup+factor(bs91_11$steuerjahr),FUN=mean,na.rm=TRUE)
+names(means) <- c("agegroup","steuerjahr","income")
+means <- means[order(means$agegroup),]
 theils <- aggregate(bs91_11$reineinkommen~bs91_11$agegroup+factor(bs91_11$steuerjahr),FUN=Theil)
 names(theils) <- c("agegroup","steuerjahr","Theil")
 theils <- theils[order(theils$agegroup),]
+
 ggplot(bs91_11,aes(x=log(reineinkommen),fill=steuerjahr))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
-  geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
+  geom_vline(data=means, aes(xintercept=log(income),color=steuerjahr))+
 geom_text(data=theils, position=position_dodge(width=16), size=6, aes(x = 11, y = 0.6, color=steuerjahr, label = paste("Theil:",round(theils$Theil,2))))+
-geom_text(data=p50s, position=position_dodge(width=16), size=6, aes(x = 11, y = 0.5, color=steuerjahr, label = paste("p50:",round(exp(p50s$log_income),0))))+
+geom_text(data=means, position=position_dodge(width=16), size=6, aes(x = 11, y = 0.5, color=steuerjahr, label = paste("Mean:",round(means$income,0), "CHF")))+
   facet_wrap(~agegroup,ncol=1)+
   scale_fill_manual(values=c("1991"="blue","2011"="red" )) +
   scale_color_manual(values=c("1991"="blue","2011"="red" )) +
