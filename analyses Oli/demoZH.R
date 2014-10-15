@@ -13,7 +13,7 @@ library(dplyr)
 
 ##
 # Daten (direkt ab sharePoint)
-daten<-read.dta("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/taxdata_ZH_1991u2007_KV.dta")
+daten<-read.dta("P:/WGS/FBS/ISS/Projekte laufend/SNF Ungleichheit/Valorisierung/Ungleichheitsworkshop Neuchatel 2014/Inequality by demographic factors/taxdata_ZH_1991-2007.dta")
 
 
 
