@@ -362,7 +362,7 @@ theils$w<-1
 # den CF Theil müssen wir mit calcGEI() berechnen da Theil() keine Gewichte unterstützt
 theils$Theil[theils$steuerjahr=="2011 CF"] <- calcGEI(x=counterfactual$reineinkommen,w=counterfactual$w,alpha=1)$ineq$index
 
-ggplot(bs_nomiss,aes(x=log(reineinkommen),fill=steuerjahr,weight=w))+
+ggplot(filter(bs_nomiss,steuerjahr!=1991),aes(x=log(reineinkommen),fill=steuerjahr,weight=w))+
   geom_density(aes(y=..density..),alpha = 0.5,position="identity")+
  #   geom_vline(data=p50s, aes(xintercept=log_income,color=steuerjahr))+
    geom_text(data=theils, position=position_stack(), size=7, aes(x = 3, y = 10000,color=steuerjahr, label = paste("Theil:",round(theils$Theil,3))))+
